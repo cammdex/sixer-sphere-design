@@ -4,12 +4,12 @@ import { useState, type ReactNode } from "react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 
-const tabs = [
+const tabs: { to: string; label: string; icon: typeof Home; exact?: boolean }[] = [
   { to: "/", label: "Home", icon: Home, exact: true },
   { to: "/players", label: "Players", icon: Users },
   { to: "/tournament", label: "Tournament", icon: Trophy },
   { to: "/sponsors", label: "Sponsors", icon: Handshake },
-] as const;
+];
 
 export function MobileLayout({
   children,
