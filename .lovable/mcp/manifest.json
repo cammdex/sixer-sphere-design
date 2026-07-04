@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "gpl-mcp",
+      "version": "0.1.0",
+      "title": "Galaxy Premier League MCP"
+    },
+    "tools": [
+      {
+        "name": "get_tournament_info",
+        "title": "Get tournament info",
+        "description": "Return the Galaxy Premier League tournament overview: name, season, tagline, auction date/venue, and headline stats.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_teams",
+        "title": "List teams",
+        "description": "List all 8 GPL franchises with captain, owner, and current season record.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_points_table",
+        "title": "Get points table",
+        "description": "Return the current GPL points table sorted by points then net run rate.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_players",
+        "title": "List players",
+        "description": "Search the GPL player catalog. Optionally filter by role, team id, or a name substring, and cap results with limit.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "role": {
+              "description": "Filter by player role.",
+              "type": "string",
+              "enum": [
+                "Batsman",
+                "Bowler",
+                "All-Rounder",
+                "Wicket Keeper"
+              ]
+            },
+            "teamId": {
+              "description": "Filter by team id (e.g. 'rr', 'ts'). Use list_teams to discover ids.",
+              "type": "string"
+            },
+            "search": {
+              "description": "Case-insensitive substring match on player name.",
+              "type": "string"
+            },
+            "limit": {
+              "description": "Max rows to return (default 25).",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
