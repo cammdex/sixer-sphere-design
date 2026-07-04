@@ -16,18 +16,22 @@ export const Route = createFileRoute("/")({
 });
 
 function useCountdown(target: string) {
-  const [now, setNow] = useState(() => Date.now());
+  const targetMs = new Date(target).getTime();
+  // Start at target time so SSR and first client render match (all zeros); update on mount.
+  const [now, setNow] = useState(() => targetMs);
   useEffect(() => {
+    setNow(Date.now());
     const i = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(i);
   }, []);
-  const diff = Math.max(0, new Date(target).getTime() - now);
+  const diff = Math.max(0, targetMs - now);
   const d = Math.floor(diff / 86400000);
   const h = Math.floor((diff / 3600000) % 24);
   const m = Math.floor((diff / 60000) % 60);
   const s = Math.floor((diff / 1000) % 60);
   return { d, h, m, s };
 }
+
 
 function HomePage() {
   const c = useCountdown(tournament.auctionDate);
