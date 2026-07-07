@@ -1,9 +1,9 @@
 // Mock data for Galaxy Premier League (GPL) tournament
 
 export const tournament = {
-  name: "Galaxy Premier League",
-  shortName: "GPL",
-  season: "Season 4 · 2026",
+  name: "SANCHI Udaipur Bohra League",
+  shortName: "UBL",
+  season: "Season 2 · 2026",
   tagline: "Where local legends rise",
   auctionDate: "2026-07-12T18:30:00",
   auctionVenue: "Crown Banquet Hall, Sector 17",
