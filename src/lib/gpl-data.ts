@@ -1,43 +1,86 @@
-// Mock data for Galaxy Premier League (GPL) tournament
+// Mock data for Sanchi UBL 2026 tournament
 
 export const tournament = {
-  name: "Galaxy Premier League",
-  shortName: "GPL",
+  name: "Sanchi UBL 2026",
+  shortName: "SUBL",
   season: "Season 4 · 2026",
-  tagline: "Where local legends rise",
+  tagline: "Sanchi United Bat League — where local legends rise",
   auctionDate: "2026-07-12T18:30:00",
   auctionVenue: "Crown Banquet Hall, Sector 17",
   auctionEntry: "Owners & Press only · Live streamed",
   stats: { teams: 8, players: 142, owners: 16 },
 };
 
-export const announcements = [
-  { id: 1, tag: "AUCTION", title: "Player auction goes live July 12", body: "Final bid catalog drops 48h before — owners review now.", tone: "gold" },
-  { id: 2, tag: "FIXTURE", title: "Opening match: Strikers vs Royals", body: "Floodlights on at Galaxy Ground from 7:30 PM.", tone: "blue" },
-  { id: 3, tag: "TRIALS", title: "U-23 trial slots reopen", body: "20 fresh entries cleared — 4 spots remain.", tone: "gold" },
+// ---------- Sponsor hierarchy ----------
+export type BrandCard = {
+  id: string; name: string; tagline: string; category: string;
+  color: string; color2: string; initials: string; phone?: string; web?: string;
+};
+
+export const leadSponsor: BrandCard = {
+  id: "lead", name: "Sanchi Cement Group", tagline: "Building strong foundations for a stronger league.",
+  category: "Title Partner", color: "#f5c542", color2: "#8a5a00", initials: "SC",
+  phone: "+91 98100 00001", web: "sanchicement.in",
+};
+
+export const poweredBy: BrandCard = {
+  id: "power", name: "Volta Electronics", tagline: "Powering every floodlit night of Sanchi UBL.",
+  category: "Powered By", color: "#3b82f6", color2: "#1e3a8a", initials: "VE",
+  phone: "+91 98100 11220", web: "volta.in",
+};
+
+export const coPoweredBy: BrandCard = {
+  id: "copower", name: "Apex Motors", tagline: "Driving every player to the ground.",
+  category: "Co-Powered By", color: "#ef4444", color2: "#7f1d1d", initials: "AM",
+  phone: "+91 98100 55660", web: "apexmotors.in",
+};
+
+// ---------- Promotions ----------
+export type Promotion = {
+  id: string; brand: string; title: string; body: string; cta: string;
+  color: string; color2: string; initials: string;
+};
+
+export const promotions: Promotion[] = [
+  { id: "pr1", brand: "Spice Route Cafe", title: "Match-day biryani combo", body: "₹249 combo on every game night. Show your ticket at the counter.", cta: "Grab combo", color: "#f59e0b", color2: "#7c2d12", initials: "SR" },
+  { id: "pr2", brand: "Stride Sportswear", title: "20% off jerseys", body: "Fan gear discount for all season pass holders through July.", cta: "Shop now", color: "#10b981", color2: "#064e3b", initials: "ST" },
+  { id: "pr3", brand: "Bytewave Computers", title: "Free scoring app", body: "Download the Sanchi UBL live scoring app — powered by Bytewave.", cta: "Download", color: "#0ea5e9", color2: "#0c4a6e", initials: "BC" },
 ];
 
-export const updates = [
-  { id: 1, time: "2h ago", title: "Royals retain captain Aarav Mehta for ₹18L" },
-  { id: 2, time: "5h ago", title: "Auction purse raised to ₹1.2 Cr per team" },
-  { id: 3, time: "1d ago", title: "Galaxy Ground re-turfed ahead of opener" },
-  { id: 4, time: "2d ago", title: "Sponsorship tier ‘Diamond’ sold out" },
+// ---------- Event feed ----------
+export const eventFeed = [
+  { id: 1, kind: "BID", time: "just now", title: "Aarav Mehta sold to Royal Rangers for ₹22L", tone: "gold" as const },
+  { id: 2, kind: "MATCH", time: "2h ago", title: "Thunder Strikers post 194/5 vs Crimson Blasters", tone: "blue" as const },
+  { id: 3, kind: "AUCTION", time: "5h ago", title: "Purse cap raised to ₹1.5 Cr per franchise", tone: "gold" as const },
+  { id: 4, kind: "FIXTURE", time: "1d ago", title: "Opening ceremony scheduled for Jul 18, 7:00 PM", tone: "blue" as const },
+  { id: 5, kind: "TRIALS", time: "2d ago", title: "U-23 trial slots reopened — 20 fresh entries", tone: "gold" as const },
 ];
 
+// Legacy exports kept for other pages
+export const announcements = eventFeed.slice(0, 3).map(e => ({
+  id: e.id, tag: e.kind, title: e.title, body: e.time, tone: e.tone,
+}));
+export const updates = eventFeed.slice(0, 4).map(e => ({ id: e.id, time: e.time, title: e.title }));
+
+// ---------- Teams (with auction purse) ----------
 export type Team = {
   id: string; name: string; short: string; captain: string; owner: string;
   color: string; color2: string; wins: number; losses: number; nrr: number; points: number;
+  purse: number; // total budget in rupees
+  nextBid: { playerName: string; amount: number; bidderOwner: string };
 };
 
+const PURSE = 15000000; // ₹1.5 Cr each
+
 export const teams: Team[] = [
-  { id: "rr", name: "Royal Rangers", short: "RR", captain: "Aarav Mehta", owner: "Vikrant Shah", color: "#3b82f6", color2: "#1e3a8a", wins: 6, losses: 1, nrr: 1.84, points: 12 },
-  { id: "ts", name: "Thunder Strikers", short: "TS", captain: "Rohan Iyer", owner: "Anika Kapoor", color: "#f59e0b", color2: "#7c2d12", wins: 5, losses: 2, nrr: 1.21, points: 10 },
-  { id: "kp", name: "Knight Phantoms", short: "KP", captain: "Yash Khanna", owner: "Devraj Singh", color: "#a855f7", color2: "#3b0764", wins: 5, losses: 2, nrr: 0.94, points: 10 },
-  { id: "tw", name: "Titan Warriors", short: "TW", captain: "Siddharth Rao", owner: "Meera Joshi", color: "#10b981", color2: "#064e3b", wins: 4, losses: 3, nrr: 0.42, points: 8 },
-  { id: "sk", name: "Sapphire Kings", short: "SK", captain: "Karan Bhatt", owner: "Rahul Verma", color: "#0ea5e9", color2: "#0c4a6e", wins: 3, losses: 4, nrr: -0.18, points: 6 },
-  { id: "cb", name: "Crimson Blasters", short: "CB", captain: "Ishaan Patel", owner: "Nisha Aggarwal", color: "#ef4444", color2: "#7f1d1d", wins: 3, losses: 4, nrr: -0.55, points: 6 },
-  { id: "dc", name: "Desert Cobras", short: "DC", captain: "Manav Reddy", owner: "Suresh Nair", color: "#eab308", color2: "#713f12", wins: 2, losses: 5, nrr: -0.92, points: 4 },
-  { id: "is", name: "Iron Spartans", short: "IS", captain: "Kabir Singh", owner: "Pooja Malhotra", color: "#64748b", color2: "#1e293b", wins: 1, losses: 6, nrr: -1.46, points: 2 },
+  { id: "rr", name: "Royal Rangers", short: "RR", captain: "Aarav Mehta", owner: "Vikrant Shah", color: "#3b82f6", color2: "#1e3a8a", wins: 6, losses: 1, nrr: 1.84, points: 12, purse: PURSE, nextBid: { playerName: "Vivaan Sharma", amount: 1800000, bidderOwner: "Vikrant Shah" } },
+  { id: "ts", name: "Thunder Strikers", short: "TS", captain: "Rohan Iyer", owner: "Anika Kapoor", color: "#f59e0b", color2: "#7c2d12", wins: 5, losses: 2, nrr: 1.21, points: 10, purse: PURSE, nextBid: { playerName: "Arjun Kapoor", amount: 1600000, bidderOwner: "Anika Kapoor" } },
+  { id: "kp", name: "Knight Phantoms", short: "KP", captain: "Yash Khanna", owner: "Devraj Singh", color: "#a855f7", color2: "#3b0764", wins: 5, losses: 2, nrr: 0.94, points: 10, purse: PURSE, nextBid: { playerName: "Krish Joshi", amount: 1400000, bidderOwner: "Devraj Singh" } },
+  { id: "tw", name: "Titan Warriors", short: "TW", captain: "Siddharth Rao", owner: "Meera Joshi", color: "#10b981", color2: "#064e3b", wins: 4, losses: 3, nrr: 0.42, points: 8, purse: PURSE, nextBid: { playerName: "Reyansh Verma", amount: 1200000, bidderOwner: "Meera Joshi" } },
+  { id: "sk", name: "Sapphire Kings", short: "SK", captain: "Karan Bhatt", owner: "Rahul Verma", color: "#0ea5e9", color2: "#0c4a6e", wins: 3, losses: 4, nrr: -0.18, points: 6, purse: PURSE, nextBid: { playerName: "Vihaan Nair", amount: 1000000, bidderOwner: "Rahul Verma" } },
+  { id: "cb", name: "Crimson Blasters", short: "CB", captain: "Ishaan Patel", owner: "Nisha Aggarwal", color: "#ef4444", color2: "#7f1d1d", wins: 3, losses: 4, nrr: -0.55, points: 6, purse: PURSE, nextBid: { playerName: "Sai Aggarwal", amount: 900000, bidderOwner: "Nisha Aggarwal" } },
+  { id: "dc", name: "Desert Cobras", short: "DC", captain: "Manav Reddy", owner: "Suresh Nair", color: "#eab308", color2: "#713f12", wins: 2, losses: 5, nrr: -0.92, points: 4, purse: PURSE, nextBid: { playerName: "Pranav Malhotra", amount: 850000, bidderOwner: "Suresh Nair" } },
+  { id: "is", name: "Iron Spartans", short: "IS", captain: "Kabir Singh", owner: "Pooja Malhotra", color: "#64748b", color2: "#1e293b", wins: 1, losses: 6, nrr: -1.46, points: 2, purse: PURSE, nextBid: { playerName: "Aniket Desai", amount: 800000, bidderOwner: "Pooja Malhotra" } },
 ];
 
 export const owners = teams.map((t) => ({
@@ -170,4 +213,11 @@ export function formatINR(n: number) {
 
 export function teamById(id?: string) {
   return teams.find((t) => t.id === id);
+}
+
+// Compute committed amount for a team from sold players
+export function teamSpent(teamId: string) {
+  return players
+    .filter((p) => p.teamId === teamId && p.soldPrice)
+    .reduce((sum, p) => sum + (p.soldPrice ?? 0), 0);
 }
