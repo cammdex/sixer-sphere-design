@@ -1,8 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, X, Crown, Phone, ChevronRight } from "lucide-react";
 import { MobileLayout, TeamCrest, Avatar } from "@/components/mobile-layout";
-import { teams, owners, players, teamById, formatINR, type Player } from "@/lib/gpl-data";
+import { teams, owners, players, teamById, formatINR, teamSpent, type Player } from "@/lib/gpl-data";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/players")({
