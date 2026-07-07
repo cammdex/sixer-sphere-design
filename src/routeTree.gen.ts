@@ -14,6 +14,7 @@ import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as PlayersRouteImport } from './routes/players'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PlayersTeamIdRouteImport } from './routes/players.$teamId'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
@@ -43,6 +44,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlayersTeamIdRoute = PlayersTeamIdRouteImport.update({
+  id: '/$teamId',
+  path: '/$teamId',
+  getParentRoute: () => PlayersRoute,
+} as any)
 const Char91DotwellKnownChar93OauthProtectedResourceRoute =
   Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
     id: '/.well-known/oauth-protected-resource',
@@ -65,32 +71,35 @@ const Char91DotmcpChar93InvokeToolToolRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/mcp': typeof McpRoute
-  '/players': typeof PlayersRoute
+  '/players': typeof PlayersRouteWithChildren
   '/sponsors': typeof SponsorsRoute
   '/tournament': typeof TournamentRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/players/$teamId': typeof PlayersTeamIdRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/mcp': typeof McpRoute
-  '/players': typeof PlayersRoute
+  '/players': typeof PlayersRouteWithChildren
   '/sponsors': typeof SponsorsRoute
   '/tournament': typeof TournamentRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/players/$teamId': typeof PlayersTeamIdRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/mcp': typeof McpRoute
-  '/players': typeof PlayersRoute
+  '/players': typeof PlayersRouteWithChildren
   '/sponsors': typeof SponsorsRoute
   '/tournament': typeof TournamentRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/players/$teamId': typeof PlayersTeamIdRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRouteTypes {
@@ -103,6 +112,7 @@ export interface FileRouteTypes {
     | '/tournament'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/players/$teamId'
     | '/.mcp/invoke-tool/$tool'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -113,6 +123,7 @@ export interface FileRouteTypes {
     | '/tournament'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/players/$teamId'
     | '/.mcp/invoke-tool/$tool'
   id:
     | '__root__'
@@ -123,13 +134,14 @@ export interface FileRouteTypes {
     | '/tournament'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/players/$teamId'
     | '/.mcp/invoke-tool/$tool'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   McpRoute: typeof McpRoute
-  PlayersRoute: typeof PlayersRoute
+  PlayersRoute: typeof PlayersRouteWithChildren
   SponsorsRoute: typeof SponsorsRoute
   TournamentRoute: typeof TournamentRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
@@ -174,6 +186,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/players/$teamId': {
+      id: '/players/$teamId'
+      path: '/$teamId'
+      fullPath: '/players/$teamId'
+      preLoaderRoute: typeof PlayersTeamIdRouteImport
+      parentRoute: typeof PlayersRoute
+    }
     '/.well-known/oauth-protected-resource': {
       id: '/.well-known/oauth-protected-resource'
       path: '/.well-known/oauth-protected-resource'
@@ -198,10 +217,21 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface PlayersRouteChildren {
+  PlayersTeamIdRoute: typeof PlayersTeamIdRoute
+}
+
+const PlayersRouteChildren: PlayersRouteChildren = {
+  PlayersTeamIdRoute: PlayersTeamIdRoute,
+}
+
+const PlayersRouteWithChildren =
+  PlayersRoute._addFileChildren(PlayersRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   McpRoute: McpRoute,
-  PlayersRoute: PlayersRoute,
+  PlayersRoute: PlayersRouteWithChildren,
   SponsorsRoute: SponsorsRoute,
   TournamentRoute: TournamentRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
