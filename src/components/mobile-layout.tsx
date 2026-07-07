@@ -31,12 +31,12 @@ export function MobileLayout({
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5">
             <div className="relative grid h-10 w-10 place-items-center rounded-xl gradient-royal shadow-glow">
-              <span className="font-display text-base font-extrabold tracking-tight text-white">G</span>
+              <span className="font-display text-base font-extrabold tracking-tight text-white">S</span>
               <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-gold ring-2 ring-background" />
             </div>
             <div className="leading-tight">
-              <div className="font-display text-[15px] font-bold">{title ?? "Galaxy Premier League"}</div>
-              <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Season 4 · 2026</div>
+              <div className="font-display text-[15px] font-bold">{title ?? "Sanchi UBL 2026"}</div>
+              <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Season 4 · United Bat League</div>
             </div>
           </Link>
           <button
