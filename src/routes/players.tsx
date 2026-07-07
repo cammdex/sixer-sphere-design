@@ -48,28 +48,45 @@ function PlayersPage() {
 function TeamsGrid() {
   return (
     <div className="mt-3 grid grid-cols-2 gap-3">
-      {teams.map((t) => (
-        <article key={t.id} className="relative overflow-hidden rounded-2xl glass p-4">
-          <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full opacity-40 blur-2xl"
-            style={{ background: `radial-gradient(circle, ${t.color}, transparent 70%)` }} />
-          <div className="relative">
-            <TeamCrest short={t.short} color={t.color} color2={t.color2} size={44} />
-            <h3 className="mt-3 font-display text-sm font-bold leading-tight">{t.name}</h3>
-            <div className="mt-2 space-y-1 text-[11px]">
-              <div className="flex items-center gap-1.5 text-muted-foreground">
-                <span className="text-gold">C</span> {t.captain}
+      {teams.map((t) => {
+        const spent = teamSpent(t.id);
+        const pct = Math.min(100, Math.round((spent / t.purse) * 100));
+        return (
+          <Link
+            key={t.id}
+            to="/players/$teamId"
+            params={{ teamId: t.id }}
+            className="relative overflow-hidden rounded-2xl glass p-4 transition-transform active:scale-[0.98]"
+          >
+            <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full opacity-40 blur-2xl"
+              style={{ background: `radial-gradient(circle, ${t.color}, transparent 70%)` }} />
+            <div className="relative">
+              <div className="flex items-start justify-between">
+                <TeamCrest short={t.short} color={t.color} color2={t.color2} size={44} />
+                <ChevronRight className="h-4 w-4 text-gold" />
               </div>
-              <div className="flex items-center gap-1.5 text-muted-foreground">
-                <Crown className="h-3 w-3 text-gold" /> {t.owner}
+              <h3 className="mt-3 font-display text-sm font-bold leading-tight">{t.name}</h3>
+              <div className="mt-2 space-y-1 text-[11px]">
+                <div className="flex items-center gap-1.5 text-muted-foreground">
+                  <span className="text-gold">C</span> {t.captain}
+                </div>
+                <div className="flex items-center gap-1.5 text-muted-foreground">
+                  <Crown className="h-3 w-3 text-gold" /> {t.owner}
+                </div>
+              </div>
+              <div className="mt-3 border-t border-border pt-2">
+                <div className="flex items-center justify-between text-[10px]">
+                  <span className="uppercase tracking-widest text-muted-foreground">Purse used</span>
+                  <span className="font-display font-bold text-gold tabular-nums">{pct}%</span>
+                </div>
+                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white/10">
+                  <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${t.color}, ${t.color2})` }} />
+                </div>
               </div>
             </div>
-            <div className="mt-3 flex items-center justify-between border-t border-border pt-2">
-              <span className="text-[10px] uppercase tracking-widest text-muted-foreground">Pts</span>
-              <span className="font-display text-lg font-bold text-gold tabular-nums">{t.points}</span>
-            </div>
-          </div>
-        </article>
-      ))}
+          </Link>
+        );
+      })}
     </div>
   );
 }
