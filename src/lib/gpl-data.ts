@@ -25,21 +25,213 @@ export const updates = [
 ];
 
 export type Team = {
-  id: string; name: string; short: string; captain: string; owner: string;
-  color: string; color2: string; wins: number; losses: number; nrr: number; points: number;
+  id: string;
+
+  name: string;
+  short: string;
+
+  owners: string[];
+
+  captain: string;
+  viceCaptain?: string;
+  retainedPlayer?: string;
+
+  logo?: string;
+
+  color: string;
+  color2: string;
+
+  initialPurse?: number;
+  purse?: number;
+
+  squadLimit?: number;
+  playersBought?: number;
+  remainingSlots?: number;
+
+  wins: number;
+  losses: number;
+  nrr: number;
+  points: number;
 };
 
 export const teams: Team[] = [
-  { id: "rr", name: "Royal Rangers", short: "RR", captain: "Aarav Mehta", owner: "Vikrant Shah", color: "#3b82f6", color2: "#1e3a8a", wins: 6, losses: 1, nrr: 1.84, points: 12 },
-  { id: "ts", name: "Thunder Strikers", short: "TS", captain: "Rohan Iyer", owner: "Anika Kapoor", color: "#f59e0b", color2: "#7c2d12", wins: 5, losses: 2, nrr: 1.21, points: 10 },
-  { id: "kp", name: "Knight Phantoms", short: "KP", captain: "Yash Khanna", owner: "Devraj Singh", color: "#a855f7", color2: "#3b0764", wins: 5, losses: 2, nrr: 0.94, points: 10 },
-  { id: "tw", name: "Titan Warriors", short: "TW", captain: "Siddharth Rao", owner: "Meera Joshi", color: "#10b981", color2: "#064e3b", wins: 4, losses: 3, nrr: 0.42, points: 8 },
-  { id: "sk", name: "Sapphire Kings", short: "SK", captain: "Karan Bhatt", owner: "Rahul Verma", color: "#0ea5e9", color2: "#0c4a6e", wins: 3, losses: 4, nrr: -0.18, points: 6 },
-  { id: "cb", name: "Crimson Blasters", short: "CB", captain: "Ishaan Patel", owner: "Nisha Aggarwal", color: "#ef4444", color2: "#7f1d1d", wins: 3, losses: 4, nrr: -0.55, points: 6 },
-  { id: "dc", name: "Desert Cobras", short: "DC", captain: "Manav Reddy", owner: "Suresh Nair", color: "#eab308", color2: "#713f12", wins: 2, losses: 5, nrr: -0.92, points: 4 },
-  { id: "is", name: "Iron Spartans", short: "IS", captain: "Kabir Singh", owner: "Pooja Malhotra", color: "#64748b", color2: "#1e293b", wins: 1, losses: 6, nrr: -1.46, points: 2 },
-];
+  {
+    id: "lt",
+    name: "LT Lions",
+    short: "LTL",
+    owners: ["Abdul Hussain Lachhawala", "Abbas Lachhawala"],
+    captain: "Mufaddal Zawar Mines",
+    viceCaptain: "Huzefa Rundera",
+    retainedPlayer: "Hussain lacchawala",
+    logo: "/logos/teams/lt.png",
+    color: "#2563eb",
+    color2: "#1e3a8a",
+    initialPurse: 15000000,
+    purse: 13500000,
+    squadLimit: 10,
+    playersBought: 3,
+    remainingSlots: 10,
+    wins: 0,
+    losses: 0,
+    nrr: 0,
+    points: 0,
+  },
 
+  {
+    id: "rr",
+    name: "Regen Royals",
+    short: "RR",
+    owners: ["Mohammedi Dalal", "Mufaddal Dalal"],
+    captain: "Abdul Qadir",
+    viceCaptain: "Ali Hussain Vichavera",
+    retainedPlayer: "Mustafa Dalal ",
+    logo: "/logos/teams/rr.png",
+    color: "#dc2626",
+    color2: "#7f1d1d",
+    initialPurse: 15000000,
+    purse: 13500000,
+    squadLimit: 10,
+    playersBought: 3,
+    remainingSlots: 10,
+    wins: 0,
+    losses: 0,
+    nrr: 0,
+    points: 0,
+  },
+
+  {
+    id: "gm",
+    name: "GM Gladiators",
+    short: "GM",
+    owners: ["Nuzhat Kagzi"],
+    captain: "Qutub kankroli ",
+    viceCaptain: "",
+    retainedPlayer: "",
+    logo: "/logos/teams/gm.png",
+    color: "#9333ea",
+    color2: "#581c87",
+    initialPurse: 15000000,
+    purse: 14000000,
+    squadLimit: 10,
+    playersBought: 2,
+    remainingSlots: 11,
+    wins: 0,
+    losses: 0,
+    nrr: 0,
+    points: 0,
+  },
+
+  {
+    id: "be",
+    name: "Best Eleven",
+    short: "BE",
+    owners: ["Amir Sohail Bandookwala", "Ali Asgar Bandookwala"],
+    captain: "Hussaini Mhow ",
+    viceCaptain: "Mohammed kurawar",
+    retainedPlayer: "Amir Sohail Bandookwala",
+    logo: "/logos/teams/be.png",
+    color: "#16a34a",
+    color2: "#14532d",
+    initialPurse: 15000000,
+    purse: 13500000,
+    squadLimit: 10,
+    playersBought: 3,
+    remainingSlots: 10,
+    wins: 0,
+    losses: 0,
+    nrr: 0,
+    points: 0,
+  },
+
+  {
+    id: "bt",
+    name: "Bandookwala Titans",
+    short: "BT",
+    owners: ["Shabbir Bandookwala", "Faisal Bandookwala"],
+    captain: "Murtaza Sanwari",
+    viceCaptain: "Idris Khilona ",
+    retainedPlayer: "Aziz German",
+    logo: "/logos/teams/bt.png",
+    color: "#f97316",
+    color2: "#9a3412",
+    initialPurse: 15000000,
+    purse: 13500000,
+    squadLimit: 10,
+    playersBought: 3,
+    remainingSlots: 10,
+    wins: 0,
+    losses: 0,
+    nrr: 0,
+    points: 0,
+  },
+
+  {
+    id: "gc",
+    name: "Global Challengers",
+    short: "GC",
+    owners: ["Hussain Bohra", "Arif Amar"],
+    captain: "Mustafa Lohawala",
+    viceCaptain: "Ali Hussain Lacchawala",
+    retainedPlayer: "Arif Amar",
+    logo: "/logos/teams/gc.png",
+    color: "#0891b2",
+    color2: "#164e63",
+    initialPurse: 15000000,
+    purse: 13500000,
+    squadLimit: 10,
+    playersBought: 3,
+    remainingSlots: 10,
+    wins: 0,
+    losses: 0,
+    nrr: 0,
+    points: 0,
+  },
+
+  {
+    id: "bb",
+    name: "Babji Blasters",
+    short: "BB",
+    owners: ["Kutubuddin Bharkhundi", "Mohammed Bohra"],
+    captain: "Abbas M Mustafa",
+    viceCaptain: "Hussain Khozema",
+    retainedPlayer: "Taha Parel",
+    logo: "/logos/teams/bb.png",
+    color: "#ca8a04",
+    color2: "#854d0e",
+    initialPurse: 15000000,
+    purse: 13500000,
+    squadLimit: 10,
+    playersBought: 3,
+    remainingSlots: 10,
+    wins: 0,
+    losses: 0,
+    nrr: 0,
+    points: 0,
+  },
+
+  {
+    id: "brf",
+    name: "BRF Legal Legends",
+    short: "BRF",
+    owners: ["Ali Hussain Ameen"],
+    captain: "Ali Asgar Hindustani",
+    viceCaptain: "Ali Asgar Lohawala ",
+    retainedPlayer: "Hussain Ghee",
+    logo: "/logos/teams/brf.png",
+    color: "#475569",
+    color2: "#1e293b",
+    initialPurse: 15000000,
+    purse: 13500000,
+    squadLimit: 10,
+    playersBought: 3,
+    remainingSlots: 10,
+    wins: 0,
+    losses: 0,
+    nrr: 0,
+    points: 0,
+  },
+];
+/*
 export const owners = teams.map((t) => ({
   id: t.id,
   name: t.owner,
@@ -51,13 +243,37 @@ export const owners = teams.map((t) => ({
   color2: t.color2,
   bio: "Backing local cricket since 2019. Building a generation of fearless players.",
 }));
+*/
 
 export type Player = {
-  id: string; name: string; age: number; role: "Batsman" | "Bowler" | "All-Rounder" | "Wicket Keeper";
-  basePrice: number; soldPrice?: number; teamId?: string;
-  batting: string; bowling: string;
-  stats: { matches: number; runs: number; wickets: number; avg: number; sr: number };
+  id: string;
+  playerNumber?: string;
+
+  name: string;
+  age: number;
+
+  role: "Batsman" | "Bowler" | "All-Rounder" | "Wicket Keeper";
+
+  basePrice: number;
+  soldPrice?: number;
+  teamId?: string;
+
+  batting: string;
+  bowling: string;
+
+  stats: {
+    matches: number;
+    runs: number;
+    wickets: number;
+    avg: number;
+    sr: number;
+  };
+
   initials: string;
+
+  photo?: string;
+
+  status?: "available" | "live" | "sold" | "unsold";
 };
 
 const firstNames = ["Aarav","Rohan","Yash","Siddharth","Karan","Ishaan","Manav","Kabir","Vivaan","Arjun","Dev","Aryan","Krish","Reyansh","Vihaan","Sai","Pranav","Aniket","Harsh","Ritvik","Tanish","Om","Atharv","Veer","Rudra","Shaurya","Ayaan","Naman","Parth","Raghav"];

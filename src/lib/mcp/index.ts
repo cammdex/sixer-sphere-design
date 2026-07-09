@@ -6,9 +6,9 @@ import listPlayers from "./tools/list-players";
 
 export default defineMcp({
   name: "gpl-mcp",
-  title: "Galaxy Premier League MCP",
+  title: "Udaipur Bohra League MCP",
   version: "0.1.0",
   instructions:
-    "Tools for the Galaxy Premier League cricket tournament app. Use them to fetch tournament info, teams, the points table, and the player catalog.",
+    "Tools for the Udaipur Bohra League cricket tournament app. Use them to fetch tournament info, teams, the points table, and the player catalog.",
   tools: [getTournamentInfo, listTeams, getPointsTable, listPlayers],
 });

@@ -35,8 +35,8 @@ export function MobileLayout({
               <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-gold ring-2 ring-background" />
             </div>
             <div className="leading-tight">
-              <div className="font-display text-[15px] font-bold">{title ?? "Galaxy Premier League"}</div>
-              <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Season 4 · 2026</div>
+              <div className="font-display text-[15px] font-bold">{title ?? "Sanchi Udaipur Bohra League"}</div>
+              <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Season 2 · 2026</div>
             </div>
           </Link>
           <button

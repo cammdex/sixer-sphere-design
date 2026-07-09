@@ -82,10 +82,10 @@ export function LeadSponsor({
 // Remove or replace once real sponsor data is wired in.
 
 export const placeholderLeadSponsor: LeadSponsorProps = {
-  name: "Volta Electronics",
+  name: "Sanchi",
   logo: "",
   tagline: "Smart appliances for modern homes.",
-  description: "Volta Electronics is the official Lead Sponsor of Galaxy Premier League Season 4, powering the tournament's digital scoreboards and stadium lighting.",
+  description: "Sanchi Group is the official Lead Sponsor of Sanchi Udaipur Bohra League Season 2, powering the tournament's digital scoreboards and stadium lighting.",
   website: "#",
   accentColor: "#3b82f6",
 };
