@@ -8,6 +8,7 @@ import { OwnersScroll, placeholderOwners } from "@/components/home/OwnersScroll"
 import { SponsorsGrid, placeholderSponsorsByTier } from "@/components/home/SponsorsGrid";
 import { PromotionsCarousel, placeholderPromotions } from "@/components/home/PromotionsCarousel";
 import { EventFeed, placeholderEventFeed } from "@/components/home/EventFeed";
+import {LiveTeams} from "@/components/home/LiveTeams";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -53,7 +54,12 @@ function HomePage() {
         <PromotionsCarousel promotions={placeholderPromotions} />
       </div>
 
-      {/* 7. Live Event Feed */}
+      {/* 7. Live Teams */}
+      <div className="mt-5">
+        <LiveTeams />
+      </div>
+
+      {/* 8. Live Event Feed */}
       <div className="mt-5">
         <EventFeed items={placeholderEventFeed} />
       </div>

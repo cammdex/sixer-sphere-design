@@ -1,5 +1,7 @@
 // Mock data for Galaxy Premier League (GPL) tournament
 
+import { ListChevronsDownUp } from "lucide-react";
+
 export const tournament = {
   name: "SANCHI Udaipur Bohra League",
   shortName: "UBL",
@@ -28,6 +30,7 @@ export type Team = {
   id: string;
 
   name: string;
+  displayName: string;
   short: string;
 
   owners: string[];
@@ -43,6 +46,7 @@ export type Team = {
 
   initialPurse?: number;
   purse?: number;
+  maxBid?: number;
 
   squadLimit?: number;
   playersBought?: number;
@@ -58,6 +62,7 @@ export const teams: Team[] = [
   {
     id: "lt",
     name: "LT Lions",
+    displayName: "Lions",
     short: "LTL",
     owners: ["Abdul Hussain Lachhawala", "Abbas Lachhawala"],
     captain: "Mufaddal Zawar Mines",
@@ -68,9 +73,10 @@ export const teams: Team[] = [
     color2: "#1e3a8a",
     initialPurse: 15000000,
     purse: 13500000,
-    squadLimit: 10,
+    squadLimit: 13,
     playersBought: 3,
     remainingSlots: 10,
+    maxBid: 11700000,
     wins: 0,
     losses: 0,
     nrr: 0,
@@ -80,6 +86,7 @@ export const teams: Team[] = [
   {
     id: "rr",
     name: "Regen Royals",
+    displayName: "Regen",
     short: "RR",
     owners: ["Mohammedi Dalal", "Mufaddal Dalal"],
     captain: "Abdul Qadir",
@@ -90,9 +97,10 @@ export const teams: Team[] = [
     color2: "#7f1d1d",
     initialPurse: 15000000,
     purse: 13500000,
-    squadLimit: 10,
+    squadLimit: 13,
     playersBought: 3,
     remainingSlots: 10,
+    maxBid: 11700000,
     wins: 0,
     losses: 0,
     nrr: 0,
@@ -102,19 +110,21 @@ export const teams: Team[] = [
   {
     id: "gm",
     name: "GM Gladiators",
+    displayName: "Gladiators",
     short: "GM",
     owners: ["Nuzhat Kagzi"],
     captain: "Qutub kankroli ",
-    viceCaptain: "",
+    viceCaptain: "Shabbir Dungri",
     retainedPlayer: "",
     logo: "/logos/teams/gm.png",
     color: "#9333ea",
     color2: "#581c87",
     initialPurse: 15000000,
     purse: 14000000,
-    squadLimit: 10,
+    squadLimit: 13,
     playersBought: 2,
     remainingSlots: 11,
+    maxBid: 12000000,
     wins: 0,
     losses: 0,
     nrr: 0,
@@ -124,6 +134,7 @@ export const teams: Team[] = [
   {
     id: "be",
     name: "Best Eleven",
+    displayName: "Eleven",
     short: "BE",
     owners: ["Amir Sohail Bandookwala", "Ali Asgar Bandookwala"],
     captain: "Hussaini Mhow ",
@@ -134,9 +145,10 @@ export const teams: Team[] = [
     color2: "#14532d",
     initialPurse: 15000000,
     purse: 13500000,
-    squadLimit: 10,
+    squadLimit: 13,
     playersBought: 3,
     remainingSlots: 10,
+    maxBid: 11700000,
     wins: 0,
     losses: 0,
     nrr: 0,
@@ -146,6 +158,7 @@ export const teams: Team[] = [
   {
     id: "bt",
     name: "Bandookwala Titans",
+    displayName: "Titans",
     short: "BT",
     owners: ["Shabbir Bandookwala", "Faisal Bandookwala"],
     captain: "Murtaza Sanwari",
@@ -156,9 +169,10 @@ export const teams: Team[] = [
     color2: "#9a3412",
     initialPurse: 15000000,
     purse: 13500000,
-    squadLimit: 10,
+    squadLimit: 13,
     playersBought: 3,
     remainingSlots: 10,
+    maxBid: 11700000,
     wins: 0,
     losses: 0,
     nrr: 0,
@@ -168,6 +182,7 @@ export const teams: Team[] = [
   {
     id: "gc",
     name: "Global Challengers",
+    displayName: "Challengers",
     short: "GC",
     owners: ["Hussain Bohra", "Arif Amar"],
     captain: "Mustafa Lohawala",
@@ -178,9 +193,10 @@ export const teams: Team[] = [
     color2: "#164e63",
     initialPurse: 15000000,
     purse: 13500000,
-    squadLimit: 10,
+    squadLimit: 13,
     playersBought: 3,
     remainingSlots: 10,
+    maxBid: 11700000,
     wins: 0,
     losses: 0,
     nrr: 0,
@@ -190,6 +206,7 @@ export const teams: Team[] = [
   {
     id: "bb",
     name: "Babji Blasters",
+    displayName:"Blasters",
     short: "BB",
     owners: ["Kutubuddin Bharkhundi", "Mohammed Bohra"],
     captain: "Abbas M Mustafa",
@@ -200,9 +217,10 @@ export const teams: Team[] = [
     color2: "#854d0e",
     initialPurse: 15000000,
     purse: 13500000,
-    squadLimit: 10,
+    squadLimit: 13,
     playersBought: 3,
     remainingSlots: 10,
+    maxBid: 11700000,
     wins: 0,
     losses: 0,
     nrr: 0,
@@ -212,6 +230,7 @@ export const teams: Team[] = [
   {
     id: "brf",
     name: "BRF Legal Legends",
+    displayName: "Legends",
     short: "BRF",
     owners: ["Ali Hussain Ameen"],
     captain: "Ali Asgar Hindustani",
@@ -222,9 +241,10 @@ export const teams: Team[] = [
     color2: "#1e293b",
     initialPurse: 15000000,
     purse: 13500000,
-    squadLimit: 10,
+    squadLimit: 13,
     playersBought: 3,
     remainingSlots: 10,
+    maxBid: 11700000,
     wins: 0,
     losses: 0,
     nrr: 0,

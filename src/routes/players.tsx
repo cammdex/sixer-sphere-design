@@ -5,6 +5,7 @@ import { MobileLayout, TeamCrest, Avatar } from "@/components/mobile-layout";
 import { formatINR } from "@/lib/gpl-data";
 import { useLivePlayers, useLiveTeams, type LivePlayer, type LiveTeam } from "@/lib/auction-store";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import TeamDetails from "@/components/team-details";
 
 export const Route = createFileRoute("/players")({
   head: () => ({ meta: [
@@ -21,6 +22,8 @@ function PlayersPage() {
   const [tab, setTab] = useState<(typeof sectionTabs)[number]>("Teams");
   const { teams, loading: teamsLoading } = useLiveTeams();
   const { players, loading: playersLoading } = useLivePlayers();
+  const [selectedTeam, setSelectedTeam] = useState<LiveTeam | null>(null);
+  const [activePlayer, setActivePlayer] = useState<LivePlayer | null>(null);
 
   return (
     <MobileLayout title="Squads & Players">
@@ -45,9 +48,42 @@ function PlayersPage() {
         )}
         {!teamsLoading && !playersLoading && (
           <>
-            {tab === "Teams" && <TeamsGrid teams={teams} players={players} />}
-            {tab === "Owners" && <OwnersList teams={teams} />}
-            {tab === "Players" && <PlayersCatalog players={players} teams={teams} />}
+            {tab === "Teams" && (
+  <>
+    <TeamsGrid
+      teams={teams}
+      players={players}
+      selectedTeam={selectedTeam}
+      onSelectTeam={setSelectedTeam}
+    />
+
+    <TeamDetails
+      open={!!selectedTeam}
+      team={selectedTeam}
+      players={players}
+      onClose={() => setSelectedTeam(null)}
+      onPlayerClick={(player) => {
+  console.log("Clicked:", player);
+  setActivePlayer(player);
+}}
+    />
+    <PlayerSheet
+  player={activePlayer}
+  team={teams.find((t) => t.id === activePlayer?.teamId)}
+  onClose={() => setActivePlayer(null)}
+/>
+
+  </>
+)}
+
+{tab === "Owners" && <OwnersList teams={teams} />}
+
+{tab === "Players" && (
+  <PlayersCatalog
+    players={players}
+    teams={teams}
+  />
+)}
           </>
         )}
       </div>
@@ -55,44 +91,89 @@ function PlayersPage() {
   );
 }
 
-function TeamsGrid({ teams, players }: { teams: LiveTeam[]; players: LivePlayer[] }) {
+function TeamsGrid({
+  teams,
+  players,
+  selectedTeam,
+  onSelectTeam,
+}: {
+  teams: LiveTeam[];
+  players: LivePlayer[];
+  selectedTeam: LiveTeam | null;
+  onSelectTeam: (team: LiveTeam) => void;
+}) {
+  
   return (
-    <div className="mt-3 grid grid-cols-2 gap-3">
-      {teams.map((t) => {
-        const squadCount = players.filter((p) => p.teamId === t.id).length;
-        return (
-          <article key={t.id} className="relative overflow-hidden rounded-2xl glass p-4">
-            <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full opacity-40 blur-2xl"
-              style={{ background: `radial-gradient(circle, ${t.color}, transparent 70%)` }} />
-            <div className="relative">
-              <TeamCrest short={t.short} color={t.color} color2={t.color2} size={44} />
-              <h3 className="mt-3 font-display text-sm font-bold leading-tight">{t.name}</h3>
-              <div className="mt-2 space-y-1 text-[11px]">
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <span className="text-gold">C</span> {t.captain}
+    <>
+      <div className="mt-3 grid grid-cols-2 gap-3">
+        {teams.map((t) => {
+          const squadCount = players.filter((p) => p.teamId === t.id).length;
+
+          return (
+            <button
+              key={t.id}
+              onClick={() => onSelectTeam(t)}
+              className="relative overflow-hidden rounded-2xl glass p-4 text-left"
+            >
+              <div
+                className="absolute -right-6 -top-6 h-20 w-20 rounded-full opacity-40 blur-2xl"
+                style={{
+                  background: `radial-gradient(circle, ${t.color}, transparent 70%)`,
+                }}
+              />
+
+              <div className="relative">
+                <TeamCrest
+                  short={t.short}
+                  color={t.color}
+                  color2={t.color2}
+                  size={44}
+                />
+
+                <h3 className="mt-3 font-display text-sm font-bold leading-tight">
+                  {t.name}
+                </h3>
+
+                <div className="mt-2 space-y-1 text-[11px]">
+                  <div className="flex items-center gap-1.5 text-muted-foreground">
+                    <span className="text-gold">C</span>
+                    {t.captain}
+                  </div>
+
+                  <div className="flex items-center gap-1.5 text-muted-foreground">
+                    <Crown className="h-3 w-3 text-gold" />
+                    {t.owners.join(" & ")}
+                  </div>
                 </div>
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <Crown className="h-3 w-3 text-gold" /> {t.owner}
+
+                <div className="mt-3 flex items-center justify-between border-t border-border pt-2">
+                  <span className="text-[10px] uppercase tracking-widest text-muted-foreground">
+                    {squadCount} players
+                  </span>
+
+                  <span className="font-display text-lg font-bold text-gold tabular-nums">
+                    {t.points}
+                  </span>
                 </div>
               </div>
-              <div className="mt-3 flex items-center justify-between border-t border-border pt-2">
-                <span className="text-[10px] uppercase tracking-widest text-muted-foreground">{squadCount} players</span>
-                <span className="font-display text-lg font-bold text-gold tabular-nums">{t.points}</span>
-              </div>
-            </div>
-          </article>
-        );
-      })}
-    </div>
+            </button>
+          );
+        })}
+      </div>
+
+    </>
   );
 }
-
 function OwnersList({ teams }: { teams: LiveTeam[] }) {
   const owners = teams.map((t) => ({
     id: t.id,
-    name: t.owner,
+    name: t.owners.join(" & "),
     team: t.name,
-    initials: t.owner.split(" ").map((n) => n[0]).join(""),
+    initials: t.owners
+  .join(" ")
+  .split(" ")
+  .map((n: string) => n[0])
+  .join(""),
     color: t.color,
     color2: t.color2,
   }));
@@ -228,7 +309,10 @@ function PlayersCatalog({ players, teams }: { players: LivePlayer[]; teams: Live
 
 function PlayerSheet({ player, team, onClose }: { player: LivePlayer | null; team?: LiveTeam; onClose: () => void }) {
   return (
-    <Dialog open={!!player} onOpenChange={(o) => !o && onClose()}>
+    <Dialog
+  open={!!player}
+  onOpenChange={(o) => !o && onClose()}
+>
       <DialogContent className="max-w-md gap-0 border-border bg-transparent p-0 shadow-none [&>button]:hidden">
         <div className="relative overflow-hidden rounded-3xl glass p-5">
           <DialogTitle className="sr-only">{player?.name}</DialogTitle>

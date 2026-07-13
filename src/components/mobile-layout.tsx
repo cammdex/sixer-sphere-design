@@ -24,7 +24,7 @@ export function MobileLayout({
   const [bellPulse, setBellPulse] = useState(true);
 
   return (
-    <div className="relative mx-auto flex min-h-screen max-w-md flex-col pb-28">
+    <div className="relative mx-auto flex min-h-screen w-full max-w-md md:max-w-3xl xl:max-w-6xl flex-col pb-28">
       {/* Top bar */}
       <header className="sticky top-0 z-30 px-4 pt-4 pb-3 backdrop-blur-xl"
         style={{ background: "linear-gradient(180deg, oklch(0.16 0.03 260 / 0.85), oklch(0.16 0.03 260 / 0.4))" }}>
@@ -65,7 +65,7 @@ export function MobileLayout({
       )}
 
       {/* Bottom nav */}
-      <nav className="fixed inset-x-0 bottom-0 z-30 mx-auto max-w-md px-4 pb-4 pt-2">
+      <nav className="fixed inset-x-0 bottom-0 z-30 mx-auto w-full max-w-md md:max-w-3xl xl:max-w-6xl px-4 pb-4 pt-2">
         <div className="glass flex items-center justify-around rounded-2xl px-2 py-2">
           {tabs.map(({ to, label, icon: Icon, exact }) => {
             const active = exact ? pathname === to : pathname.startsWith(to);
@@ -90,18 +90,54 @@ export function MobileLayout({
   );
 }
 
-export function TeamCrest({ short, color, color2, size = 40 }: { short: string; color: string; color2: string; size?: number }) {
+export function TeamCrest({
+  short,
+  color,
+  color2,
+  size = 40,
+}: {
+  short: string;
+  color: string;
+  color2: string;
+  size?: number;
+}) {
+  const logo = `/logos/teams/${short.toLowerCase()}.png`;
+
   return (
     <div
-      className="relative grid place-items-center rounded-xl font-display font-bold text-white shadow-md"
+      className="relative overflow-hidden rounded-xl"
       style={{
-        width: size, height: size,
+        width: size,
+        height: size,
         background: `linear-gradient(135deg, ${color}, ${color2})`,
         boxShadow: `0 6px 18px -6px ${color}80, inset 0 1px 0 rgba(255,255,255,0.18)`,
-        fontSize: size * 0.36,
       }}
     >
-      {short}
+      <img
+        src={logo}
+        alt={short}
+        className="h-full w-full object-cover"
+        onError={(e) => {
+          const target = e.currentTarget;
+          target.style.display = "none";
+
+          const parent = target.parentElement;
+          if (parent) {
+            parent.innerHTML = `
+              <div style="
+                width:100%;
+                height:100%;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                color:white;
+                font-weight:bold;
+                font-size:${size * 0.36}px;">
+                ${short}
+              </div>`;
+          }
+        }}
+      />
     </div>
   );
 }

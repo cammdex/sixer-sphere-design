@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Radio } from "lucide-react";
 import { Avatar, TeamCrest } from "@/components/mobile-layout";
 import { tournament, formatINR } from "@/lib/gpl-data";
-import { useAuctionState, useLivePlayers, useLiveTeams } from "@/lib/auction-store";
+import { useAuctionState, useLivePlayers } from "@/lib/auction-store";
 import { toast } from "sonner";
 
 function useCountdown(target: string) {
@@ -25,11 +25,9 @@ export function HeroSection() {
   const c = useCountdown(tournament.auctionDate);
   const { state: auction } = useAuctionState();
   const { players } = useLivePlayers();
-  const { teams } = useLiveTeams();
 
   const isLive = auction.status === "live";
   const currentPlayer = players.find((p) => p.id === auction.playerId);
-  const biddingTeam = teams.find((t) => t.id === auction.biddingTeamId);
 
   return (
     <section className="relative mt-2 overflow-hidden rounded-3xl p-5 glass-gold">
@@ -53,29 +51,30 @@ export function HeroSection() {
                 <Avatar initials={currentPlayer.initials} color="#3b82f6" color2="#1e3a8a" size={72} />
               )}
               <div className="min-w-0">
-                <h1 className="font-display text-xl font-extrabold leading-tight">{currentPlayer.name}</h1>
-                <div className="text-xs uppercase tracking-widest text-gold">{currentPlayer.role}</div>
-                <div className="mt-1 text-xs text-muted-foreground">Base {formatINR(currentPlayer.basePrice)}</div>
-              </div>
+  <div className="inline-flex rounded-full border border-gold/40 bg-gold/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.25em] text-gold">
+    {currentPlayer.playerNumber}
+  </div>
+
+  <h1 className="mt-2 font-display text-xl font-extrabold leading-tight">
+    {currentPlayer.name}
+  </h1>
+
+  <div className="mt-1 text-xs uppercase tracking-widest text-gold">
+    {currentPlayer.role}
+  </div>
+</div>
             </div>
-            <div className="mt-4 grid grid-cols-2 gap-2">
-              <div className="glass rounded-xl py-2.5 text-center">
-                <div className="font-display text-xl font-bold tabular-nums text-gold">
-                  {auction.currentBid ? formatINR(auction.currentBid) : "—"}
-                </div>
-                <div className="mt-0.5 text-[9px] uppercase tracking-widest text-muted-foreground">Current bid</div>
-              </div>
-              <div className="glass flex items-center justify-center gap-2 rounded-xl py-2.5 text-center">
-                {biddingTeam ? (
-                  <>
-                    <TeamCrest short={biddingTeam.short} color={biddingTeam.color} color2={biddingTeam.color2} size={24} />
-                    <span className="text-sm font-bold">{biddingTeam.short}</span>
-                  </>
-                ) : (
-                  <span className="text-xs text-muted-foreground">Bidding open</span>
-                )}
-              </div>
-            </div>
+            <div className="mt-5 rounded-2xl glass p-4">
+  <div className="text-center">
+    <div className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+      BASE PRICE
+    </div>
+
+    <div className="mt-2 font-display text-3xl font-extrabold text-gold">
+      {formatINR(currentPlayer.basePrice)}
+    </div>
+  </div>
+</div>
           </>
         ) : (
           <>
