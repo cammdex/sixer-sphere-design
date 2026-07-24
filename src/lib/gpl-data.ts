@@ -1,30 +1,37 @@
-// Mock data for Galaxy Premier League (GPL) tournament
 
-import { ListChevronsDownUp } from "lucide-react";
 
 export const tournament = {
-  name: "SANCHI Udaipur Bohra League",
+  name: "Udaipur Bohra League",
   shortName: "UBL",
+
   season: "Season 2 · 2026",
-  tagline: "Where local legends rise",
-  auctionDate: "2026-07-12T18:30:00",
-  auctionVenue: "Crown Banquet Hall, Sector 17",
-  auctionEntry: "Owners & Press only · Live streamed",
-  stats: { teams: 8, players: 142, owners: 16 },
+
+  tagline: " ",
+
+  auctionDate: "2026-08-09",
+
+  auctionVenue: "Delhi Darbar",
+
+  auctionEntry: " ",
+
+  auctionStatus: "Auction Coming Soon",
+
+  auctionPurse: "TBA",
+
+  about: "",
+
+  logo: "/logos/ubl-logo.png",
+
+  stats: {
+    teams: 8,
+    players: 151,
+    owners: 13,
+  },
 };
 
-export const announcements = [
-  { id: 1, tag: "AUCTION", title: "Player auction goes live July 12", body: "Final bid catalog drops 48h before — owners review now.", tone: "gold" },
-  { id: 2, tag: "FIXTURE", title: "Opening match: Strikers vs Royals", body: "Floodlights on at Galaxy Ground from 7:30 PM.", tone: "blue" },
-  { id: 3, tag: "TRIALS", title: "U-23 trial slots reopen", body: "20 fresh entries cleared — 4 spots remain.", tone: "gold" },
-];
+export const announcements = [];
 
-export const updates = [
-  { id: 1, time: "2h ago", title: "Royals retain captain Aarav Mehta for ₹18L" },
-  { id: 2, time: "5h ago", title: "Auction purse raised to ₹1.2 Cr per team" },
-  { id: 3, time: "1d ago", title: "Galaxy Ground re-turfed ahead of opener" },
-  { id: 4, time: "2d ago", title: "Sponsorship tier ‘Diamond’ sold out" },
-];
+export const updates = [];
 
 export type Team = {
   id: string;
@@ -68,7 +75,7 @@ export const teams: Team[] = [
     captain: "Mufaddal Zawar Mines",
     viceCaptain: "Huzefa Rundera",
     retainedPlayer: "Hussain lacchawala",
-    logo: "/logos/teams/lt.png",
+    logo: "/logos/teams/ltl.png",
     color: "#2563eb",
     color2: "#1e3a8a",
     initialPurse: 15000000,
@@ -332,40 +339,15 @@ export const players: Player[] = Array.from({ length: 36 }, (_, i) => {
   };
 });
 
-export const fixtures = [
-  { id: 1, date: "Jul 18", time: "7:30 PM", a: "rr", b: "ts", venue: "Galaxy Ground", status: "Upcoming" },
-  { id: 2, date: "Jul 19", time: "3:30 PM", a: "kp", b: "tw", venue: "Galaxy Ground", status: "Upcoming" },
-  { id: 3, date: "Jul 19", time: "7:30 PM", a: "sk", b: "cb", venue: "Crown Oval", status: "Upcoming" },
-  { id: 4, date: "Jul 20", time: "3:30 PM", a: "dc", b: "is", venue: "Crown Oval", status: "Upcoming" },
-  { id: 5, date: "Jul 22", time: "7:30 PM", a: "rr", b: "kp", venue: "Galaxy Ground", status: "Upcoming" },
-];
+export const fixtures = [];
 
-export const results = [
-  { id: 1, date: "Jul 14", a: "ts", b: "cb", scoreA: "182/4", scoreB: "168/9", winner: "ts", margin: "14 runs" },
-  { id: 2, date: "Jul 13", a: "rr", b: "is", scoreA: "201/6", scoreB: "144/10", winner: "rr", margin: "57 runs" },
-  { id: 3, date: "Jul 12", a: "kp", b: "dc", scoreA: "156/7", scoreB: "160/4", winner: "dc", margin: "6 wickets" },
-];
+export const results = [];
 
-export const topScorers = [
-  { player: "Aarav Mehta", teamId: "rr", runs: 412, sr: 168.2 },
-  { player: "Rohan Iyer", teamId: "ts", runs: 388, sr: 154.0 },
-  { player: "Yash Khanna", teamId: "kp", runs: 351, sr: 149.7 },
-  { player: "Siddharth Rao", teamId: "tw", runs: 320, sr: 142.1 },
-  { player: "Karan Bhatt", teamId: "sk", runs: 298, sr: 138.6 },
-];
+export const topScorers = [];
 
-export const topWicketTakers = [
-  { player: "Ishaan Patel", teamId: "cb", wickets: 18, econ: 6.4 },
-  { player: "Manav Reddy", teamId: "dc", wickets: 15, econ: 6.8 },
-  { player: "Kabir Singh", teamId: "is", wickets: 14, econ: 7.1 },
-  { player: "Yash Khanna", teamId: "kp", wickets: 12, econ: 7.4 },
-  { player: "Rohan Iyer", teamId: "ts", wickets: 10, econ: 7.6 },
-];
+export const topWicketTakers = [];
 
-export const venues = [
-  { name: "Galaxy Ground", city: "Sector 17", capacity: "8,500" },
-  { name: "Crown Oval", city: "Sector 22", capacity: "5,200" },
-];
+export const venues = [];
 
 export const umpires = ["R. Krishnan", "M. Pereira", "S. Bhattacharya", "A. Khurana", "N. Joseph"];
 
@@ -377,25 +359,9 @@ export type Sponsor = {
   color: string; color2: string; initials: string;
 };
 
-export const sponsors: Sponsor[] = [
-  { id: "s1", name: "Volta Electronics", category: "Electronics", tagline: "Smart appliances for modern homes.", phone: "+91 98100 11220", web: "volta.in", featured: true, color: "#3b82f6", color2: "#1e40af", initials: "VE" },
-  { id: "s2", name: "Spice Route Cafe", category: "Food", tagline: "Stone-oven pizzas & local biryani.", phone: "+91 98100 22330", web: "spiceroute.cafe", color: "#f59e0b", color2: "#7c2d12", initials: "SR" },
-  { id: "s3", name: "Stride Sportswear", category: "Sports", tagline: "Gear for game-day legends.", phone: "+91 98100 33440", web: "stride.in", color: "#10b981", color2: "#064e3b", initials: "ST" },
-  { id: "s4", name: "Threadline Co.", category: "Clothing", tagline: "Premium tailored fits.", phone: "+91 98100 44550", web: "threadline.in", color: "#a855f7", color2: "#3b0764", initials: "TC" },
-  { id: "s5", name: "Apex Motors", category: "Auto", tagline: "Service & detailing experts.", phone: "+91 98100 55660", web: "apexmotors.in", color: "#ef4444", color2: "#7f1d1d", initials: "AM" },
-  { id: "s6", name: "Bytewave Computers", category: "Electronics", tagline: "Custom rigs & repairs.", phone: "+91 98100 66770", web: "bytewave.in", color: "#0ea5e9", color2: "#0c4a6e", initials: "BC" },
-  { id: "s7", name: "Tandoor Nights", category: "Food", tagline: "Charcoal-grill kebabs since 1998.", phone: "+91 98100 77880", web: "tandoornights.in", color: "#eab308", color2: "#713f12", initials: "TN" },
-  { id: "s8", name: "Boundary Sports", category: "Sports", tagline: "Bats, balls, pads — pro picks.", phone: "+91 98100 88990", web: "boundary.shop", color: "#22c55e", color2: "#14532d", initials: "BS" },
-];
+export const sponsors: Sponsor[] = [];
 
-export const galleryPrompts = [
-  "Stadium under floodlights",
-  "Trophy lift moment",
-  "Owner & captain handshake",
-  "Crowd celebration",
-  "Six over the ropes",
-  "Spinner mid-delivery",
-];
+export const galleryPrompts = [];
 
 export function formatINR(n: number) {
   if (n >= 10000000) return `₹${(n / 10000000).toFixed(2)} Cr`;

@@ -5,11 +5,50 @@ import {
   onSnapshot,
   setDoc,
   updateDoc,
+  deleteDoc,
   serverTimestamp,
   getDoc,
+  query,
+  orderBy,
+  limit,
 } from "firebase/firestore";
+import { toast } from "sonner";
 import { db } from "@/lib/firebase";
 import type { Player, Team } from "@/lib/gpl-data";
+
+
+export type Sale = {
+  id: string;
+  playerId: string;
+  teamId: string;
+  price: number;
+  soldAt?: unknown;
+};
+export function useRecentSales() {
+  const [sales, setSales] = useState<Sale[]>([]);
+
+  useEffect(() => {
+    const q = query(
+      collection(db, "sales"),
+      orderBy("soldAt", "desc"),
+      limit(10)
+    );
+
+    return onSnapshot(q, (snap) => {
+      setSales(
+        snap.docs.map(
+          (d) =>
+            ({
+              id: d.id,
+              ...d.data(),
+            } as Sale)
+        )
+      );
+    });
+  }, []);
+
+  return sales;
+}
 
 export type LivePlayer = Player & {
   imageUrl?: string;
@@ -20,19 +59,24 @@ export type LiveTeam = Team;
 
 export type AuctionState = {
   playerId: string | null;
-
-  currentBid: number | null;
-
+  previousBid: number | null;
+currentBid: number | null;
   biddingTeamId: string | null;
 
-  status: "idle" | "live" | "sold" | "unsold";
+  status:
+    | "idle"
+    | "live"
+    | "goingOnce"
+    | "goingTwice"
+    | "sold"
+    | "unsold";
 
   round: 1 | 2;
 
   eventMessage?: string;
 
   updatedAt?: unknown;
-}
+};
 
 export type LastSale = {
   playerId: string;
@@ -49,6 +93,10 @@ export type LastSale = {
 
 const AUCTION_DOC = "meta/auctionState";
 const LAST_SALE_DOC = "meta/lastSale";
+const EVENTS_COLLECTION = "events";
+const PLAYERS_COLLECTION = "players";
+const TEAMS_COLLECTION = "teams";
+
 
 export function useLivePlayers() {
   const [players, setPlayers] = useState<LivePlayer[]>([]);
@@ -57,12 +105,7 @@ export function useLivePlayers() {
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "players"), (snap) => {
 
-  console.log(
-    snap.docs.map(doc => ({
-      firestoreId: doc.id,
-      playerNumber: doc.data().playerNumber
-    }))
-  );
+
 
   setPlayers(
   snap.docs.map(
@@ -96,9 +139,40 @@ export function useLiveTeams() {
   return { teams, loading };
 }
 
+export type AuctionEvent = {
+  id: string;
+  message: string;
+  badge?: "LIVE" | "SOLD" | "MATCH" | "RESULT";
+  timestamp?: unknown;
+};
+
+export function useAuctionEvents() {
+  const [events, setEvents] = useState<AuctionEvent[]>([]);
+
+  useEffect(() => {
+    const q = query(
+      collection(db, EVENTS_COLLECTION),
+      orderBy("timestamp", "desc"),
+      limit(20)
+    );
+
+    return onSnapshot(q, (snap) => {
+      setEvents(
+        snap.docs.map((d) => ({
+          id: d.id,
+          ...(d.data() as Omit<AuctionEvent, "id">),
+        }))
+      );
+    });
+  }, []);
+
+  return events;
+}
+
 export function useAuctionState() {
   const [state, setState] = useState<AuctionState>({
   playerId: null,
+  previousBid: null,
   currentBid: null,
   biddingTeamId: null,
   status: "idle",
@@ -118,24 +192,108 @@ export function useAuctionState() {
   return { state, loading };
 }
 
+async function addEvent(
+  message: string,
+  badge?: "LIVE" | "SOLD" | "MATCH" | "RESULT"
+) {
+  await setDoc(doc(collection(db, EVENTS_COLLECTION)), {
+    message,
+    badge: badge ?? null,
+    timestamp: serverTimestamp(),
+  });
+}
+
 export async function pushPlayerLive(
   playerId: string,
   startingBid: number
 ) {
+  if (startingBid <= 0) {
+  throw new Error("Starting bid must be greater than zero.");
+}
   await setDoc(doc(db, AUCTION_DOC), {
     playerId,
+
+    previousBid: null,
     currentBid: startingBid,
+
     biddingTeamId: null,
     status: "live",
     round: 1,
     eventMessage: "",
     updatedAt: serverTimestamp(),
   });
+  const playerSnap = await getDoc(doc(db, PLAYERS_COLLECTION, playerId));
+
+const player = playerSnap.data();
+
+await addEvent(
+  `${player?.playerNumber ?? ""} ${player?.name ?? "Player"} enters the auction`,
+  "LIVE"
+);
+
+
 }
 
-export async function updateLiveBid(currentBid: number, biddingTeamId: string | null) {
-  await updateDoc(doc(db, AUCTION_DOC), {
-    currentBid,
+export async function updateLiveBid(
+  currentBid: number,
+  biddingTeamId: string | null
+) {
+  try {
+    if (!biddingTeamId) return;
+
+    const teamSnap = await getDoc(doc(db, TEAMS_COLLECTION, biddingTeamId));
+
+    if (!teamSnap.exists()) return;
+
+    const team = teamSnap.data() as LiveTeam;
+
+    if (currentBid > (team.maxBid ?? Infinity)) {
+      throw new Error("Bid exceeds team's maximum bid.");
+    }
+
+    const auctionRef = doc(db, AUCTION_DOC);
+    const auctionSnap = await getDoc(auctionRef);
+
+    if (!auctionSnap.exists()) return;
+
+    const auction = auctionSnap.data() as AuctionState;
+
+    if (currentBid <= (auction.currentBid ?? 0)) {
+      throw new Error("New bid must be higher than the current bid.");
+    }
+
+    await updateDoc(auctionRef, {
+      previousBid: auction.currentBid,
+      currentBid,
+      biddingTeamId,
+      updatedAt: serverTimestamp(),
+    });
+
+    await addEvent(
+      `${team.name} bid ₹${currentBid.toLocaleString("en-IN")}`
+    );
+  } catch (err) {
+    toast.error(
+      err instanceof Error ? err.message : "Failed to update bid."
+    );
+    throw err;
+  }
+}
+
+export async function changeLeadingTeam(
+  biddingTeamId: string
+) {
+  const auctionRef = doc(db, AUCTION_DOC);
+
+  const auctionSnap = await getDoc(auctionRef);
+
+  if (!auctionSnap.exists()) return;
+
+  const auction = auctionSnap.data() as AuctionState;
+
+  if (!auction.playerId) return;
+
+  await updateDoc(auctionRef, {
     biddingTeamId,
     updatedAt: serverTimestamp(),
   });
@@ -147,22 +305,35 @@ export async function markSold(
   price: number
 ): Promise<boolean> {
 
+  const auctionSnap = await getDoc(doc(db, AUCTION_DOC));
+
+  if (!auctionSnap.exists()) return false;
+
+  const auction = auctionSnap.data() as AuctionState;
+
+ if (
+  auction.playerId !== playerId ||
+  auction.status !== "goingTwice"
+) {
+  toast.error("Player cannot be sold right now.");
+  return false;
+} 
+
   // Update team
-  const teamRef = doc(db, "teams", teamId);
+  const teamRef = doc(db, TEAMS_COLLECTION, teamId);
   const snap = await getDoc(teamRef);
 
   if (snap.exists()) {
     const team = snap.data() as LiveTeam;
-
-    if ((team.playersBought ?? 0) >= (team.squadLimit ?? 13)) {
-  alert("This team already has a full squad.");
+if (price > (team.maxBid ?? Infinity)) {
+  toast.error("Bid exceeds this team's maximum bid.");
   return false;
 }
-await updateDoc(doc(db, "players", playerId), {
-    teamId,
-    soldPrice: price,
-    status: "sold",
-  });
+    if ((team.playersBought ?? 0) >= (team.squadLimit ?? 13)) {
+  toast.error("This team already has a full squad.");
+  return false;
+}
+
 
     await setDoc(doc(db, LAST_SALE_DOC), {
   playerId,
@@ -177,14 +348,11 @@ await updateDoc(doc(db, "players", playerId), {
   },
 });
 
-   const STARTING_PLAYERS = 3;
-const TOTAL_SQUAD_SIZE = 13;
+   const TOTAL_SQUAD_SIZE = 13;
 
-const purse = (team.purse ?? 0) - price;
+const purse = Math.max((team.purse ?? 0) - price, 0);
 
-// If Firestore still has 0, initialize correctly
-const currentBought =
-  (team.playersBought ?? STARTING_PLAYERS);
+const currentBought = team.playersBought ?? 0;
 
 if (currentBought >= TOTAL_SQUAD_SIZE) {
   throw new Error("Squad is already full.");
@@ -206,38 +374,93 @@ const maxBid = Math.max(
       remainingSlots,
       maxBid,
     });
+
+    await updateDoc(doc(db, PLAYERS_COLLECTION, playerId), {
+    teamId,
+    soldPrice: price,
+    status: "sold",
+  });
+  const saleRef = doc(collection(db, "sales"));
+
+await setDoc(saleRef, {
+  playerId,
+  teamId,
+  price,
+  soldAt: serverTimestamp(),
+});
   }
 
-  // Update live auction
   await updateDoc(doc(db, AUCTION_DOC), {
     status: "sold",
-    biddingTeamId: teamId,
-    currentBid: price,
     eventMessage: "Player Sold",
     updatedAt: serverTimestamp(),
-  });
+});
+
+const playerSnap = await getDoc(doc(db, PLAYERS_COLLECTION, playerId));
+const teamSnap = await getDoc(doc(db, TEAMS_COLLECTION, teamId));
+
+const player = playerSnap.data();
+const team = teamSnap.data();
+
+await addEvent(
+  `${player?.playerNumber ?? ""} ${player?.name} sold to ${
+    team?.name
+  } for ₹${price.toLocaleString("en-IN")}`,
+  "SOLD"
+);
+
   return true;
 }
 
 export async function markUnsold(playerId: string) {
-  await updateDoc(doc(db, "players", playerId), {
+  await updateDoc(doc(db, PLAYERS_COLLECTION, playerId), {
     status: "unsold",
   });
   await updateDoc(doc(db, AUCTION_DOC), {
-  status: "unsold",
-  eventMessage: "Player Unsold",
-  updatedAt: serverTimestamp(),
+    status: "unsold",
+    eventMessage: "Player Unsold",
+    updatedAt: serverTimestamp(),
 });
+
+const playerSnap = await getDoc(doc(db, PLAYERS_COLLECTION, playerId));
+
+const player = playerSnap.data();
+
+await addEvent(
+  `${player?.playerNumber ?? ""} ${player?.name ?? "Player"} remained unsold`
+);
 }
 
 export async function clearLiveAuction() {
-  await setDoc(doc(db, AUCTION_DOC), {
+  await updateDoc(doc(db, AUCTION_DOC), {
     playerId: null,
-    currentBid: null,
+    previousBid: null,
+currentBid: null,
     biddingTeamId: null,
     status: "idle",
+    eventMessage: "",
     updatedAt: serverTimestamp(),
   });
+}
+
+export async function setGoingOnce() {
+  await updateDoc(doc(db, AUCTION_DOC), {
+    status: "goingOnce",
+    eventMessage: "Going Once",
+    updatedAt: serverTimestamp(),
+  });
+
+  await addEvent("Going Once", "LIVE");
+}
+
+export async function setGoingTwice() {
+  await updateDoc(doc(db, AUCTION_DOC), {
+    status: "goingTwice",
+    eventMessage: "Going Twice",
+    updatedAt: serverTimestamp(),
+  });
+
+  await addEvent("Going Twice", "LIVE");
 }
 
 export async function undoLastSale() {
@@ -251,14 +474,16 @@ export async function undoLastSale() {
   const lastSale = lastSaleSnap.data() as LastSale;
 
   // Restore player
-  await updateDoc(doc(db, "players", lastSale.playerId), {
+  await updateDoc(
+  doc(db, PLAYERS_COLLECTION, lastSale.playerId),
+  {
     teamId: null,
     soldPrice: null,
     status: "available",
-  });
-
+  }
+);
   // Restore team
-  await updateDoc(doc(db, "teams", lastSale.teamId), {
+  await updateDoc(doc(db, TEAMS_COLLECTION, lastSale.teamId), {
     purse: lastSale.previousTeam.purse,
     playersBought: lastSale.previousTeam.playersBought,
     remainingSlots: lastSale.previousTeam.remainingSlots,
@@ -269,12 +494,15 @@ export async function undoLastSale() {
   await updateDoc(doc(db, AUCTION_DOC), {
     playerId: lastSale.playerId,
     biddingTeamId: null,
-    currentBid: lastSale.price,
+    previousBid: null,
+currentBid: lastSale.price,
     status: "live",
     eventMessage: "Sale Undone",
     updatedAt: serverTimestamp(),
   });
 
   // Clear saved sale
-  await setDoc(lastSaleRef, {});
+await deleteDoc(lastSaleRef);
+
+await addEvent("Last sale has been undone");
 }

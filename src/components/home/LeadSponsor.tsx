@@ -25,53 +25,129 @@ export function LeadSponsor({
     .toUpperCase();
 
   return (
-    <section className="relative overflow-hidden rounded-3xl glass-gold p-5">
+    <section
+  className="relative overflow-hidden rounded-[34px] p-7"
+  style={{
+    background:
+      "linear-gradient(180deg,#fffaf2,#f7eedf)",
+
+    border:
+      "1px solid rgba(173,133,73,.25)",
+
+    boxShadow:
+      "0 14px 34px rgba(70,48,20,.10)",
+
+    backgroundImage: `
+      radial-gradient(circle at top right, rgba(212,176,111,.12), transparent 38%),
+      url("/patterns/bohra-pattern.png")
+    `,
+
+    backgroundBlendMode:"overlay"
+  }}
+>
       <div
         className="pointer-events-none absolute -right-12 -top-12 h-44 w-44 rounded-full opacity-40 blur-3xl"
         style={{ background: `radial-gradient(circle, ${accentColor}, transparent 70%)` }}
       />
 
       <div className="relative">
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold">
-          <Star className="h-3 w-3 fill-gold text-gold" />
-          Lead Sponsor
-        </div>
+      
+          <div
+className="inline-flex items-center gap-2 rounded-full px-4 py-1.5"
+style={{
+background:"#f8efdf",
+border:"1px solid rgba(188,145,78,.35)"
+}}
+>
+
+<Star
+className="h-3 w-3"
+style={{
+color:"#b58335",
+fill:"#b58335"
+}}
+/>
+
+<span
+className="text-[11px] font-semibold uppercase tracking-[0.22em]"
+style={{
+color:"#9a6f3c"
+}}
+>
+Official Lead Sponsor
+</span>
+
+</div>
+        
 
         <div className="mt-4 flex items-center gap-4">
           {logo ? (
             <img
               src={logo}
               alt={name}
-              className="h-16 w-16 shrink-0 rounded-2xl object-cover shadow-glow"
+              className="h-20 w-20 shrink-0 rounded-3xl object-cover shadow-xl"
             />
           ) : (
-            <div
-              className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl font-display text-xl font-bold text-white shadow-glow"
-              style={{ background: `linear-gradient(135deg, ${accentColor}, #1e293b)` }}
-            >
+          <div
+  className="grid h-20 w-20 shrink-0 place-items-center rounded-3xl"
+  style={{
+    background: "linear-gradient(180deg,#d8bc8a,#b48a52)",
+    boxShadow: "0 8px 18px rgba(60,40,18,.20)",
+    color: "#4d3622",
+    fontSize: "30px",
+    fontWeight: 800,
+  }}
+>
               {initials}
             </div>
           )}
           <div className="min-w-0">
-            <h3 className="font-display text-lg font-bold leading-tight">{name}</h3>
-            <p className="mt-0.5 text-xs text-muted-foreground">{tagline}</p>
+            <h3
+  className="font-display text-3xl font-extrabold leading-tight"
+  style={{
+    color: "#4c3624",
+    letterSpacing: "-0.02em",
+  }}
+>
+  {name}
+</h3>
+              
+           <p
+  className="mt-2 text-sm"
+  style={{
+    color: "#8d6b47",
+    letterSpacing: ".04em",
+  }}
+>
+  {tagline}
+</p>
           </div>
         </div>
 
         {description && (
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{description}</p>
+    <p
+  className="mt-5 text-[15px] leading-8"
+  style={{
+    color: "#65523e",
+  }}
+>{description}</p>
         )}
 
         {website && (
           <a
-            href={website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl gradient-royal px-4 py-3 text-sm font-semibold text-white shadow-glow transition-transform active:scale-[0.98]"
-          >
-            Visit Website
-            <ExternalLink className="h-4 w-4" />
-          </a>
+  href={website}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="mt-6 inline-flex items-center gap-2 transition-all hover:translate-x-1"
+  style={{
+    color: "#a16f34",
+    fontWeight: 700,
+  }}
+>
+  Visit Sponsor
+
+  <ExternalLink size={16} />
+</a>
         )}
       </div>
     </section>

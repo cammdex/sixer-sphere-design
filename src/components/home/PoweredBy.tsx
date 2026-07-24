@@ -16,33 +16,96 @@ function PoweredByPrimaryCard({ name, logo, tagline, website, accentColor = "#3b
   const initials = initialsOf(name);
 
   const card = (
-    <div className="relative overflow-hidden rounded-2xl glass p-4">
+    <div
+  className="relative overflow-hidden rounded-[34px] p-6"
+  style={{
+    background:
+      "linear-gradient(180deg,#fffaf2,#f7eedf)",
+    border:
+      "1px solid rgba(173,133,73,.25)",
+    boxShadow:
+      "0 14px 34px rgba(70,48,20,.10)",
+    backgroundImage: `
+      radial-gradient(circle at top right, rgba(212,176,111,.12), transparent 38%),
+      url("/patterns/bohra-pattern.png")
+    `,
+    backgroundBlendMode: "overlay",
+  }}
+>
       <div
         className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-40 blur-2xl"
         style={{ background: `radial-gradient(circle, ${accentColor}, transparent 70%)` }}
       />
       <div className="relative">
-        <div className="text-[9px] font-semibold uppercase tracking-widest text-gold">Powered By</div>
+        <div
+  className="inline-flex items-center gap-2 rounded-full px-4 py-1.5"
+  style={{
+    background:"#f8efdf",
+    border:"1px solid rgba(188,145,78,.35)"
+  }}
+>
+<span
+className="text-[11px] font-semibold uppercase tracking-[0.22em]"
+style={{
+color:"#9a6f3c"
+}}
+>
+Powered By
+</span>
+</div>
         <div className="mt-2.5 flex items-center gap-3">
           {logo ? (
-            <img src={logo} alt={name} className="h-12 w-12 shrink-0 rounded-xl object-cover shadow-glow" />
+            <img
+src={logo}
+alt={name}
+className="h-20 w-20 shrink-0 rounded-3xl object-cover shadow-xl"
+/>
           ) : (
             <div
-              className="grid h-12 w-12 shrink-0 place-items-center rounded-xl text-sm font-bold text-white shadow-glow"
-              style={{ background: `linear-gradient(135deg, ${accentColor}, #1e293b)` }}
-            >
+className="grid h-20 w-20 shrink-0 place-items-center rounded-3xl"
+style={{
+background:"linear-gradient(180deg,#d8bc8a,#b48a52)",
+boxShadow:"0 8px 18px rgba(60,40,18,.20)",
+color:"#4d3622",
+fontSize:"30px",
+fontWeight:800,
+}}
+>
               {initials}
             </div>
           )}
           <div className="min-w-0">
-            <div className="truncate font-display text-base font-bold leading-tight">{name}</div>
-            {tagline && <div className="truncate text-[11px] text-muted-foreground">{tagline}</div>}
+            <h3
+className="font-display text-3xl font-extrabold leading-tight"
+style={{
+color:"#4c3624",
+letterSpacing:"-.02em"
+}}
+>
+{name}
+</h3>
+            {tagline && <p
+className="mt-2 text-sm"
+style={{
+color:"#8d6b47",
+letterSpacing:".04em"
+}}
+>
+{tagline}
+</p>}
           </div>
         </div>
         {website && (
-          <div className="mt-2.5 flex items-center gap-1 text-[11px] font-medium text-gold">
-            Visit website <ExternalLink className="h-3 w-3" />
-          </div>
+          <div
+className="mt-5 inline-flex items-center gap-2 transition-all hover:translate-x-1"
+style={{
+color:"#a16f34",
+fontWeight:700,
+}}
+>
+Visit Website
+<ExternalLink size={16}/>
+</div>
         )}
       </div>
     </div>
@@ -61,18 +124,42 @@ function CoPoweredByGridItem({ name, logo, accentColor = "#64748b", website }: P
   const initials = initialsOf(name);
 
   const item = (
-    <div className="flex h-full flex-col items-center gap-2 rounded-2xl glass p-3 text-center">
+    <div
+className="flex h-full flex-col items-center rounded-[26px] p-5 text-center transition-all hover:-translate-y-1"
+style={{
+background:"linear-gradient(180deg,#fffaf2,#f8efe1)",
+border:"1px solid rgba(180,140,82,.22)",
+boxShadow:"0 8px 24px rgba(60,40,20,.08)"
+}}
+>
       {logo ? (
-        <img src={logo} alt={name} className="h-10 w-10 rounded-xl object-cover" />
+        <img
+src={logo}
+alt={name}
+className="h-14 w-14 rounded-2xl object-cover shadow-lg"
+/>
       ) : (
         <div
-          className="grid h-10 w-10 place-items-center rounded-xl text-xs font-bold text-white"
-          style={{ background: `linear-gradient(135deg, ${accentColor}, #1e293b)` }}
-        >
+className="grid h-14 w-14 place-items-center rounded-2xl"
+style={{
+background:`linear-gradient(135deg,${accentColor},#22304d)`,
+color:"#fff",
+fontWeight:800,
+fontSize:"15px",
+boxShadow:"0 6px 18px rgba(0,0,0,.15)"
+}}
+>
           {initials}
         </div>
       )}
-      <div className="truncate text-[11px] font-semibold leading-tight">{name}</div>
+      <h4
+className="mt-3 text-sm font-bold leading-tight"
+style={{
+color:"#4c3624"
+}}
+>
+{name}
+</h4>
     </div>
   );
 
@@ -92,15 +179,20 @@ export interface PoweredByProps {
 
 export function PoweredBy({ poweredBy, coPoweredBy }: PoweredByProps) {
   return (
-    <section className="space-y-3">
+    <section className="space-y-6">
       <PoweredByPrimaryCard {...poweredBy} />
 
       {coPoweredBy.length > 0 && (
         <div>
-          <div className="mb-2 text-[9px] font-semibold uppercase tracking-widest text-muted-foreground">
-            Co-Powered By
-          </div>
-          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+          <div
+className="mb-4 text-[11px] font-bold uppercase tracking-[0.24em]"
+style={{
+color:"#9a6f3c"
+}}
+>
+Co-Powered By
+</div>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {coPoweredBy.map((sponsor) => (
               <CoPoweredByGridItem key={sponsor.name} {...sponsor} />
             ))}

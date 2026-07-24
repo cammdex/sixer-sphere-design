@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { Search, Radio, CheckCircle2, XCircle, RotateCcw } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Search, Radio, CheckCircle2, XCircle, RotateCcw, ChevronDown, ChevronRight} from "lucide-react";
 import { MobileLayout, TeamCrest, Avatar } from "@/components/mobile-layout";
 
 import { formatINR, teams as defaultTeams } from "@/lib/gpl-data";
@@ -21,11 +21,16 @@ import {
   useAuctionState,
   pushPlayerLive,
   updateLiveBid,
+  changeLeadingTeam,
   markSold,
   markUnsold,
   clearLiveAuction,
   undoLastSale,
+  setGoingOnce,
+  setGoingTwice,
 } from "@/lib/auction-store";
+
+
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/admin/auction")({
@@ -36,7 +41,11 @@ const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || "changeme";
 
 function AdminAuctionPage() {
   const [unlocked, setUnlocked] = useState(false);
-  const [pw, setPw] = useState("");
+const [pw, setPw] = useState("");
+
+useEffect(() => {
+  setUnlocked(sessionStorage.getItem("auctionAdmin") === "true");
+}, []);
 
   if (!unlocked) {
     return (
@@ -48,15 +57,29 @@ function AdminAuctionPage() {
             type="password"
             value={pw}
             onChange={(e) => setPw(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && pw === ADMIN_PASSWORD && setUnlocked(true)}
+            onKeyDown={(e) => {
+  if (e.key === "Enter") {
+    if (pw === ADMIN_PASSWORD) {
+      sessionStorage.setItem("auctionAdmin", "true");
+      setUnlocked(true);
+    } else {
+      toast.error("Wrong password");
+    }
+  }
+}}
             placeholder="Password"
             className="w-full rounded-2xl bg-card/60 py-3 px-4 text-sm border border-border focus:border-primary outline-none"
           />
           <button
-            onClick={() => {
-              if (pw === ADMIN_PASSWORD) setUnlocked(true);
-              else toast.error("Wrong password");
-            }}
+              onClick={() => {
+  if (pw === ADMIN_PASSWORD) {
+    sessionStorage.setItem("auctionAdmin", "true");
+    setUnlocked(true);
+  } else {
+    toast.error("Wrong password");
+  }
+}}
+            
             className="w-full rounded-2xl gradient-royal py-3 text-sm font-semibold text-white"
           >
             Unlock
@@ -150,7 +173,22 @@ async function resetTournament() {
 
     await batch.commit();
 
-    toast.success("Tournament reset successfully!");
+// Clear all auction events
+const eventsSnap = await getDocs(collection(db, "events"));
+await Promise.all(
+  eventsSnap.docs.map((eventDoc) => deleteDoc(eventDoc.ref))
+);
+
+// Clear sales history
+const salesSnap = await getDocs(collection(db, "sales"));
+await Promise.all(
+  salesSnap.docs.map((saleDoc) => deleteDoc(saleDoc.ref))
+);
+
+// Remove last sale cache
+await deleteDoc(doc(db, "meta", "lastSale"));
+
+toast.success("Tournament reset successfully!");
   } catch (err) {
     console.error(err);
     toast.error("Reset failed");
@@ -164,74 +202,173 @@ async function resetTournament() {
   const [q, setQ] = useState("");
   const [bidInput, setBidInput] = useState("");
   const [teamInput, setTeamInput] = useState("");
-  const selectedTeam = teams.find((t) => t.id === teamInput);
+  const [showUtilities, setShowUtilities] = useState(false);
+  const [pendingPlayer, setPendingPlayer] = useState<any>(null);
+const [showPushDialog, setShowPushDialog] = useState(false);
+const [updatingBid, setUpdatingBid] = useState(false);
 
-  const filtered = useMemo(
+  const availablePlayers = useMemo(
   () =>
     [...players]
+      .filter((p) => p.status === "available")
       .sort((a, b) => {
-        const numA = Number((a.playerNumber ??"").replace("P", ""));
-        const numB = Number((b.playerNumber ??"").replace("P", ""));
+        const numA = Number((a.playerNumber ?? "").replace("P", ""));
+        const numB = Number((b.playerNumber ?? "").replace("P", ""));
         return numA - numB;
       })
       .filter(
         (p) =>
-          (
-            p.playerNumber?.toLowerCase().includes(q.toLowerCase()) ||
-            p.name.toLowerCase().includes(q.toLowerCase())
-          ) &&
-          p.status !== "sold"
+          p.playerNumber?.toLowerCase().includes(q.toLowerCase()) ||
+          p.name.toLowerCase().includes(q.toLowerCase())
       ),
   [players, q]
 );
 
+const unsoldPlayers = useMemo(
+  () =>
+    [...players]
+      .filter((p) => p.status === "unsold")
+      .sort((a, b) => {
+        const numA = Number((a.playerNumber ?? "").replace("P", ""));
+        const numB = Number((b.playerNumber ?? "").replace("P", ""));
+        return numA - numB;
+      }),
+  [players]
+);
+
   const currentPlayer = players.find((p) => p.id === state.playerId);
+  useEffect(() => {
+  function handleEscape(e: KeyboardEvent) {
+    if (e.key === "Escape") {
+      setPendingPlayer(null);
+      setShowPushDialog(false);
+    }
+  }
+
+  if (showPushDialog) {
+    window.addEventListener("keydown", handleEscape);
+  }
+
+  return () => {
+    window.removeEventListener("keydown", handleEscape);
+  };
+}, [showPushDialog]);
+
 
   return (
     <MobileLayout title="Admin · Auction" showFab={false}>
       <div className="mt-4 space-y-5">
 
-        <div className="grid grid-cols-4 gap-3">
-          <button
-            onClick={importTeams}
-            className="rounded-xl bg-blue-600 py-3 text-sm font-semibold text-white"
-          >
-            Import Teams
-          </button>
-    
-          <button
-            onClick={importPlayers}
-            className="rounded-xl bg-green-600 py-3 text-sm font-semibold text-white"
-          >
-            Import Players
-        </button>
-          <button
-            onClick={clearPlayers}
-            className="rounded-xl bg-red-600 py-3 text-sm font-semibold text-white"
->
-            Clear Players
-          </button>
-          <button
-  onClick={() => {
-  const confirmed = window.confirm(
-    "⚠️ This will reset the ENTIRE tournament.\n\nAll sold players, team purses, player assignments, maximum bids and the live auction will be restored to their starting values.\n\nThis action cannot be undone.\n\nAre you sure?"
-  );
+       <div className="rounded-2xl glass overflow-hidden">
 
-  if (confirmed) {
-    resetTournament();
+  <button
+    onClick={() => setShowUtilities(!showUtilities)}
+    className="flex w-full items-center justify-between px-4 py-3 text-left"
+  >
+    <div>
+      <div className="text-sm font-semibold">
+        Tournament Utilities
+      </div>
+      <div className="text-xs text-muted-foreground">
+        Import • Reset • Maintenance
+      </div>
+    </div>
+
+    {showUtilities ? (
+      <ChevronDown className="h-5 w-5" />
+    ) : (
+      <ChevronRight className="h-5 w-5" />
+    )}
+  </button>
+
+  {showUtilities && (
+    <div className="grid grid-cols-2 gap-3 border-t border-border p-4">
+
+<button
+  onClick={async (e) => {
+  const btn = e.currentTarget;
+  btn.disabled = true;
+  try {
+    await importTeams();
+  } finally {
+    btn.disabled = false;
   }
 }}
+  className="rounded-xl bg-blue-600 py-3 text-sm font-semibold text-white"
+>
+  Import Teams
+</button>
+
+<button
+  onClick={async (e) => {
+  const btn = e.currentTarget;
+  btn.disabled = true;
+  try {
+    await importPlayers();
+  } finally {
+    btn.disabled = false;
+  }
+}}
+  className="rounded-xl bg-green-600 py-3 text-sm font-semibold text-white"
+>
+  Import Players
+</button>
+
+<button
+  onClick={clearPlayers}
+  className="rounded-xl bg-red-600 py-3 text-sm font-semibold text-white"
+>
+  Clear Players
+</button>
+
+<button
+  onClick={() => {
+    const confirmed = window.confirm(
+      "⚠️ This will reset the ENTIRE tournament.\n\nAll sold players, team purses, player assignments, maximum bids and the live auction will be restored to their starting values.\n\nThis action cannot be undone.\n\nAre you sure?"
+    );
+
+    if (confirmed) {
+      resetTournament();
+    }
+  }}
+  className="rounded-xl bg-amber-600 py-3 text-sm font-semibold text-white"
 >
   Reset Tournament
 </button>
-      </div>
 
-        <section className="rounded-2xl glass p-4">
-          <div className="flex items-center gap-2 text-gold">
+
+    </div>
+  )}
+
+</div>
+
+        <section className="rounded-2xl border-2 border-gold glass p-4 shadow-lg">
+          <div
+  className={`flex items-center gap-2 ${
+    state.status === "live"
+      ? "text-green-500"
+      : state.status === "goingOnce"
+      ? "text-amber-500"
+      : state.status === "goingTwice"
+      ? "text-orange-500"
+      : state.status === "sold"
+      ? "text-emerald-600"
+      : state.status === "unsold"
+      ? "text-red-500"
+      : "text-muted-foreground"
+  }`}
+>
             <Radio className="h-4 w-4" />
-            <span className="text-[11px] font-bold uppercase tracking-widest">
-              {state.status === "live" ? "Live now" : "Nothing live"}
-            </span>
+          <span className="text-[11px] font-bold uppercase tracking-widest">
+  {{
+    idle: "Nothing Live",
+    live: "LIVE",
+    goingOnce: "GOING ONCE",
+    goingTwice: "GOING TWICE",
+    sold: "SOLD",
+    unsold: "UNSOLD",
+  }[state.status] ?? "Unknown"}
+</span>
           </div>
 
           {currentPlayer ? (
@@ -262,22 +399,28 @@ async function resetTournament() {
   </div>
 
   <div className="grid grid-cols-4 gap-2">
-  {[20000, 50000, 100000, 200000].map((inc) => (
+  {[200000, 300000, 500000].map((inc) => (
     <button
+  disabled={updatingBid}
       key={inc}
       type="button"
-      onClick={() => {
-        if (!teamInput) {
-          toast.error("Select a leading team first");
-          return;
-        }
+     onClick={async () => {
+  if (updatingBid) return;
 
-        const nextBid = Number(bidInput || 0) + inc;
+  setUpdatingBid(true);
 
-        setBidInput(String(nextBid));
+  try {
+    const nextBid = Number(bidInput || 0) + inc;
 
-        updateLiveBid(nextBid, teamInput);
-      }}
+    await updateLiveBid(nextBid, teamInput);
+
+    setBidInput(String(nextBid));
+  } catch {
+    // updateLiveBid already shows the correct error toast
+  } finally {
+    setUpdatingBid(false);
+  }
+}}
       className="rounded-xl glass py-2 text-xs font-semibold"
     >
       +{formatINR(inc)}
@@ -296,15 +439,15 @@ async function resetTournament() {
       <button
   key={team.id}
   type="button"
-  onClick={() => {
-    setTeamInput(team.id);
+  onClick={async () => {
+  setTeamInput(team.id);
 
-    const bid = Number(bidInput || 0);
-
-    if (bid > 0) {
-      updateLiveBid(bid, team.id);
-    }
-  }}
+  try {
+    await changeLeadingTeam(team.id);
+  } catch {
+    toast.error("Failed to change leading team.");
+  }
+}}
         className={`rounded-xl p-2 transition-all ${
           teamInput === team.id
             ? "border-2 border-gold bg-gold/10"
@@ -332,17 +475,14 @@ async function resetTournament() {
 </div>
 
 </div>
-              <button
-  onClick={() => {
-  toast.success("Live auction already updated");
-}}
-  className="mt-2 w-full rounded-xl gradient-royal py-3 text-sm font-semibold text-white"
->
-  Update Live Auction
-</button>
+              
 
-              <div className="mt-3 grid grid-cols-2 gap-2">
+              <div className="mt-3 grid grid-cols-3 gap-2">
                 <button
+  disabled={
+  state.status !== "goingTwice" ||
+  !currentPlayer
+}
   onClick={async () => {
     const price = Number(bidInput);
 
@@ -364,6 +504,8 @@ if (!sold) {
   return;
 }
 
+
+
 toast.success(
   `${currentPlayer.name} sold to ${
     teams.find((t) => t.id === teamInput)?.short
@@ -372,12 +514,21 @@ toast.success(
 
 setBidInput("");
 setTeamInput("");
+setQ("");
   }}
-                  className="flex items-center justify-center gap-1.5 rounded-xl gradient-royal py-2.5 text-xs font-semibold text-white"
+                  className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 text-xs font-semibold text-white transition-all ${
+  state.status !== "goingTwice" ||
+  !teamInput ||
+  !bidInput ||
+  Number(bidInput) <= 0
+    ? "bg-muted cursor-not-allowed opacity-50"
+    : "gradient-royal"
+}`}
                 >
                   <CheckCircle2 className="h-3.5 w-3.5" /> Mark Sold
                 </button>
                 <button
+  disabled={state.status !== "goingTwice"}
   onClick={async () => {
     await markUnsold(currentPlayer.id);
 
@@ -385,30 +536,74 @@ setTeamInput("");
 
     setBidInput("");
     setTeamInput("");
+    setQ("");
   }}
-                  className="flex items-center justify-center gap-1.5 rounded-xl glass py-2.5 text-xs font-semibold"
-                >
-                  <XCircle className="h-3.5 w-3.5" /> Mark Unsold
-                </button>
+  className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 text-xs font-semibold ${
+    state.status === "goingTwice"
+      ? "glass"
+      : "bg-muted opacity-50 cursor-not-allowed"
+  }`}
+>
+  <XCircle className="h-3.5 w-3.5" />
+  Mark Unsold
+</button>
+
+
+<button
+  onClick={async () => {
+  if (!confirm("Remove the current player from the live auction?")) return;
+
+  await clearLiveAuction();
+
+  setBidInput("");
+  setTeamInput("");
+  setQ("");
+
+  toast.success("Current player removed.");
+}}
+
+  className="flex items-center justify-center gap-1.5 rounded-xl bg-red-500 py-2.5 text-xs font-semibold text-white"
+>
+  Cancel Player
+</button>
+
+<div className="mt-3 grid grid-cols-2 gap-2">
+  <button
+  disabled={state.status !== "live"}
+  onClick={async () => {
+    await setGoingOnce();
+    toast.success("Going Once");
+  }}
+  className={`rounded-xl py-2.5 text-xs font-semibold text-white ${
+    state.status === "live"
+      ? "bg-amber-500"
+      : "bg-muted opacity-50 cursor-not-allowed"
+  }`}
+>
+  Going Once
+</button>
+
+ <button
+  disabled={state.status !== "goingOnce"}
+  onClick={async () => {
+    await setGoingTwice();
+    toast.success("Going Twice");
+  }}
+  className={`rounded-xl py-2.5 text-xs font-semibold text-white ${
+    state.status === "goingOnce"
+      ? "bg-orange-500"
+      : "bg-muted opacity-50 cursor-not-allowed"
+  }`}
+>
+  Going Twice
+</button>
+
+</div>
+
               </div>
               <div className="mt-2 space-y-2">
 
-  <button
-    onClick={async () => {
-      if (!confirm("Are you sure you want to undo the last sale?")) return;
-
-      try {
-    await undoLastSale();
-    toast.success("Last sale has been undone");
-} catch (err) {
-    toast.error("No sale available to undo");
-}
-    }}
-    className="flex w-full items-center justify-center gap-2 rounded-xl bg-amber-500 py-2.5 text-sm font-semibold text-white"
-  >
-    <RotateCcw className="h-4 w-4" />
-    Undo Last Sale
-  </button>
+  
 
   <button
     onClick={async () => {
@@ -431,34 +626,57 @@ toast.success("Auction reset");
           )}
         </section>
 
+        <button
+    onClick={async () => {
+      if (!confirm("Are you sure you want to undo the last sale?")) return;
+
+      try {
+    await undoLastSale();
+    toast.success("Last sale has been undone");
+} catch (err) {
+    toast.error("No sale available to undo");
+}
+    }}
+    className="flex w-full items-center justify-center gap-2 rounded-xl bg-amber-500 py-2.5 text-sm font-semibold text-white"
+  >
+    <RotateCcw className="h-4 w-4" />
+    Undo Last Sale
+  </button>
+        {!currentPlayer && (
         <section>
           <div className="relative">
             <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
+            disabled={showPushDialog}
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Search Player Number (P1, P2...)"
-              className="w-full rounded-2xl bg-card/60 py-3 pl-10 pr-4 text-sm border border-border outline-none"
+              className="w-full rounded-2xl bg-card/60 py-4 pl-10 pr-4 text-base border border-border outline-none"
             />
           </div>
-          <div className="mt-3 space-y-2 max-h-[50vh] overflow-y-auto">
-            {filtered.map((p) => (
+          <div
+  className={`mt-3 space-y-2 max-h-[50vh] overflow-y-auto ${
+    showPushDialog ? "pointer-events-none opacity-40" : ""
+  }`}
+>
+            {availablePlayers.map((p) => (
               <button
-                key={p.playerNumber}
+                key={p.id}
+
                 onClick={() => {
-  pushPlayerLive(p.id, p.basePrice);
-
-  setBidInput(String(p.basePrice));
-
-  setTeamInput("");
-
-  toast.success(`${p.name} is now live`);
+  setPendingPlayer(p);
+  setShowPushDialog(true);
 }}
-                className="flex w-full items-center gap-3 rounded-xl glass p-3 text-left"
+
+                className="flex w-full items-center gap-3 rounded-xl glass p-4 text-left"
               >
-                <Avatar initials={p.initials} color="#3b82f6" color2="#1e3a8a" size={36} />
+                <Avatar 
+                initials={p.initials} 
+                color="#3b82f6" 
+                color2="#1e3a8a" 
+                size={46} />
                 <div className="min-w-0 flex-1">
-                  <div className="truncate text-sm font-semibold">
+                  <div className="truncate text-base font-semibold">
   {p.playerNumber} • {p.name}
 </div>
                   <div className="text-[10px] text-muted-foreground">{p.role} · Base {formatINR(p.basePrice)}</div>
@@ -466,8 +684,100 @@ toast.success("Auction reset");
               </button>
             ))}
           </div>
+          {unsoldPlayers.length > 0 && (
+  <>
+    <h3 className="mt-6 mb-2 text-sm font-bold text-red-400">
+      Unsold Players ({unsoldPlayers.length})
+    </h3>
+
+    <div className="space-y-2 max-h-[30vh] overflow-y-auto">
+      {unsoldPlayers.map((p) => (
+        <div
+          key={p.id}
+          className="flex items-center gap-3 rounded-xl border border-red-500/30 bg-red-500/5 p-4"
+        >
+          <Avatar
+            initials={p.initials}
+            color="#ef4444"
+            color2="#991b1b"
+            size={46}
+          />
+
+          <div className="min-w-0 flex-1">
+            <div className="truncate text-base font-semibold">
+              {p.playerNumber} • {p.name}
+            </div>
+
+            <div className="text-[10px] text-muted-foreground">
+              {p.role} • Base {formatINR(p.basePrice)}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </>
+)}
         </section>
+        )}
       </div>
+      {showPushDialog && pendingPlayer && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+    <div className="w-full max-w-sm rounded-2xl bg-card p-6">
+
+      <h2 className="text-lg font-bold">
+        Push Player Live?
+      </h2>
+
+      <p className="mt-2 text-sm text-muted-foreground">
+        {pendingPlayer.playerNumber} • {pendingPlayer.name}
+      </p>
+
+      <div className="mt-6 flex gap-3">
+
+  <button
+    onClick={() => {
+      setPendingPlayer(null);
+      setShowPushDialog(false);
+    }}
+    className="flex-1 rounded-xl border border-border bg-card/60 py-3 font-semibold"
+  >
+    Cancel
+  </button>
+
+  <button
+    autoFocus
+    onClick={async () => {
+      try {
+        await pushPlayerLive(
+          pendingPlayer.id,
+          pendingPlayer.basePrice
+        );
+
+        setBidInput(String(pendingPlayer.basePrice));
+        setTeamInput("");
+
+        toast.success(`${pendingPlayer.name} is now live`);
+
+        setPendingPlayer(null);
+        setShowPushDialog(false);
+      } catch (err) {
+        toast.error(
+          err instanceof Error
+            ? err.message
+            : "Failed to push player live."
+        );
+      }
+    }}
+    className="flex-1 rounded-xl gradient-royal py-3 text-white font-semibold"
+  >
+    Push Live
+  </button>
+
+</div>
+
+    </div>
+  </div>
+)}
     </MobileLayout>
   );
 }

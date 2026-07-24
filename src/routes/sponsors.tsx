@@ -17,7 +17,7 @@ function SponsorsPage() {
   const [cat, setCat] = useState<(typeof sponsorCategories)[number]>("All");
   const [q, setQ] = useState("");
 
-  const featured = sponsors.find((s) => s.featured)!;
+  const featured = sponsors.find((s) => s.featured);
 
   const filtered = useMemo(() => {
     return sponsors.filter((s) => {
@@ -30,28 +30,31 @@ function SponsorsPage() {
   return (
     <MobileLayout title="Sponsors">
       {/* Featured */}
-      <article className="relative mt-2 overflow-hidden rounded-3xl glass-gold p-5">
-        <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full opacity-50 blur-3xl"
-          style={{ background: `radial-gradient(circle, ${featured.color}, transparent 70%)` }} />
-        <div className="relative">
-          <div className="inline-flex items-center gap-1 rounded-full bg-gold/15 border border-gold/30 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-gold">
-            <Star className="h-3 w-3 fill-current" /> Featured sponsor
-          </div>
-          <div className="mt-3 flex items-center gap-3">
-            <SponsorLogo color={featured.color} color2={featured.color2} initials={featured.initials} size={56} />
-            <div>
-              <h2 className="font-display text-lg font-bold">{featured.name}</h2>
-              <div className="text-[11px] uppercase tracking-widest text-gold">{featured.category}</div>
+      {featured && (
+        <article className="relative mt-2 overflow-hidden rounded-3xl glass-gold p-5">
+          <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full opacity-50 blur-3xl"
+            style={{ background: `radial-gradient(circle, ${featured.color}, transparent 70%)` }} />
+          <div className="relative">
+            <div className="inline-flex items-center gap-1 rounded-full bg-gold/15 border border-gold/30 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-gold">
+              <Star className="h-3 w-3 fill-current" /> Featured sponsor
+            </div>
+            <div className="mt-3 flex items-center gap-3">
+              <SponsorLogo color={featured.color} color2={featured.color2} initials={featured.initials} size={56} />
+              <div>
+                <h2 className="font-display text-lg font-bold">{featured.name}</h2>
+                <div className="text-[11px] uppercase tracking-widest text-gold">{featured.category}</div>
+              </div>
+            </div>
+            <p className="mt-3 text-sm text-muted-foreground">{featured.tagline}</p>
+            <div className="mt-4 grid grid-cols-3 gap-2">
+              <ActionBtn icon={<Phone className="h-3.5 w-3.5" />} label="Call" onClick={() => toast(featured.phone)} />
+              <ActionBtn icon={<Globe className="h-3.5 w-3.5" />} label="Website" onClick={() => toast(featured.web)} />
+              <ActionBtn icon={<MapPin className="h-3.5 w-3.5" />} label="Map" onClick={() => toast("Opening Google Maps…")} />
             </div>
           </div>
-          <p className="mt-3 text-sm text-muted-foreground">{featured.tagline}</p>
-          <div className="mt-4 grid grid-cols-3 gap-2">
-            <ActionBtn icon={<Phone className="h-3.5 w-3.5" />} label="Call" onClick={() => toast(featured.phone)} />
-            <ActionBtn icon={<Globe className="h-3.5 w-3.5" />} label="Website" onClick={() => toast(featured.web)} />
-            <ActionBtn icon={<MapPin className="h-3.5 w-3.5" />} label="Map" onClick={() => toast("Opening Google Maps…")} />
-          </div>
-        </div>
-      </article>
+        </article>
+      )}
+      
 
       {/* Search */}
       <div className="mt-5 relative">

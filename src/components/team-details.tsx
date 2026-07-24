@@ -2,6 +2,7 @@ import { X } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { TeamCrest, Avatar } from "@/components/mobile-layout";
 import type { LivePlayer, LiveTeam } from "@/lib/auction-store";
+import { formatINR } from "@/lib/gpl-data";
 
 type Props = {
   open: boolean;
@@ -28,9 +29,11 @@ export default function TeamDetails({
 
   return (
     <Dialog
-      open={open}
-      
-    >
+  open={open}
+  onOpenChange={(value) => {
+    if (!value) onClose();
+  }}
+>
       <DialogContent className="w-[95vw] max-w-6xl h-[92vh] border-none bg-transparent p-0 shadow-none">
 
         <div className="glass relative h-full overflow-y-auto rounded-3xl p-8">
@@ -77,12 +80,12 @@ export default function TeamDetails({
 
             <Stat
               label="PURSE"
-              value={`₹${((team.purse ?? 0) / 10000000).toFixed(2)} Cr`}
+              value={formatINR(team.purse ?? 0)}
             />
 
             <Stat
               label="MAX BID"
-              value={`₹${((team.maxBid ?? 0) / 10000000).toFixed(2)} Cr`}
+              value={formatINR(team.maxBid ?? 0)}
             />
 
             <Stat
@@ -156,8 +159,9 @@ export default function TeamDetails({
   {/* Captain */}
 
   <button
+    disabled={!captain}
     onClick={() => captain && onPlayerClick(captain)}
-    className="glass w-full rounded-2xl p-4 text-left transition hover:scale-[1.02]"
+    className="glass bohra-border w-full rounded-2xl p-4 text-left transition hover:scale-[1.02]"
   >
     <div className="text-xs uppercase tracking-widest text-muted-foreground">
       Captain
@@ -184,8 +188,9 @@ export default function TeamDetails({
   {/* Vice Captain */}
 
   <button
+  disabled={!viceCaptain}
     onClick={() => viceCaptain && onPlayerClick(viceCaptain)}
-    className="glass w-full rounded-2xl p-4 text-left transition hover:scale-[1.02]"
+    className="glass bohra-border w-full rounded-2xl p-4 text-left transition hover:scale-[1.02]"
   >
     <div className="text-xs uppercase tracking-widest text-muted-foreground">
       Vice Captain
@@ -212,8 +217,9 @@ export default function TeamDetails({
   {/* Retained Player */}
 
   <button
+  disabled={!retainedPlayer}
     onClick={() => retainedPlayer && onPlayerClick(retainedPlayer)}
-    className="glass w-full rounded-2xl p-4 text-left transition hover:scale-[1.02]"
+    className="glass bohra-border w-full rounded-2xl p-4 text-left transition hover:scale-[1.02]"
   >
     <div className="text-xs uppercase tracking-widest text-muted-foreground">
       Retained Player
@@ -251,7 +257,7 @@ export default function TeamDetails({
 <div className="mt-4 grid gap-3 md:grid-cols-2">
   {squad.length === 0 ? (
 
-    <div className="glass rounded-2xl p-8 text-center text-muted-foreground">
+    <div className="glass bohra-border rounded-2xl p-8 text-center text-muted-foreground">
       No auction players yet.
     </div>
 
@@ -278,7 +284,7 @@ export default function TeamDetails({
                       </div>
 
                       <div className="text-xs text-muted-foreground">
-                        {player.playerNumber} • {player.role}
+                        {player.playerNumber ?? "P--"} • {player.role}
                       </div>
 
                     </div>
@@ -291,7 +297,7 @@ export default function TeamDetails({
 
                       <div className="font-bold text-gold">
                         {player.soldPrice
-                          ? `₹${player.soldPrice.toLocaleString("en-IN")}`
+                          ? formatINR(player.soldPrice)
                           : "—"}
                       </div>
 

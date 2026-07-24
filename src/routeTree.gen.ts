@@ -13,6 +13,7 @@ import { Route as TournamentRouteImport } from './routes/tournament'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as PlayersRouteImport } from './routes/players'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as DisplayRouteImport } from './routes/display'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminAuctionRouteImport } from './routes/admin.auction'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -37,6 +38,11 @@ const PlayersRoute = PlayersRouteImport.update({
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DisplayRoute = DisplayRouteImport.update({
+  id: '/display',
+  path: '/display',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -70,6 +76,7 @@ const Char91DotmcpChar93InvokeToolToolRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/display': typeof DisplayRoute
   '/mcp': typeof McpRoute
   '/players': typeof PlayersRoute
   '/sponsors': typeof SponsorsRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/display': typeof DisplayRoute
   '/mcp': typeof McpRoute
   '/players': typeof PlayersRoute
   '/sponsors': typeof SponsorsRoute
@@ -93,6 +101,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/display': typeof DisplayRoute
   '/mcp': typeof McpRoute
   '/players': typeof PlayersRoute
   '/sponsors': typeof SponsorsRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/display'
     | '/mcp'
     | '/players'
     | '/sponsors'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/display'
     | '/mcp'
     | '/players'
     | '/sponsors'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/display'
     | '/mcp'
     | '/players'
     | '/sponsors'
@@ -140,6 +152,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DisplayRoute: typeof DisplayRoute
   McpRoute: typeof McpRoute
   PlayersRoute: typeof PlayersRoute
   SponsorsRoute: typeof SponsorsRoute
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       path: '/mcp'
       fullPath: '/mcp'
       preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/display': {
+      id: '/display'
+      path: '/display'
+      fullPath: '/display'
+      preLoaderRoute: typeof DisplayRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -220,6 +240,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DisplayRoute: DisplayRoute,
   McpRoute: McpRoute,
   PlayersRoute: PlayersRoute,
   SponsorsRoute: SponsorsRoute,

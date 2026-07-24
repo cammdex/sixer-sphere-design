@@ -9,7 +9,9 @@ import TeamDetails from "@/components/team-details";
 
 export const Route = createFileRoute("/players")({
   head: () => ({ meta: [
-    { title: "Players — Galaxy Premier League" },
+    { 
+      title: "Players — Udaipur Bohra League",
+     },
     { name: "description", content: "Teams, owners and the full player catalog with stats." },
   ]}),
   component: PlayersPage,
@@ -29,7 +31,7 @@ function PlayersPage() {
     <MobileLayout title="Squads & Players">
       <div className="sticky top-[68px] z-20 -mx-4 px-4 pt-2 pb-3 backdrop-blur-xl"
         style={{ background: "linear-gradient(180deg, oklch(0.16 0.03 260 / 0.85), oklch(0.16 0.03 260 / 0))" }}>
-        <div className="glass rounded-2xl p-1 grid grid-cols-3 gap-1">
+        <div className="glass bohra-border rounded-2xl p-1 grid grid-cols-3 gap-1">
           {sectionTabs.map((t) => (
             <button
               key={t}
@@ -63,7 +65,6 @@ function PlayersPage() {
       players={players}
       onClose={() => setSelectedTeam(null)}
       onPlayerClick={(player) => {
-  console.log("Clicked:", player);
   setActivePlayer(player);
 }}
     />
@@ -105,7 +106,7 @@ function TeamsGrid({
   
   return (
     <>
-      <div className="mt-3 grid grid-cols-2 gap-3">
+      <div className="mt-4 grid grid-cols-2 gap-4">
         {teams.map((t) => {
           const squadCount = players.filter((p) => p.teamId === t.id).length;
 
@@ -113,28 +114,33 @@ function TeamsGrid({
             <button
               key={t.id}
               onClick={() => onSelectTeam(t)}
-              className="relative overflow-hidden rounded-2xl glass p-4 text-left"
+              className="group relative overflow-hidden rounded-[30px] glass bohra-border p-5 text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
               <div
-                className="absolute -right-6 -top-6 h-20 w-20 rounded-full opacity-40 blur-2xl"
+                className="absolute -right-8 -top-8 h-28 w-28 rounded-full opacity-45 blur-3xl"
                 style={{
                   background: `radial-gradient(circle, ${t.color}, transparent 70%)`,
                 }}
               />
 
               <div className="relative">
-                <TeamCrest
-                  short={t.short}
-                  color={t.color}
-                  color2={t.color2}
-                  size={44}
-                />
 
-                <h3 className="mt-3 font-display text-sm font-bold leading-tight">
+              <div className="transition-transform duration-300 group-hover:scale-110">
+
+                <TeamCrest
+    
+                short={t.short}
+                color={t.color}
+                color2={t.color2}
+                size={58}
+              />
+              </div>
+
+                <h3 className="mt-4 font-display text-lg font-black leading-tight tracking-tight">
                   {t.name}
                 </h3>
 
-                <div className="mt-2 space-y-1 text-[11px]">
+                <div className="mt-3 space-y-2 text-xs">
                   <div className="flex items-center gap-1.5 text-muted-foreground">
                     <span className="text-gold">C</span>
                     {t.captain}
@@ -146,12 +152,12 @@ function TeamsGrid({
                   </div>
                 </div>
 
-                <div className="mt-3 flex items-center justify-between border-t border-border pt-2">
+                <div className="mt-5 flex items-center justify-between border-t border-[#E8D9BF] pt-4">
                   <span className="text-[10px] uppercase tracking-widest text-muted-foreground">
                     {squadCount} players
                   </span>
 
-                  <span className="font-display text-lg font-bold text-gold tabular-nums">
+                  <span className="font-display text-2xl font-black tracking-tight text-gold tabular-nums">
                     {t.points}
                   </span>
                 </div>
@@ -179,18 +185,20 @@ function OwnersList({ teams }: { teams: LiveTeam[] }) {
   }));
 
   return (
-    <div className="mt-3 space-y-3">
+    <div className="mt-4 space-y-4">
       {owners.map((o) => (
-        <article key={o.id} className="flex items-center gap-3 rounded-2xl glass p-3.5">
-          <Avatar initials={o.initials} color={o.color} color2={o.color2} size={52} />
+        <article key={o.id} className="group flex items-center gap-4 rounded-[30px] glass bohra-border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+          <div className="transition-transform duration-300 group-hover:scale-105">
+          <Avatar initials={o.initials} color={o.color} color2={o.color2} size={60} />
+          </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
-              <h3 className="truncate font-display text-sm font-bold">{o.name}</h3>
-              <span className="rounded-full bg-gold/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-gold">Owner</span>
+              <h3 className="truncate font-display text-lg font-black tracking-tight">{o.name}</h3>
+              <span className="rounded-full bg-gold/15 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-gold transition-all duration-300 group-hover:bg-gold/20">Owner</span>
             </div>
-            <div className="mt-0.5 truncate text-[11px] text-muted-foreground">{o.team}</div>
+            <div className="mt-1 truncate text-sm text-muted-foreground">{o.team}</div>
           </div>
-          <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1" />
         </article>
       ))}
     </div>
@@ -217,15 +225,15 @@ function PlayersCatalog({ players, teams }: { players: LivePlayer[]; teams: Live
   return (
     <div className="mt-3">
       <div className="relative">
-        <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Search className="absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-[#C79A35] transition-colors duration-300" />
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Search players"
-          className="w-full rounded-2xl bg-card/60 py-3 pl-10 pr-10 text-sm placeholder:text-muted-foreground border border-border focus:border-primary outline-none transition-colors"
+          placeholder="Search by player name..."
+          className="glass w-full rounded-full border border-white/25 bg-white/35 py-3.5 pl-14 pr-12 text-sm font-medium text-slate-800 shadow-xl backdrop-blur-xl outline-none transition-all duration-300 placeholder:text-slate-400 focus:border-[#D5A44A]/40 focus:bg-white/45 focus:ring-4 focus:ring-[#D5A44A]/15"
         />
         {q && (
-          <button onClick={() => setQ("")} aria-label="Clear" className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+          <button onClick={() => setQ("")} aria-label="Clear" className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-slate-400 transition-all duration-300 hover:bg-white/60 hover:text-[#C79A35]">
             <X className="h-4 w-4" />
           </button>
         )}
@@ -236,7 +244,7 @@ function PlayersCatalog({ players, teams }: { players: LivePlayer[]; teams: Live
           <button
             key={r}
             onClick={() => setRole(r)}
-            className={`shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold transition-all ${role === r ? "gradient-gold text-gold-foreground shadow-glow-gold" : "glass text-muted-foreground"}`}
+            className={`shrink-0 rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 ${role === r ? "gradient-gold text-gold-foreground shadow-glow-gold" : "glass text-muted-foreground"}`}
           >
             {r}
           </button>
@@ -252,7 +260,7 @@ function PlayersCatalog({ players, teams }: { players: LivePlayer[]; teams: Live
           <button
             key={t.id}
             onClick={() => setTeamFilter(t.id)}
-            className={`shrink-0 flex items-center gap-1.5 rounded-full pl-1 pr-3 py-1 text-[11px] font-semibold transition-all ${teamFilter === t.id ? "gradient-royal text-white" : "glass text-muted-foreground"}`}
+            className={`shrink-0 flex items-center gap-2 rounded-full pl-1.5 pr-4 py-2 text-xs font-bold transition-all duration-300 ${teamFilter === t.id ? "gradient-royal text-white" : "glass text-muted-foreground"}`}
           >
             <TeamCrest short={t.short} color={t.color} color2={t.color2} size={20} />
             {t.short}
@@ -265,41 +273,101 @@ function PlayersCatalog({ players, teams }: { players: LivePlayer[]; teams: Live
           const team = teamById(p.teamId);
           return (
             <button
-              key={p.id}
-              onClick={() => setActive(p)}
-              className="group relative overflow-hidden rounded-2xl glass p-3 text-left transition-transform active:scale-[0.98]"
-            >
-              <div className="flex items-start justify-between">
+  key={p.id}
+  aria-label={`View ${p.name}`}
+  onClick={() => setActive(p)}
+  className="group relative overflow-hidden rounded-[32px] p-6 text-left transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl active:scale-[0.98]"
+  style={{
+    background: "linear-gradient(180deg,#fffdf9,#f7efe2)",
+    border: "1px solid rgba(190,150,90,.20)",
+    boxShadow: "0 12px 24px rgba(90,60,25,.10)",
+  }}
+>
+  <div
+  className="absolute -right-10 -top-10 h-32 w-32 rounded-full blur-[90px] opacity-40"
+  style={{
+    background: team?.color ?? "#C79A35",
+  }}
+/>
+
+<div className="relative">
+  <div className="flex items-start justify-between">
                 {p.imageUrl ? (
-                  <img src={p.imageUrl} alt={p.name} className="h-11 w-11 rounded-xl object-cover" />
+                  <img
+  loading="lazy"
+  src={p.imageUrl}
+  alt={`${p.name} profile`}
+                  className="h-[72px] w-[72px] rounded-2xl object-cover shadow-lg transition-transform duration-300 group-hover:scale-105"
+                  />
                 ) : (
-                  <Avatar initials={p.initials} color={team?.color ?? "#3b82f6"} color2={team?.color2 ?? "#1e3a8a"} size={44} />
+                  <Avatar initials={p.initials} color={team?.color ?? "#3b82f6"} color2={team?.color2 ?? "#1e3a8a"} size={72} />
                 )}
-                {team ? (
-                  <TeamCrest short={team.short} color={team.color} color2={team.color2} size={22} />
-                ) : (
-                  <span className="rounded-full bg-gold/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-gold">Unsold</span>
-                )}
+                {p.status === "sold" ? (
+  <span className="rounded-full bg-emerald-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-emerald-800">
+    SOLD
+  </span>
+) : p.status === "unsold" ? (
+  <span className="rounded-full bg-red-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-red-700">
+    UNSOLD
+  </span>
+) : (
+  <span className="rounded-full bg-amber-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-amber-700">
+    AVAILABLE
+  </span>
+)}
               </div>
-              <h3 className="mt-2 truncate font-display text-sm font-bold">{p.name}</h3>
-              <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{p.role} · {p.age}y</div>
-              <div className="mt-2 flex items-center justify-between border-t border-border pt-2">
-                <div>
-                  <div className="text-[9px] uppercase text-muted-foreground">Base</div>
-                  <div className="font-display text-[12px] font-bold text-gold">{formatINR(p.basePrice)}</div>
-                </div>
-                <div className="text-right">
-                  <div className="text-[9px] uppercase text-muted-foreground">SR</div>
-                  <div className="font-display text-[12px] font-bold tabular-nums">{p.stats.sr}</div>
-                </div>
-              </div>
+              <h3 className="mt-4 line-clamp-2 font-display text-xl font-black leading-tight tracking-tight text-slate-900">{p.name}</h3>
+              <div className="mt-2 text-xs font-bold uppercase tracking-[0.28em] text-[#B68B42]">{p.role} · {p.age}yrs</div>
+              
+              
+              <div className="mt-6 grid grid-cols-[1fr_auto] gap-4 border-t border-[#E7D8BE] pt-5">
+
+  <div className="grid grid-cols-2 gap-3">
+
+    <div className="rounded-2xl bg-white/60 border border-[#E8D9BF] p-3">
+      <div className="text-[9px] font-black uppercase tracking-[0.22em] text-gray-500">
+        Base
+      </div>
+
+      <div className="mt-2 font-display text-xl font-black tracking-tight text-[#B68B42]">
+        {formatINR(p.basePrice)}
+      </div>
+    </div>
+
+    <div className="rounded-2xl bg-white/60 border border-[#E8D9BF] p-3">
+      <div className="text-[9px] font-black uppercase tracking-[0.22em] text-gray-500">
+        Sold
+      </div>
+
+      <div className="mt-2 font-display text-xl font-black tracking-tight text-[#3F8B57]">
+        {p.soldPrice ? formatINR(p.soldPrice) : "—"}
+      </div>
+    </div>
+
+  </div>
+
+  {team && (
+    <div className="flex items-center">
+      <TeamCrest
+        short={team.short}
+        color={team.color}
+        color2={team.color2}
+        size={48}
+      />
+    </div>
+  )}
+
+</div>
+
+
+</div>
             </button>
           );
         })}
       </div>
 
       {filtered.length === 0 && (
-        <div className="mt-10 text-center text-sm text-muted-foreground">No players match these filters.</div>
+        <div className="mt-10 text-center text-sm text-muted-foreground">No players found. Try changing your filters.</div>
       )}
 
       <PlayerSheet player={active} team={teamById(active?.teamId)} onClose={() => setActive(null)} />
@@ -313,40 +381,43 @@ function PlayerSheet({ player, team, onClose }: { player: LivePlayer | null; tea
   open={!!player}
   onOpenChange={(o) => !o && onClose()}
 >
-      <DialogContent className="max-w-md gap-0 border-border bg-transparent p-0 shadow-none [&>button]:hidden">
-        <div className="relative overflow-hidden rounded-3xl glass p-5">
+      <DialogContent className="max-w-xl gap-0 border-border bg-transparent p-0 shadow-none [&>button]:hidden">
+        <div className="relative overflow-hidden rounded-[40px] glass bohra-border p-8 shadow-2xl">
           <DialogTitle className="sr-only">{player?.name}</DialogTitle>
           {player && (
             <>
-              <div className="absolute inset-x-0 top-0 h-40 opacity-30 blur-3xl"
+              <div className="absolute inset-x-0 top-0 h-64 opacity-55 blur-[120px]"
                 style={{ background: `linear-gradient(180deg, ${team?.color ?? "#3b82f6"}, transparent)` }} />
               <div className="relative flex items-center gap-3">
                 {player.imageUrl ? (
-                  <img src={player.imageUrl} alt={player.name} className="h-16 w-16 rounded-2xl object-cover" />
+                  <img
+  loading="lazy"
+  src={player.imageUrl}
+  alt={`${player.name} profile`} className="h-[92px] w-[92px] rounded-[28px] object-cover shadow-2xl"/>
                 ) : (
-                  <Avatar initials={player.initials} color={team?.color ?? "#3b82f6"} color2={team?.color2 ?? "#1e3a8a"} size={64} />
+                  <Avatar initials={player.initials} color={team?.color ?? "#3b82f6"} color2={team?.color2 ?? "#1e3a8a"} size={92} />
                 )}
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-display text-lg font-bold">{player.name}</h3>
-                  <div className="text-[11px] uppercase tracking-widest text-gold">{player.role}</div>
-                  <div className="mt-0.5 text-xs text-muted-foreground">
-                    {team ? team.name : "Unsold"} · {player.age} yrs
+                  <h3 className="font-display text-3xl font-black tracking-tight leading-none">{player.name}</h3>
+                  <div className="mt-3 inline-flex w-fit rounded-full bg-gold/15 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.22em] text-gold border border-gold/20">{player.role}</div>
+                  <div className="mt-2 text-sm font-medium text-muted-foreground">
+                     {team ? team.name : "Available"} · {player.age} yrs
                   </div>
                 </div>
-                <button onClick={onClose} className="grid h-9 w-9 place-items-center rounded-full glass" aria-label="Close">
+                <button onClick={onClose} className="grid h-11 w-11 place-items-center rounded-full glass border border-white/20 transition-all duration-300 hover:rotate-90 hover:scale-110" aria-label="Close">
                   <X className="h-4 w-4" />
                 </button>
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-2">
+              <div className="mt-8 grid grid-cols-2 gap-4">
                 <Mini label="Batting" value={player.batting} />
                 <Mini label="Bowling" value={player.bowling} />
                 <Mini label="Base" value={formatINR(player.basePrice)} tone="gold" />
                 <Mini label="Sold for" value={player.soldPrice ? formatINR(player.soldPrice) : "—"} tone="gold" />
               </div>
 
-              <div className="mt-4 rounded-2xl bg-card/60 p-4">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-gold">Career Stats</div>
+              <div className="mt-6 rounded-[28px] bg-card/60 p-5">
+                <div className="text-[11px] font-black uppercase tracking-[0.22em] text-gold">Career Stats</div>
                 <div className="mt-3 grid grid-cols-4 gap-2 text-center">
                   {[
                     { l: "Mat", v: player.stats.matches },
@@ -355,7 +426,7 @@ function PlayerSheet({ player, team, onClose }: { player: LivePlayer | null; tea
                     { l: "Avg", v: player.stats.avg },
                   ].map((s) => (
                     <div key={s.l}>
-                      <div className="font-display text-base font-bold tabular-nums">{s.v}</div>
+                      <div className="font-display text-lg font-black tracking-tight tabular-nums">{s.v}</div>
                       <div className="text-[9px] uppercase tracking-widest text-muted-foreground">{s.l}</div>
                     </div>
                   ))}
@@ -371,9 +442,9 @@ function PlayerSheet({ player, team, onClose }: { player: LivePlayer | null; tea
 
 function Mini({ label, value, tone }: { label: string; value: string; tone?: "gold" }) {
   return (
-    <div className="rounded-xl bg-card/60 p-3">
+    <div className="rounded-2xl bg-white/60 border border-white/30 p-4 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
       <div className="text-[9px] uppercase tracking-widest text-muted-foreground">{label}</div>
-      <div className={`mt-1 font-display text-sm font-bold ${tone === "gold" ? "text-gold" : ""}`}>{value}</div>
+      <div className={`mt-2 font-display text-lg font-black tracking-tight ${tone === "gold" ? "text-gold" : ""}`}>{value}</div>
     </div>
   );
 }
