@@ -1,10 +1,10 @@
 [
   {
-    "id": "p1",
+    "id": "P1",
     "playerNumber": "P1",
     "name": "Aamir Faizee",
     "age": 22,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -18,14 +18,15 @@
       "sr": 0
     },
     "initials": "AF",
+    "photo": "/player-photos/P1.jpeg",
     "status": "available"
   },
   {
-    "id": "p2",
+    "id": "P2",
     "playerNumber": "P2",
     "name": "Amir Sohail Bandookwala",
     "age": 32,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -39,14 +40,15 @@
       "sr": 0
     },
     "initials": "AS",
+    "photo": "/player-photos/P2.jpeg",
     "status": "available"
   },
   {
-    "id": "p3",
+    "id": "P3",
     "playerNumber": "P3",
     "name": "Abbas Ali Patwala",
     "age": 40,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -60,14 +62,15 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P3.jpeg",
     "status": "available"
   },
   {
-    "id": "p4",
+    "id": "P4",
     "playerNumber": "P4",
-    "name": "abbas lachhawala",
+    "name": "Abbas Lachhawala",
     "age": 48,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -81,14 +84,15 @@
       "sr": 0
     },
     "initials": "AL",
+    "photo": "/player-photos/P4.jpeg",
     "status": "available"
   },
   {
-    "id": "p5",
+    "id": "P5",
     "playerNumber": "P5",
     "name": "Abbas M Mustafa",
     "age": 35,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -102,14 +106,15 @@
       "sr": 0
     },
     "initials": "AM",
+    "photo": "/player-photos/P5.jpeg",
     "status": "available"
   },
   {
-    "id": "p6",
+    "id": "P6",
     "playerNumber": "P6",
     "name": "Abdul Qadir",
     "age": 26,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -123,14 +128,15 @@
       "sr": 0
     },
     "initials": "AQ",
+    "photo": "/player-photos/P6.jpeg",
     "status": "available"
   },
   {
-    "id": "p7",
+    "id": "P7",
     "playerNumber": "P7",
-    "name": "Abdul Qadir Bhai Juzer Bhai Kapasan Wala",
+    "name": "Abdul Qadir Kapasan",
     "age": 32,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -144,14 +150,15 @@
       "sr": 0
     },
     "initials": "AQ",
+    "photo": "/player-photos/P7.jpeg",
     "status": "available"
   },
   {
-    "id": "p8",
+    "id": "P8",
     "playerNumber": "P8",
-    "name": "Abdul qadir zawar mines",
+    "name": "Abdul Qadir Zawar Mines",
     "age": 18,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -165,14 +172,15 @@
       "sr": 0
     },
     "initials": "AQ",
+    "photo": "/player-photos/P8.jpeg",
     "status": "available"
   },
   {
-    "id": "p9",
+    "id": "P9",
     "playerNumber": "P9",
     "name": "Afaq Hussain",
     "age": 35,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -186,15 +194,16 @@
       "sr": 0
     },
     "initials": "AH",
+    "photo": "/player-photos/P9.jpeg",
     "status": "available"
   },
   {
-    "id": "p10",
+    "id": "P10",
     "playerNumber": "P10",
-    "name": "Ali Asgar Abbas Ali Tidiwala",
+    "name": "Ali Asgar Tidiwala",
     "age": 24,
-    "role": "All Rounder",
-    "basePrice": 200000,
+    "role": "All-Rounder",
+    "basePrice": 1000000,
     "soldPrice": null,
     "teamId": null,
     "batting": "",
@@ -207,14 +216,15 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P10.jpeg",
     "status": "available"
   },
   {
-    "id": "p11",
+    "id": "P11",
     "playerNumber": "P11",
     "name": "Ali Asgar Bandook",
     "age": 28,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -228,14 +238,15 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P11.jpeg",
     "status": "available"
   },
   {
-    "id": "p12",
+    "id": "P12",
     "playerNumber": "P12",
-    "name": "Ali asgar habib",
+    "name": "Ali Asgar Habib",
     "age": 41,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -249,14 +260,15 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P12.jpeg",
     "status": "available"
   },
   {
-    "id": "p13",
+    "id": "P13",
     "playerNumber": "P13",
     "name": "Ali Asgar Kholia",
     "age": 32,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -270,10 +282,11 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P13.jpeg",
     "status": "available"
   },
   {
-    "id": "p14",
+    "id": "P14",
     "playerNumber": "P14",
     "name": "Ali Asgar Lacchawala",
     "age": 39,
@@ -291,14 +304,15 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P14.jpeg",
     "status": "available"
   },
   {
-    "id": "p15",
+    "id": "P15",
     "playerNumber": "P15",
     "name": "Ali Asgar Loha Wala",
     "age": 35,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -312,14 +326,15 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P15.jpeg",
     "status": "available"
   },
   {
-    "id": "p16",
+    "id": "P16",
     "playerNumber": "P16",
     "name": "Ali Asgar Lohawala",
     "age": 28,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -333,14 +348,15 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P16.jpeg",
     "status": "available"
   },
   {
-    "id": "p17",
+    "id": "P17",
     "playerNumber": "P17",
     "name": "Ali Asgar Hindustani",
     "age": 37,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -354,12 +370,13 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P17.jpeg",
     "status": "available"
   },
   {
-    "id": "p18",
+    "id": "P18",
     "playerNumber": "P18",
-    "name": "Ali Asgar magar",
+    "name": "Ali Asgar Magar",
     "age": 50,
     "role": "Wicket Keeper",
     "basePrice": 200000,
@@ -375,14 +392,15 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P18.jpeg",
     "status": "available"
   },
   {
-    "id": "p19",
+    "id": "P19",
     "playerNumber": "P19",
-    "name": "Ali asgar moomin",
+    "name": "Ali Asgar Moomin",
     "age": 30,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -396,15 +414,16 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P19.jpeg",
     "status": "available"
   },
   {
-    "id": "p20",
+    "id": "P20",
     "playerNumber": "P20",
     "name": "Ali Asgar Mustafa",
     "age": 35,
-    "role": "All Rounder",
-    "basePrice": 200000,
+    "role": "All-Rounder",
+    "basePrice": 1000000,
     "soldPrice": null,
     "teamId": null,
     "batting": "",
@@ -417,14 +436,15 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P20.jpeg",
     "status": "available"
   },
   {
-    "id": "p21",
+    "id": "P21",
     "playerNumber": "P21",
-    "name": "Ali asgar pan",
+    "name": "Ali Asgar Pan",
     "age": 34,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -438,12 +458,13 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P21.jpeg",
     "status": "available"
   },
   {
-    "id": "p22",
+    "id": "P22",
     "playerNumber": "P22",
-    "name": "Ali Asgar taher ali mustafa",
+    "name": "Ali Asgar Mustafa",
     "age": 25,
     "role": "Batsman",
     "basePrice": 200000,
@@ -459,14 +480,15 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P22.jpeg",
     "status": "available"
   },
   {
-    "id": "p23",
+    "id": "P23",
     "playerNumber": "P23",
     "name": "Ali Asgar Turra",
     "age": 40,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -480,12 +502,13 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P23.jpeg",
     "status": "available"
   },
   {
-    "id": "p24",
+    "id": "P24",
     "playerNumber": "P24",
-    "name": "ALI ASGAR ZARIWALA",
+    "name": "Ali Asgar Zariwala",
     "age": 26,
     "role": "Batsman",
     "basePrice": 200000,
@@ -501,14 +524,15 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P24.jpeg",
     "status": "available"
   },
   {
-    "id": "p25",
+    "id": "P25",
     "playerNumber": "P25",
     "name": "Ali Hussain Vichavera",
     "age": 45,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -522,12 +546,13 @@
       "sr": 0
     },
     "initials": "AH",
+    "photo": "/player-photos/P25.jpeg",
     "status": "available"
   },
   {
-    "id": "p26",
+    "id": "P26",
     "playerNumber": "P26",
-    "name": "Ali hussain ameen",
+    "name": "Ali Hussain Ameen",
     "age": 30,
     "role": "Wicket Keeper",
     "basePrice": 200000,
@@ -543,14 +568,15 @@
       "sr": 0
     },
     "initials": "AH",
+    "photo": "/player-photos/P26.jpeg",
     "status": "available"
   },
   {
-    "id": "p27",
+    "id": "P27",
     "playerNumber": "P27",
     "name": "Ali Hussain German",
     "age": 33,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -564,14 +590,15 @@
       "sr": 0
     },
     "initials": "AH",
+    "photo": "/player-photos/P27.jpeg",
     "status": "available"
   },
   {
-    "id": "p28",
+    "id": "P28",
     "playerNumber": "P28",
     "name": "Ali Hussain Lacchawala",
     "age": 45,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -585,14 +612,15 @@
       "sr": 0
     },
     "initials": "AH",
+    "photo": "/player-photos/P28.jpeg",
     "status": "available"
   },
   {
-    "id": "p29",
+    "id": "P29",
     "playerNumber": "P29",
     "name": "Ali Siyahi",
     "age": 45,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -606,14 +634,15 @@
       "sr": 0
     },
     "initials": "AS",
+    "photo": "/player-photos/P29.jpeg",
     "status": "available"
   },
   {
-    "id": "p30",
+    "id": "P30",
     "playerNumber": "P30",
     "name": "Aliasgar Mumeen",
     "age": 21,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -627,10 +656,11 @@
       "sr": 0
     },
     "initials": "AM",
+    "photo": "/player-photos/P30.jpeg",
     "status": "available"
   },
   {
-    "id": "p31",
+    "id": "P31",
     "playerNumber": "P31",
     "name": "Arif Amar",
     "age": 53,
@@ -648,14 +678,15 @@
       "sr": 0
     },
     "initials": "AA",
+    "photo": "/player-photos/P31.jpeg",
     "status": "available"
   },
   {
-    "id": "p32",
+    "id": "P32",
     "playerNumber": "P32",
-    "name": "Arif bhabrana",
+    "name": "Arif Bhabrana",
     "age": 31,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -669,15 +700,16 @@
       "sr": 0
     },
     "initials": "AB",
+    "photo": "/player-photos/P32.jpeg",
     "status": "available"
   },
   {
-    "id": "p33",
+    "id": "P33",
     "playerNumber": "P33",
     "name": "Azhar Hussain",
     "age": 40,
-    "role": "All Rounder",
-    "basePrice": 200000,
+    "role": "All-Rounder",
+    "basePrice": 1000000,
     "soldPrice": null,
     "teamId": null,
     "batting": "",
@@ -690,14 +722,15 @@
       "sr": 0
     },
     "initials": "AH",
+    "photo": "/player-photos/P33.jpeg",
     "status": "available"
   },
   {
-    "id": "p34",
+    "id": "P34",
     "playerNumber": "P34",
     "name": "Aziz German",
     "age": 34,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -711,14 +744,15 @@
       "sr": 0
     },
     "initials": "AG",
+    "photo": "/player-photos/P34.jpeg",
     "status": "available"
   },
   {
-    "id": "p35",
+    "id": "P35",
     "playerNumber": "P35",
     "name": "Aziz Hitawala",
     "age": 32,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -732,14 +766,15 @@
       "sr": 0
     },
     "initials": "AH",
+    "photo": "/player-photos/P35.jpeg",
     "status": "available"
   },
   {
-    "id": "p36",
+    "id": "P36",
     "playerNumber": "P36",
     "name": "Bahlah Sethjiwala",
     "age": 25,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -753,14 +788,15 @@
       "sr": 0
     },
     "initials": "BS",
+    "photo": "/player-photos/P36.jpeg",
     "status": "available"
   },
   {
-    "id": "p37",
+    "id": "P37",
     "playerNumber": "P37",
-    "name": "Burhanuddin bhalamwala",
+    "name": "Burhanuddin Bhalamwala",
     "age": 21,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -774,12 +810,13 @@
       "sr": 0
     },
     "initials": "BB",
+    "photo": "/player-photos/P37.jpeg",
     "status": "available"
   },
   {
-    "id": "p38",
+    "id": "P38",
     "playerNumber": "P38",
-    "name": "Burhanuddin ezzi",
+    "name": "Burhanuddin Ezzi",
     "age": 17,
     "role": "Batsman",
     "basePrice": 200000,
@@ -795,10 +832,11 @@
       "sr": 0
     },
     "initials": "BE",
+    "photo": "/player-photos/P38.jpeg",
     "status": "available"
   },
   {
-    "id": "p39",
+    "id": "P39",
     "playerNumber": "P39",
     "name": "Burhanuddin Habib",
     "age": 24,
@@ -816,12 +854,13 @@
       "sr": 0
     },
     "initials": "BH",
+    "photo": "/player-photos/P39.jpeg",
     "status": "available"
   },
   {
-    "id": "p40",
+    "id": "P40",
     "playerNumber": "P40",
-    "name": "Burhanuddin juzer ali patwala",
+    "name": "Burhanuddin Patwala",
     "age": 34,
     "role": "Batsman",
     "basePrice": 200000,
@@ -836,15 +875,16 @@
       "avg": 0,
       "sr": 0
     },
-    "initials": "BJ",
+    "initials": "BP",
+    "photo": "/player-photos/P40.jpeg",
     "status": "available"
   },
   {
-    "id": "p41",
+    "id": "P41",
     "playerNumber": "P41",
-    "name": "Burhanuddin KW",
+    "name": "Burhanuddin Kw",
     "age": 29,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -858,14 +898,15 @@
       "sr": 0
     },
     "initials": "BK",
+    "photo": "/player-photos/P41.jpeg",
     "status": "available"
   },
   {
-    "id": "p42",
+    "id": "P42",
     "playerNumber": "P42",
-    "name": "Burhanuddin raninwala",
+    "name": "Burhanuddin Raninwala",
     "age": 45,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -879,14 +920,15 @@
       "sr": 0
     },
     "initials": "BR",
+    "photo": "/player-photos/P42.jpeg",
     "status": "available"
   },
   {
-    "id": "p43",
+    "id": "P43",
     "playerNumber": "P43",
     "name": "Burhanuddin Sanwarwala",
     "age": 28,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -900,10 +942,11 @@
       "sr": 0
     },
     "initials": "BS",
+    "photo": "/player-photos/P43.jpeg",
     "status": "available"
   },
   {
-    "id": "p44",
+    "id": "P44",
     "playerNumber": "P44",
     "name": "Fakhri",
     "age": 37,
@@ -921,14 +964,15 @@
       "sr": 0
     },
     "initials": "F",
+    "photo": "/player-photos/P44.jpeg",
     "status": "available"
   },
   {
-    "id": "p45",
+    "id": "P45",
     "playerNumber": "P45",
-    "name": "Fakhruddin BaraBhai",
+    "name": "Fakhruddin Barabhai",
     "age": 35,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -942,12 +986,13 @@
       "sr": 0
     },
     "initials": "FB",
+    "photo": "/player-photos/P45.jpeg",
     "status": "available"
   },
   {
-    "id": "p46",
+    "id": "P46",
     "playerNumber": "P46",
-    "name": "Fakhruddin hotelwala",
+    "name": "Fakhruddin Hotelwala",
     "age": 21,
     "role": "Batsman",
     "basePrice": 200000,
@@ -963,14 +1008,15 @@
       "sr": 0
     },
     "initials": "FH",
+    "photo": "/player-photos/P46.jpeg",
     "status": "available"
   },
   {
-    "id": "p47",
+    "id": "P47",
     "playerNumber": "P47",
     "name": "Fakhruddin Radio",
     "age": 31,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -984,14 +1030,15 @@
       "sr": 0
     },
     "initials": "FR",
+    "photo": "/player-photos/P47.jpeg",
     "status": "available"
   },
   {
-    "id": "p48",
+    "id": "P48",
     "playerNumber": "P48",
     "name": "Fazal Fakhruddin Faizee",
     "age": 52,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1005,12 +1052,13 @@
       "sr": 0
     },
     "initials": "FF",
+    "photo": "/player-photos/P48.jpeg",
     "status": "available"
   },
   {
-    "id": "p49",
+    "id": "P49",
     "playerNumber": "P49",
-    "name": "Haider Ishaq bhai Pan wala",
+    "name": "Haider Pan Wala",
     "age": 18,
     "role": "Bowler",
     "basePrice": 200000,
@@ -1025,15 +1073,16 @@
       "avg": 0,
       "sr": 0
     },
-    "initials": "HI",
+    "initials": "HP",
+    "photo": "/player-photos/P49.jpeg",
     "status": "available"
   },
   {
-    "id": "p50",
+    "id": "P50",
     "playerNumber": "P50",
     "name": "Hakim Dilwara",
     "age": 40,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1047,12 +1096,13 @@
       "sr": 0
     },
     "initials": "HD",
+    "photo": "/player-photos/P50.jpeg",
     "status": "available"
   },
   {
-    "id": "p51",
+    "id": "P51",
     "playerNumber": "P51",
-    "name": "Hasan patel",
+    "name": "Hasan Patel",
     "age": 20,
     "role": "Bowler",
     "basePrice": 200000,
@@ -1068,14 +1118,15 @@
       "sr": 0
     },
     "initials": "HP",
+    "photo": "/player-photos/P51.jpeg",
     "status": "available"
   },
   {
-    "id": "p52",
+    "id": "P52",
     "playerNumber": "P52",
-    "name": "Hasan Qutbuddin bhai parsola",
+    "name": "Hasan Bhai Parsola",
     "age": 28,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1088,15 +1139,16 @@
       "avg": 0,
       "sr": 0
     },
-    "initials": "HQ",
+    "initials": "HB",
+    "photo": "/player-photos/P52.jpeg",
     "status": "available"
   },
   {
-    "id": "p53",
+    "id": "P53",
     "playerNumber": "P53",
-    "name": "Hatim ali",
+    "name": "Hatim Ali",
     "age": 47,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1110,14 +1162,15 @@
       "sr": 0
     },
     "initials": "HA",
+    "photo": "/player-photos/P53.jpeg",
     "status": "available"
   },
   {
-    "id": "p54",
+    "id": "P54",
     "playerNumber": "P54",
     "name": "Hatim Ali Kankroli Wala",
     "age": 26,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1131,14 +1184,15 @@
       "sr": 0
     },
     "initials": "HA",
+    "photo": "/player-photos/P54.jpeg",
     "status": "available"
   },
   {
-    "id": "p55",
+    "id": "P55",
     "playerNumber": "P55",
     "name": "Hatim Darbar",
     "age": 28,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1152,14 +1206,15 @@
       "sr": 0
     },
     "initials": "HD",
+    "photo": "/player-photos/P55.jpeg",
     "status": "available"
   },
   {
-    "id": "p56",
+    "id": "P56",
     "playerNumber": "P56",
-    "name": "Hatim Kaied johar Baroda wala",
+    "name": "Hatim Baroda Wala",
     "age": 18,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1172,15 +1227,16 @@
       "avg": 0,
       "sr": 0
     },
-    "initials": "HK",
+    "initials": "HB",
+    "photo": "/player-photos/P56.jpeg",
     "status": "available"
   },
   {
-    "id": "p57",
+    "id": "P57",
     "playerNumber": "P57",
     "name": "Hatim Mukhiya",
     "age": 33,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1194,10 +1250,11 @@
       "sr": 0
     },
     "initials": "HM",
+    "photo": "/player-photos/P57.jpeg",
     "status": "available"
   },
   {
-    "id": "p58",
+    "id": "P58",
     "playerNumber": "P58",
     "name": "Huzefa Rundera",
     "age": 28,
@@ -1215,12 +1272,13 @@
       "sr": 0
     },
     "initials": "HR",
+    "photo": "/player-photos/P58.jpeg",
     "status": "available"
   },
   {
-    "id": "p59",
+    "id": "P59",
     "playerNumber": "P59",
-    "name": "Husain ogna wala",
+    "name": "Husain Ogna Wala",
     "age": 45,
     "role": "Batsman",
     "basePrice": 200000,
@@ -1236,10 +1294,11 @@
       "sr": 0
     },
     "initials": "HO",
+    "photo": "/player-photos/P59.jpeg",
     "status": "available"
   },
   {
-    "id": "p60",
+    "id": "P60",
     "playerNumber": "P60",
     "name": "Hussaini Mhow",
     "age": 40,
@@ -1257,14 +1316,15 @@
       "sr": 0
     },
     "initials": "HM",
+    "photo": "/player-photos/P60.jpeg",
     "status": "available"
   },
   {
-    "id": "p61",
+    "id": "P61",
     "playerNumber": "P61",
     "name": "Hussain Amar Haider",
     "age": 44,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1278,14 +1338,15 @@
       "sr": 0
     },
     "initials": "HA",
+    "photo": "/player-photos/P61.jpeg",
     "status": "available"
   },
   {
-    "id": "p62",
+    "id": "P62",
     "playerNumber": "P62",
     "name": "Hussain Attari",
     "age": 21,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1299,12 +1360,13 @@
       "sr": 0
     },
     "initials": "HA",
+    "photo": "/player-photos/P62.jpeg",
     "status": "available"
   },
   {
-    "id": "p63",
+    "id": "P63",
     "playerNumber": "P63",
-    "name": "Hussain bhai sirajali bhai khilona wala",
+    "name": "Hussain Khilona",
     "age": 15,
     "role": "Bowler",
     "basePrice": 200000,
@@ -1319,13 +1381,14 @@
       "avg": 0,
       "sr": 0
     },
-    "initials": "HB",
+    "initials": "HK",
+    "photo": "/player-photos/P63.jpeg",
     "status": "available"
   },
   {
-    "id": "p64",
+    "id": "P64",
     "playerNumber": "P64",
-    "name": "Hussain fakhri",
+    "name": "Hussain Fakhri",
     "age": 18,
     "role": "Batsman",
     "basePrice": 200000,
@@ -1341,10 +1404,11 @@
       "sr": 0
     },
     "initials": "HF",
+    "photo": "/player-photos/P64.jpeg",
     "status": "available"
   },
   {
-    "id": "p65",
+    "id": "P65",
     "playerNumber": "P65",
     "name": "Hussain Ghee",
     "age": 33,
@@ -1362,10 +1426,11 @@
       "sr": 0
     },
     "initials": "HG",
+    "photo": "/player-photos/P65.jpeg",
     "status": "available"
   },
   {
-    "id": "p66",
+    "id": "P66",
     "playerNumber": "P66",
     "name": "Hussain Haidary",
     "age": 31,
@@ -1383,14 +1448,15 @@
       "sr": 0
     },
     "initials": "HH",
+    "photo": "/player-photos/P66.jpeg",
     "status": "available"
   },
   {
-    "id": "p67",
+    "id": "P67",
     "playerNumber": "P67",
     "name": "Hussain Hathi",
     "age": 32,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1404,14 +1470,15 @@
       "sr": 0
     },
     "initials": "HH",
+    "photo": "/player-photos/P67.jpeg",
     "status": "available"
   },
   {
-    "id": "p68",
+    "id": "P68",
     "playerNumber": "P68",
-    "name": "Hussain hita",
+    "name": "Hussain Hita",
     "age": 38,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1425,14 +1492,15 @@
       "sr": 0
     },
     "initials": "HH",
+    "photo": "/player-photos/P68.jpeg",
     "status": "available"
   },
   {
-    "id": "p69",
+    "id": "P69",
     "playerNumber": "P69",
-    "name": "Hussain katariya",
+    "name": "Hussain Katariya",
     "age": 32,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1446,14 +1514,15 @@
       "sr": 0
     },
     "initials": "HK",
+    "photo": "/player-photos/P69.jpeg",
     "status": "available"
   },
   {
-    "id": "p70",
+    "id": "P70",
     "playerNumber": "P70",
     "name": "Hussain Khozema",
     "age": 28,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -1467,14 +1536,15 @@
       "sr": 0
     },
     "initials": "HK",
+    "photo": "/player-photos/P70.jpeg",
     "status": "available"
   },
   {
-    "id": "p71",
+    "id": "P71",
     "playerNumber": "P71",
-    "name": "Hussain lacchawala",
+    "name": "Hussain Lacchawala",
     "age": 19,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -1488,10 +1558,11 @@
       "sr": 0
     },
     "initials": "HL",
+    "photo": "/player-photos/P71.jpeg",
     "status": "available"
   },
   {
-    "id": "p72",
+    "id": "P72",
     "playerNumber": "P72",
     "name": "Hussain Ora Wala",
     "age": 21,
@@ -1509,12 +1580,13 @@
       "sr": 0
     },
     "initials": "HO",
+    "photo": "/player-photos/P72.jpeg",
     "status": "available"
   },
   {
-    "id": "p73",
+    "id": "P73",
     "playerNumber": "P73",
-    "name": "Hussain ShabbirHussain Magar wala",
+    "name": "Hussain Magar Wala",
     "age": 16,
     "role": "Batsman",
     "basePrice": 200000,
@@ -1529,15 +1601,16 @@
       "avg": 0,
       "sr": 0
     },
-    "initials": "HS",
+    "initials": "HM",
+    "photo": "/player-photos/P73.jpeg",
     "status": "available"
   },
   {
-    "id": "p74",
+    "id": "P74",
     "playerNumber": "P74",
     "name": "Hussain Siyahiwala",
     "age": 19,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1551,14 +1624,15 @@
       "sr": 0
     },
     "initials": "HS",
+    "photo": "/player-photos/P74.jpeg",
     "status": "available"
   },
   {
-    "id": "p75",
+    "id": "P75",
     "playerNumber": "P75",
-    "name": "Huzaifa Bhai Ashfaqhusain Sanwarwala",
+    "name": "Huzaifa Bhai Sanwarwala",
     "age": 32,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1572,14 +1646,15 @@
       "sr": 0
     },
     "initials": "HB",
+    "photo": "/player-photos/P75.jpeg",
     "status": "available"
   },
   {
-    "id": "p76",
+    "id": "P76",
     "playerNumber": "P76",
     "name": "Huzaifa Kotwal",
     "age": 21,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1593,14 +1668,15 @@
       "sr": 0
     },
     "initials": "HK",
+    "photo": "/player-photos/P76.jpeg",
     "status": "available"
   },
   {
-    "id": "p77",
+    "id": "P77",
     "playerNumber": "P77",
     "name": "Huzefa Moomin",
     "age": 30,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1614,14 +1690,15 @@
       "sr": 0
     },
     "initials": "HM",
+    "photo": "/player-photos/P77.jpeg",
     "status": "available"
   },
   {
-    "id": "p78",
+    "id": "P78",
     "playerNumber": "P78",
     "name": "Idris Khilona",
     "age": 23,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -1635,14 +1712,15 @@
       "sr": 0
     },
     "initials": "IK",
+    "photo": "/player-photos/P78.jpeg",
     "status": "available"
   },
   {
-    "id": "p79",
+    "id": "P79",
     "playerNumber": "P79",
-    "name": "Imran bhai kaidjohar bhai kundli",
+    "name": "Imran Bhai Kundli",
     "age": 17,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1656,14 +1734,15 @@
       "sr": 0
     },
     "initials": "IB",
+    "photo": "/player-photos/P79.jpeg",
     "status": "available"
   },
   {
-    "id": "p80",
+    "id": "P80",
     "playerNumber": "P80",
     "name": "Ismail Suwasra",
     "age": 20,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1677,12 +1756,13 @@
       "sr": 0
     },
     "initials": "IS",
+    "photo": "/player-photos/P80.jpeg",
     "status": "available"
   },
   {
-    "id": "p81",
+    "id": "P81",
     "playerNumber": "P81",
-    "name": "Juzar sheopurwala",
+    "name": "Juzar Sheopurwala",
     "age": 26,
     "role": "Batsman",
     "basePrice": 200000,
@@ -1698,14 +1778,15 @@
       "sr": 0
     },
     "initials": "JS",
+    "photo": "/player-photos/P81.jpeg",
     "status": "available"
   },
   {
-    "id": "p82",
+    "id": "P82",
     "playerNumber": "P82",
-    "name": "Kaid zohar",
+    "name": "Kaid Zohar",
     "age": 41,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1719,14 +1800,15 @@
       "sr": 0
     },
     "initials": "KZ",
+    "photo": "/player-photos/P82.jpeg",
     "status": "available"
   },
   {
-    "id": "p83",
+    "id": "P83",
     "playerNumber": "P83",
-    "name": "Kutubkhan danish",
+    "name": "Kutubkhan Danish",
     "age": 20,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1740,14 +1822,15 @@
       "sr": 0
     },
     "initials": "KD",
+    "photo": "/player-photos/P83.jpeg",
     "status": "available"
   },
   {
-    "id": "p84",
+    "id": "P84",
     "playerNumber": "P84",
     "name": "Lukman Mavli",
     "age": 38,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1761,12 +1844,13 @@
       "sr": 0
     },
     "initials": "LM",
+    "photo": "/player-photos/P84.jpeg",
     "status": "available"
   },
   {
-    "id": "p85",
+    "id": "P85",
     "playerNumber": "P85",
-    "name": "M. Hussain Sh Hakimuddin Bhai Delhiwala",
+    "name": "Hussain Delhiwala",
     "age": 38,
     "role": "Batsman",
     "basePrice": 200000,
@@ -1781,13 +1865,14 @@
       "avg": 0,
       "sr": 0
     },
-    "initials": "MH",
+    "initials": "HD",
+    "photo": "/player-photos/P85.jpeg",
     "status": "available"
   },
   {
-    "id": "p86",
+    "id": "P86",
     "playerNumber": "P86",
-    "name": "M.aliasger parel",
+    "name": "M.aliasger Parel",
     "age": 44,
     "role": "Wicket Keeper",
     "basePrice": 200000,
@@ -1803,12 +1888,13 @@
       "sr": 0
     },
     "initials": "MP",
+    "photo": "/player-photos/P86.jpeg",
     "status": "available"
   },
   {
-    "id": "p87",
+    "id": "P87",
     "playerNumber": "P87",
-    "name": "M.Huzaifa shk saifuddin jamali",
+    "name": "Huzaifa Jamali",
     "age": 50,
     "role": "Batsman",
     "basePrice": 200000,
@@ -1823,15 +1909,16 @@
       "avg": 0,
       "sr": 0
     },
-    "initials": "MS",
+    "initials": "HJ",
+    "photo": "/player-photos/P87.jpeg",
     "status": "available"
   },
   {
-    "id": "p88",
+    "id": "P88",
     "playerNumber": "P88",
     "name": "Mehlam Nathdwarawala",
     "age": 21,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1845,12 +1932,13 @@
       "sr": 0
     },
     "initials": "MN",
+    "photo": "/player-photos/P88.jpeg",
     "status": "available"
   },
   {
-    "id": "p89",
+    "id": "P89",
     "playerNumber": "P89",
-    "name": "Miqdad moomin",
+    "name": "Miqdad Moomin",
     "age": 21,
     "role": "Batsman",
     "basePrice": 200000,
@@ -1866,14 +1954,15 @@
       "sr": 0
     },
     "initials": "MM",
+    "photo": "/player-photos/P89.jpeg",
     "status": "available"
   },
   {
-    "id": "p90",
+    "id": "P90",
     "playerNumber": "P90",
-    "name": "Mohammed ajmerwala",
+    "name": "Mohammed Ajmerwala",
     "age": 26,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1887,12 +1976,13 @@
       "sr": 0
     },
     "initials": "MA",
+    "photo": "/player-photos/P90.jpeg",
     "status": "available"
   },
   {
-    "id": "p91",
+    "id": "P91",
     "playerNumber": "P91",
-    "name": "Mohammed AmarHaider",
+    "name": "Mohammed Amarhaider",
     "age": 18,
     "role": "Batsman",
     "basePrice": 200000,
@@ -1908,14 +1998,15 @@
       "sr": 0
     },
     "initials": "MA",
+    "photo": "/player-photos/P91.jpeg",
     "status": "available"
   },
   {
-    "id": "p92",
+    "id": "P92",
     "playerNumber": "P92",
-    "name": "Mohammed bhai nooruddin bhai lokhanwala",
+    "name": "Mohammed Bhai Lokhanwala",
     "age": 17,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1929,12 +2020,13 @@
       "sr": 0
     },
     "initials": "MB",
+    "photo": "/player-photos/P92.jpeg",
     "status": "available"
   },
   {
-    "id": "p93",
+    "id": "P93",
     "playerNumber": "P93",
-    "name": "Mohammed hussain badshah",
+    "name": "Mohammed Hussain Badshah",
     "age": 38,
     "role": "Bowler",
     "basePrice": 200000,
@@ -1950,14 +2042,15 @@
       "sr": 0
     },
     "initials": "MH",
+    "photo": "/player-photos/P93.jpeg",
     "status": "available"
   },
   {
-    "id": "p94",
+    "id": "P94",
     "playerNumber": "P94",
-    "name": "Mohammed hussain khaked",
+    "name": "Mohammed Hussain Khaked",
     "age": 55,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -1971,14 +2064,15 @@
       "sr": 0
     },
     "initials": "MH",
+    "photo": "/player-photos/P94.jpeg",
     "status": "available"
   },
   {
-    "id": "p95",
+    "id": "P95",
     "playerNumber": "P95",
-    "name": "Mohammed kurawar",
+    "name": "Mohammed Kurawar",
     "age": 35,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -1992,10 +2086,11 @@
       "sr": 0
     },
     "initials": "MK",
+    "photo": "/player-photos/P95.jpeg",
     "status": "available"
   },
   {
-    "id": "p96",
+    "id": "P96",
     "playerNumber": "P96",
     "name": "Mohammed Mustafa",
     "age": 21,
@@ -2013,14 +2108,15 @@
       "sr": 0
     },
     "initials": "MM",
+    "photo": "/player-photos/P96.jpeg",
     "status": "available"
   },
   {
-    "id": "p97",
+    "id": "P97",
     "playerNumber": "P97",
-    "name": "Mohammed nathwara wala",
+    "name": "Mohammed Nathwara Wala",
     "age": 47,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2034,10 +2130,11 @@
       "sr": 0
     },
     "initials": "MN",
+    "photo": "/player-photos/P97.jpeg",
     "status": "available"
   },
   {
-    "id": "p98",
+    "id": "P98",
     "playerNumber": "P98",
     "name": "Mohammed Sethjiwala",
     "age": 18,
@@ -2055,12 +2152,13 @@
       "sr": 0
     },
     "initials": "MS",
+    "photo": "/player-photos/P98.jpeg",
     "status": "available"
   },
   {
-    "id": "p99",
+    "id": "P99",
     "playerNumber": "P99",
-    "name": "Mohammed sheopurwala",
+    "name": "Mohammed Sheopurwala",
     "age": 21,
     "role": "Batsman",
     "basePrice": 200000,
@@ -2076,15 +2174,16 @@
       "sr": 0
     },
     "initials": "MS",
+    "photo": "/player-photos/P99.jpeg",
     "status": "available"
   },
   {
-    "id": "p100",
+    "id": "P100",
     "playerNumber": "P100",
     "name": "Moiz Ora",
     "age": 22,
-    "role": "All Rounder",
-    "basePrice": 200000,
+    "role": "All-Rounder",
+    "basePrice": 1000000,
     "soldPrice": null,
     "teamId": null,
     "batting": "",
@@ -2097,12 +2196,13 @@
       "sr": 0
     },
     "initials": "MO",
+    "photo": "/player-photos/P100.jpeg",
     "status": "available"
   },
   {
-    "id": "p101",
+    "id": "P101",
     "playerNumber": "P101",
-    "name": "Moiz saifuddin waglawala",
+    "name": "Moiz Saifuddin Wagla",
     "age": 52,
     "role": "Batsman",
     "basePrice": 200000,
@@ -2118,14 +2218,15 @@
       "sr": 0
     },
     "initials": "MS",
+    "photo": "/player-photos/P101.jpeg",
     "status": "available"
   },
   {
-    "id": "p102",
+    "id": "P102",
     "playerNumber": "P102",
-    "name": "Mubarak ghasa",
+    "name": "Mubarak Ghasa",
     "age": 37,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2139,14 +2240,15 @@
       "sr": 0
     },
     "initials": "MG",
+    "photo": "/player-photos/P102.jpeg",
     "status": "available"
   },
   {
-    "id": "p103",
+    "id": "P103",
     "playerNumber": "P103",
-    "name": "MUDREKA BHAI MULLA TAHER BHAI PARELWALA",
+    "name": "Mudreka Parelwala",
     "age": 20,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2159,13 +2261,14 @@
       "avg": 0,
       "sr": 0
     },
-    "initials": "MB",
+    "initials": "MP",
+    "photo": "/player-photos/P103.jpeg",
     "status": "available"
   },
   {
-    "id": "p104",
+    "id": "P104",
     "playerNumber": "P104",
-    "name": "Mufaddal lodal",
+    "name": "Mufaddal Lodal",
     "age": 26,
     "role": "Bowler",
     "basePrice": 200000,
@@ -2181,10 +2284,11 @@
       "sr": 0
     },
     "initials": "ML",
+    "photo": "/player-photos/P104.jpeg",
     "status": "available"
   },
   {
-    "id": "p105",
+    "id": "P105",
     "playerNumber": "P105",
     "name": "Mufaddal Mohammedi Dalal",
     "age": 28,
@@ -2202,14 +2306,15 @@
       "sr": 0
     },
     "initials": "MM",
+    "photo": "/player-photos/P105.jpeg",
     "status": "available"
   },
   {
-    "id": "p106",
+    "id": "P106",
     "playerNumber": "P106",
     "name": "Mufaddal Zawar Mines",
     "age": 22,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -2223,10 +2328,11 @@
       "sr": 0
     },
     "initials": "MZ",
+    "photo": "/player-photos/P106.jpeg",
     "status": "available"
   },
   {
-    "id": "p107",
+    "id": "P107",
     "playerNumber": "P107",
     "name": "Mukarram Rangwala",
     "age": 20,
@@ -2244,12 +2350,13 @@
       "sr": 0
     },
     "initials": "MR",
+    "photo": "/player-photos/P107.jpeg",
     "status": "available"
   },
   {
-    "id": "p108",
+    "id": "P108",
     "playerNumber": "P108",
-    "name": "Munawar kifayat",
+    "name": "Munawar Kifayat",
     "age": 40,
     "role": "Wicket Keeper",
     "basePrice": 200000,
@@ -2265,14 +2372,15 @@
       "sr": 0
     },
     "initials": "MK",
+    "photo": "/player-photos/P108.jpeg",
     "status": "available"
   },
   {
-    "id": "p109",
+    "id": "P109",
     "playerNumber": "P109",
-    "name": "Murtaza AmarHaider",
+    "name": "Murtaza Amarhaider",
     "age": 48,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2286,14 +2394,15 @@
       "sr": 0
     },
     "initials": "MA",
+    "photo": "/player-photos/P109.jpeg",
     "status": "available"
   },
   {
-    "id": "p110",
+    "id": "P110",
     "playerNumber": "P110",
-    "name": "Murtaza Bhai Mohammad Hussain Bhai kanorwala",
+    "name": "Murtaza Kanorwala",
     "age": 28,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2306,15 +2415,16 @@
       "avg": 0,
       "sr": 0
     },
-    "initials": "MB",
+    "initials": "MK",
+    "photo": "/player-photos/P110.jpeg",
     "status": "available"
   },
   {
-    "id": "p111",
+    "id": "P111",
     "playerNumber": "P111",
     "name": "Murtaza Bhavnagar",
     "age": 33,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2328,14 +2438,15 @@
       "sr": 0
     },
     "initials": "MB",
+    "photo": "/player-photos/P111.jpeg",
     "status": "available"
   },
   {
-    "id": "p112",
+    "id": "P112",
     "playerNumber": "P112",
     "name": "Murtaza Khilonawala",
     "age": 31,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2349,12 +2460,13 @@
       "sr": 0
     },
     "initials": "MK",
+    "photo": "/player-photos/P112.jpeg",
     "status": "available"
   },
   {
-    "id": "p113",
+    "id": "P113",
     "playerNumber": "P113",
-    "name": "Murtaza lohawala",
+    "name": "Murtaza Lohawala",
     "age": 30,
     "role": "Batsman",
     "basePrice": 200000,
@@ -2370,15 +2482,16 @@
       "sr": 0
     },
     "initials": "ML",
+    "photo": "/player-photos/P113.jpeg",
     "status": "available"
   },
   {
-    "id": "p114",
+    "id": "P114",
     "playerNumber": "P114",
     "name": "Murtaza Nathdwara",
     "age": 30,
     "role": "Bowler",
-    "basePrice": 200000,
+    "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
     "batting": "",
@@ -2391,14 +2504,15 @@
       "sr": 0
     },
     "initials": "MN",
+    "photo": "/player-photos/P114.jpeg",
     "status": "available"
   },
   {
-    "id": "p115",
+    "id": "P115",
     "playerNumber": "P115",
     "name": "Murtaza Sanwari",
     "age": 32,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -2412,10 +2526,11 @@
       "sr": 0
     },
     "initials": "MS",
+    "photo": "/player-photos/P115.jpeg",
     "status": "available"
   },
   {
-    "id": "p116",
+    "id": "P116",
     "playerNumber": "P116",
     "name": "Mustafa Birotywala",
     "age": 44,
@@ -2433,14 +2548,15 @@
       "sr": 0
     },
     "initials": "MB",
+    "photo": "/player-photos/P116.jpeg",
     "status": "available"
   },
   {
-    "id": "p117",
+    "id": "P117",
     "playerNumber": "P117",
     "name": "Mustafa Dalal",
     "age": 18,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -2454,14 +2570,15 @@
       "sr": 0
     },
     "initials": "MD",
+    "photo": "/player-photos/P117.jpeg",
     "status": "available"
   },
   {
-    "id": "p118",
+    "id": "P118",
     "playerNumber": "P118",
     "name": "Mustafa Dhoraji",
     "age": 36,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2475,14 +2592,15 @@
       "sr": 0
     },
     "initials": "MD",
+    "photo": "/player-photos/P118.jpeg",
     "status": "available"
   },
   {
-    "id": "p119",
+    "id": "P119",
     "playerNumber": "P119",
     "name": "Mustafa Hathi",
     "age": 31,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2496,10 +2614,11 @@
       "sr": 0
     },
     "initials": "MH",
+    "photo": "/player-photos/P119.jpeg",
     "status": "available"
   },
   {
-    "id": "p120",
+    "id": "P120",
     "playerNumber": "P120",
     "name": "Mustafa Lohawala",
     "age": 31,
@@ -2517,14 +2636,15 @@
       "sr": 0
     },
     "initials": "ML",
+    "photo": "/player-photos/P120.jpeg",
     "status": "available"
   },
   {
-    "id": "p121",
+    "id": "P121",
     "playerNumber": "P121",
     "name": "Mustansir Amar Haider",
     "age": 42,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2538,10 +2658,11 @@
       "sr": 0
     },
     "initials": "MA",
+    "photo": "/player-photos/P121.jpeg",
     "status": "available"
   },
   {
-    "id": "p122",
+    "id": "P122",
     "playerNumber": "P122",
     "name": "Mustansir Kanor Wala",
     "age": 22,
@@ -2559,14 +2680,15 @@
       "sr": 0
     },
     "initials": "MK",
+    "photo": "/player-photos/P122.jpeg",
     "status": "available"
   },
   {
-    "id": "p123",
+    "id": "P123",
     "playerNumber": "P123",
     "name": "Mustansir Petiwala",
     "age": 22,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2580,15 +2702,16 @@
       "sr": 0
     },
     "initials": "MP",
+    "photo": "/player-photos/P123.jpeg",
     "status": "available"
   },
   {
-    "id": "p124",
+    "id": "P124",
     "playerNumber": "P124",
     "name": "Mustansir Zakir Hussain",
     "age": 20,
     "role": "Batsman",
-    "basePrice": 200000,
+    "basePrice": 1000000,
     "soldPrice": null,
     "teamId": null,
     "batting": "",
@@ -2601,14 +2724,15 @@
       "sr": 0
     },
     "initials": "MZ",
+    "photo": "/player-photos/P124.jpeg",
     "status": "available"
   },
   {
-    "id": "p125",
+    "id": "P125",
     "playerNumber": "P125",
     "name": "Qaid Johar Amar",
     "age": 18,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2622,15 +2746,16 @@
       "sr": 0
     },
     "initials": "QJ",
+    "photo": "/player-photos/P125.jpeg",
     "status": "available"
   },
   {
-    "id": "p126",
+    "id": "P126",
     "playerNumber": "P126",
-    "name": "Qureshali bhai Shaikh Abdulhusain bhai Lacchawala",
+    "name": "Qureshali Lacchawala",
     "age": 20,
-    "role": "All Rounder",
-    "basePrice": 200000,
+    "role": "All-Rounder",
+    "basePrice": 1000000,
     "soldPrice": null,
     "teamId": null,
     "batting": "",
@@ -2642,15 +2767,16 @@
       "avg": 0,
       "sr": 0
     },
-    "initials": "QB",
+    "initials": "QL",
+    "photo": "/player-photos/P126.jpeg",
     "status": "available"
   },
   {
-    "id": "p127",
+    "id": "P127",
     "playerNumber": "P127",
-    "name": "Qutub kankroli",
+    "name": "Qutub Kankroli",
     "age": 32,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -2664,14 +2790,15 @@
       "sr": 0
     },
     "initials": "QK",
+    "photo": "/player-photos/P127.jpeg",
     "status": "available"
   },
   {
-    "id": "p128",
+    "id": "P128",
     "playerNumber": "P128",
-    "name": "Riyaz  Zari",
+    "name": "Riyaz Zari",
     "age": 33,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2685,10 +2812,11 @@
       "sr": 0
     },
     "initials": "RZ",
+    "photo": "/player-photos/P128.jpeg",
     "status": "available"
   },
   {
-    "id": "p129",
+    "id": "P129",
     "playerNumber": "P129",
     "name": "Rizwan Hitawala",
     "age": 45,
@@ -2706,10 +2834,11 @@
       "sr": 0
     },
     "initials": "RH",
+    "photo": "/player-photos/P129.jpeg",
     "status": "available"
   },
   {
-    "id": "p130",
+    "id": "P130",
     "playerNumber": "P130",
     "name": "Sajid Hussain Beeroti",
     "age": 60,
@@ -2727,10 +2856,11 @@
       "sr": 0
     },
     "initials": "SH",
+    "photo": "/player-photos/P130.jpeg",
     "status": "available"
   },
   {
-    "id": "p131",
+    "id": "P131",
     "playerNumber": "P131",
     "name": "Shabbar Bhai Kankroliwala",
     "age": 42,
@@ -2748,10 +2878,11 @@
       "sr": 0
     },
     "initials": "SB",
+    "photo": "/player-photos/P131.jpeg",
     "status": "available"
   },
   {
-    "id": "p132",
+    "id": "P132",
     "playerNumber": "P132",
     "name": "Shabbir Dhorajiwala",
     "age": 25,
@@ -2769,10 +2900,11 @@
       "sr": 0
     },
     "initials": "SD",
+    "photo": "/player-photos/P132.jpeg",
     "status": "available"
   },
   {
-    "id": "p133",
+    "id": "P133",
     "playerNumber": "P133",
     "name": "Shabbir Dungri",
     "age": 31,
@@ -2790,14 +2922,15 @@
       "sr": 0
     },
     "initials": "SD",
+    "photo": "/player-photos/P133.jpeg",
     "status": "available"
   },
   {
-    "id": "p134",
+    "id": "P134",
     "playerNumber": "P134",
-    "name": "SHABBIR PETIWALA",
+    "name": "Shabbir Petiwala",
     "age": 54,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2811,10 +2944,11 @@
       "sr": 0
     },
     "initials": "SP",
+    "photo": "/player-photos/P134.jpeg",
     "status": "available"
   },
   {
-    "id": "p135",
+    "id": "P135",
     "playerNumber": "P135",
     "name": "Shabbir Rangwala",
     "age": 43,
@@ -2832,14 +2966,15 @@
       "sr": 0
     },
     "initials": "SR",
+    "photo": "/player-photos/P135.jpeg",
     "status": "available"
   },
   {
-    "id": "p136",
+    "id": "P136",
     "playerNumber": "P136",
-    "name": "SOHAIL ZAHID ALI HITAWALA",
+    "name": "Sohail Zahid Ali Hitawala",
     "age": 32,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2853,10 +2988,11 @@
       "sr": 0
     },
     "initials": "SZ",
+    "photo": "/player-photos/P136.jpeg",
     "status": "available"
   },
   {
-    "id": "p137",
+    "id": "P137",
     "playerNumber": "P137",
     "name": "Taha Amar",
     "age": 22,
@@ -2874,10 +3010,11 @@
       "sr": 0
     },
     "initials": "TA",
+    "photo": "/player-photos/P137.jpeg",
     "status": "available"
   },
   {
-    "id": "p138",
+    "id": "P138",
     "playerNumber": "P138",
     "name": "Taha Bandookwala",
     "age": 28,
@@ -2895,12 +3032,13 @@
       "sr": 0
     },
     "initials": "TB",
+    "photo": "/player-photos/P138.jpeg",
     "status": "available"
   },
   {
-    "id": "p139",
+    "id": "P139",
     "playerNumber": "P139",
-    "name": "Taha Fakhruddin sinji",
+    "name": "Taha Fakhruddin Sinji",
     "age": 20,
     "role": "Batsman",
     "basePrice": 200000,
@@ -2916,15 +3054,16 @@
       "sr": 0
     },
     "initials": "TF",
+    "photo": "/player-photos/P139.jpeg",
     "status": "available"
   },
   {
-    "id": "p140",
+    "id": "P140",
     "playerNumber": "P140",
-    "name": "TAHA KANKROLI WALA",
+    "name": "Taha Kankroli Wala",
     "age": 21,
-    "role": "All Rounder",
-    "basePrice": 200000,
+    "role": "All-Rounder",
+    "basePrice": 1000000,
     "soldPrice": null,
     "teamId": null,
     "batting": "",
@@ -2937,14 +3076,15 @@
       "sr": 0
     },
     "initials": "TK",
+    "photo": "/player-photos/P140.jpeg",
     "status": "available"
   },
   {
-    "id": "p141",
+    "id": "P141",
     "playerNumber": "P141",
-    "name": "Taha kanorwala",
+    "name": "Taha Kanorwala",
     "age": 21,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -2958,14 +3098,15 @@
       "sr": 0
     },
     "initials": "TK",
+    "photo": "/player-photos/P141.jpeg",
     "status": "available"
   },
   {
-    "id": "p142",
+    "id": "P142",
     "playerNumber": "P142",
     "name": "Taha Parel",
     "age": 21,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 500000,
     "soldPrice": null,
     "teamId": null,
@@ -2979,10 +3120,11 @@
       "sr": 0
     },
     "initials": "TP",
+    "photo": "/player-photos/P142.jpeg",
     "status": "available"
   },
   {
-    "id": "p143",
+    "id": "P143",
     "playerNumber": "P143",
     "name": "Taha Patel",
     "age": 24,
@@ -3000,14 +3142,15 @@
       "sr": 0
     },
     "initials": "TP",
+    "photo": "/player-photos/P143.jpeg",
     "status": "available"
   },
   {
-    "id": "p144",
+    "id": "P144",
     "playerNumber": "P144",
-    "name": "Taher zulfiqar Tinwala",
+    "name": "Taher Zulfiqar Tinwala",
     "age": 19,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -3021,10 +3164,11 @@
       "sr": 0
     },
     "initials": "TZ",
+    "photo": "/player-photos/P144.jpeg",
     "status": "available"
   },
   {
-    "id": "p145",
+    "id": "P145",
     "playerNumber": "P145",
     "name": "Taikhum Bandookwala",
     "age": 26,
@@ -3042,14 +3186,15 @@
       "sr": 0
     },
     "initials": "TB",
+    "photo": "/player-photos/P145.jpeg",
     "status": "available"
   },
   {
-    "id": "p146",
+    "id": "P146",
     "playerNumber": "P146",
     "name": "Tanveer Hussain",
     "age": 40,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -3063,12 +3208,13 @@
       "sr": 0
     },
     "initials": "TH",
+    "photo": "/player-photos/P146.jpeg",
     "status": "available"
   },
   {
-    "id": "p147",
+    "id": "P147",
     "playerNumber": "P147",
-    "name": "Yusuf ali kholiyawala",
+    "name": "Yusuf Ali Kholiyawala",
     "age": 38,
     "role": "Batsman",
     "basePrice": 200000,
@@ -3084,14 +3230,15 @@
       "sr": 0
     },
     "initials": "YA",
+    "photo": "/player-photos/P147.jpeg",
     "status": "available"
   },
   {
-    "id": "p148",
+    "id": "P148",
     "playerNumber": "P148",
-    "name": "Yusuf bhai Zainuddin bhai Kholiyawala",
+    "name": "Yusuf Bhai Zainuddin Kholiyawala",
     "age": 32,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -3105,10 +3252,11 @@
       "sr": 0
     },
     "initials": "YB",
+    "photo": "/player-photos/P148.jpeg",
     "status": "available"
   },
   {
-    "id": "p149",
+    "id": "P149",
     "playerNumber": "P149",
     "name": "Yusuf Mahu",
     "age": 23,
@@ -3126,14 +3274,15 @@
       "sr": 0
     },
     "initials": "YM",
+    "photo": "/player-photos/P149.jpeg",
     "status": "available"
   },
   {
-    "id": "p150",
+    "id": "P150",
     "playerNumber": "P150",
     "name": "Zakaria",
     "age": 43,
-    "role": "All Rounder",
+    "role": "All-Rounder",
     "basePrice": 200000,
     "soldPrice": null,
     "teamId": null,
@@ -3147,6 +3296,29 @@
       "sr": 0
     },
     "initials": "Z",
+    "photo": "/player-photos/P150.jpeg",
+    "status": "available"
+  },
+  {
+    "id": "P151",
+    "playerNumber": "P151",
+    "name": "Sajid Attari",
+    "age": 42,
+    "role": "All-Rounder",
+    "basePrice": 500000,
+    "soldPrice": null,
+    "teamId": null,
+    "batting": "",
+    "bowling": "",
+    "stats": {
+      "matches": 0,
+      "runs": 0,
+      "wickets": 0,
+      "avg": 0,
+      "sr": 0
+    },
+    "initials": "SA",
+    "photo": "/player-photos/P151.jpeg",
     "status": "available"
   }
 ]

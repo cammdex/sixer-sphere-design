@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TournamentRouteImport } from './routes/tournament'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as PlayersRouteImport } from './routes/players'
 import { Route as McpRouteImport } from './routes/mcp'
@@ -20,11 +19,6 @@ import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } fr
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 
-const TournamentRoute = TournamentRouteImport.update({
-  id: '/tournament',
-  path: '/tournament',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SponsorsRoute = SponsorsRouteImport.update({
   id: '/sponsors',
   path: '/sponsors',
@@ -80,7 +74,6 @@ export interface FileRoutesByFullPath {
   '/mcp': typeof McpRoute
   '/players': typeof PlayersRoute
   '/sponsors': typeof SponsorsRoute
-  '/tournament': typeof TournamentRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/auction': typeof AdminAuctionRoute
@@ -92,7 +85,6 @@ export interface FileRoutesByTo {
   '/mcp': typeof McpRoute
   '/players': typeof PlayersRoute
   '/sponsors': typeof SponsorsRoute
-  '/tournament': typeof TournamentRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/auction': typeof AdminAuctionRoute
@@ -105,7 +97,6 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/players': typeof PlayersRoute
   '/sponsors': typeof SponsorsRoute
-  '/tournament': typeof TournamentRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/auction': typeof AdminAuctionRoute
@@ -119,7 +110,6 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/players'
     | '/sponsors'
-    | '/tournament'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/auction'
@@ -131,7 +121,6 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/players'
     | '/sponsors'
-    | '/tournament'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/auction'
@@ -143,7 +132,6 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/players'
     | '/sponsors'
-    | '/tournament'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/auction'
@@ -156,7 +144,6 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   PlayersRoute: typeof PlayersRoute
   SponsorsRoute: typeof SponsorsRoute
-  TournamentRoute: typeof TournamentRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminAuctionRoute: typeof AdminAuctionRoute
@@ -165,13 +152,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/tournament': {
-      id: '/tournament'
-      path: '/tournament'
-      fullPath: '/tournament'
-      preLoaderRoute: typeof TournamentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/sponsors': {
       id: '/sponsors'
       path: '/sponsors'
@@ -244,7 +224,6 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   PlayersRoute: PlayersRoute,
   SponsorsRoute: SponsorsRoute,
-  TournamentRoute: TournamentRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,

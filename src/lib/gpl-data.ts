@@ -122,7 +122,7 @@ export const teams: Team[] = [
     owners: ["Nuzhat Kagzi"],
     captain: "Qutub kankroli ",
     viceCaptain: "Shabbir Dungri",
-    retainedPlayer: "",
+    retainedPlayer: "Sajid Attari",
     logo: "/logos/teams/gm.png",
     color: "#9333ea",
     color2: "#581c87",
@@ -187,14 +187,15 @@ export const teams: Team[] = [
   },
 
   {
-    id: "gc",
-    name: "Global Challengers",
-    displayName: "Challengers",
-    short: "GC",
-    owners: ["Hussain Bohra", "Arif Amar"],
-    captain: "Mustafa Lohawala",
-    viceCaptain: "Ali Hussain Lacchawala",
-    retainedPlayer: "Arif Amar",
+    
+  id: "gc",
+  name: "Global Challengers",
+  displayName: "Challengers",
+  short: "GC",
+  owners: ["Arif Amar"],
+  captain: "Murtaza Nathdwara",
+  viceCaptain: "Ali Hussain Lacchawala",
+  retainedPlayer: "Arif Amar",
     logo: "/logos/teams/gc.png",
     color: "#0891b2",
     color2: "#164e63",
@@ -303,41 +304,7 @@ export type Player = {
   status?: "available" | "live" | "sold" | "unsold";
 };
 
-const firstNames = ["Aarav","Rohan","Yash","Siddharth","Karan","Ishaan","Manav","Kabir","Vivaan","Arjun","Dev","Aryan","Krish","Reyansh","Vihaan","Sai","Pranav","Aniket","Harsh","Ritvik","Tanish","Om","Atharv","Veer","Rudra","Shaurya","Ayaan","Naman","Parth","Raghav"];
-const lastNames = ["Mehta","Iyer","Khanna","Rao","Bhatt","Patel","Reddy","Singh","Sharma","Kapoor","Joshi","Verma","Nair","Aggarwal","Malhotra","Desai","Shah","Pillai","Gupta","Chopra"];
-const roles: Player["role"][] = ["Batsman","Bowler","All-Rounder","Wicket Keeper"];
-const battingStyles = ["Right-hand bat","Left-hand bat"];
-const bowlingStyles = ["Right-arm fast","Right-arm medium","Left-arm spin","Right-arm offspin","Left-arm fast","—"];
-
-function seeded(i: number) { return ((i * 9301 + 49297) % 233280) / 233280; }
-
-export const players: Player[] = Array.from({ length: 36 }, (_, i) => {
-  const fn = firstNames[i % firstNames.length];
-  const ln = lastNames[(i * 3) % lastNames.length];
-  const role = roles[i % roles.length];
-  const sold = i % 4 !== 0;
-  const team = sold ? teams[i % teams.length].id : undefined;
-  const base = [200000, 300000, 500000, 750000, 1000000][i % 5];
-  return {
-    id: "p" + (i + 1),
-    name: `${fn} ${ln}`,
-    age: 19 + Math.floor(seeded(i + 1) * 16),
-    role,
-    basePrice: base,
-    soldPrice: sold ? Math.floor(base * (1 + seeded(i + 7) * 3.5)) : undefined,
-    teamId: team,
-    batting: battingStyles[i % 2],
-    bowling: role === "Batsman" || role === "Wicket Keeper" ? "—" : bowlingStyles[i % bowlingStyles.length],
-    stats: {
-      matches: 12 + Math.floor(seeded(i + 11) * 60),
-      runs: role === "Bowler" ? Math.floor(seeded(i + 2) * 400) : Math.floor(300 + seeded(i + 4) * 1800),
-      wickets: role === "Batsman" || role === "Wicket Keeper" ? 0 : Math.floor(5 + seeded(i + 5) * 70),
-      avg: +(18 + seeded(i + 6) * 30).toFixed(1),
-      sr: +(110 + seeded(i + 8) * 70).toFixed(1),
-    },
-    initials: fn[0] + ln[0],
-  };
-});
+export { players } from "./data/players";
 
 export const fixtures = [];
 

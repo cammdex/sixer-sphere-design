@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import players from "../data/players.auction.ready.json" assert { type: "json" };
+import players from "../public/data/players.auction.ready.json" with { type: "json" };
 
 const firebaseConfig = {
   apiKey: "AIzaSyBiZuKpXAz7i2vKayttV2HESREtyYG5hu0",

@@ -19,9 +19,9 @@ import {
   useLivePlayers,
   useLiveTeams,
   useAuctionState,
+  startLiveTransition,
   pushPlayerLive,
-  updateLiveBid,
-  changeLeadingTeam,
+  placeBid,
   markSold,
   markUnsold,
   clearLiveAuction,
@@ -200,12 +200,10 @@ toast.success("Tournament reset successfully!");
   const { state } = useAuctionState();
 
   const [q, setQ] = useState("");
-  const [bidInput, setBidInput] = useState("");
   const [teamInput, setTeamInput] = useState("");
   const [showUtilities, setShowUtilities] = useState(false);
   const [pendingPlayer, setPendingPlayer] = useState<any>(null);
 const [showPushDialog, setShowPushDialog] = useState(false);
-const [updatingBid, setUpdatingBid] = useState(false);
 
   const availablePlayers = useMemo(
   () =>
@@ -362,6 +360,7 @@ const unsoldPlayers = useMemo(
           <span className="text-[11px] font-bold uppercase tracking-widest">
   {{
     idle: "Nothing Live",
+    transition: "LIVE TRANSITION",
     live: "LIVE",
     goingOnce: "GOING ONCE",
     goingTwice: "GOING TWICE",
@@ -385,47 +384,31 @@ const unsoldPlayers = useMemo(
               <div className="mt-3 space-y-3">
 
   <div>
-    <label className="mb-1 block text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
-      Current Bid
-    </label>
+  <label className="mb-1 block text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+    Current Bid
+  </label>
 
-    <input
-      type="number"
-      placeholder="Current bid (₹)"
-      value={bidInput}
-      onChange={(e) => setBidInput(e.target.value)}
-      className="w-full rounded-xl bg-card/60 py-3 px-3 text-sm border border-border outline-none"
-    />
+  <div className="rounded-xl bg-card/60 border border-border px-4 py-3">
+    <div className="text-2xl font-bold">
+      {state.currentBid ? formatINR(state.currentBid) : "—"}
+    </div>
   </div>
+</div>
 
-  <div className="grid grid-cols-4 gap-2">
-  {[200000, 300000, 500000].map((inc) => (
-    <button
-  disabled={updatingBid}
-      key={inc}
-      type="button"
-     onClick={async () => {
-  if (updatingBid) return;
+<div className="rounded-2xl border border-amber-300/30 bg-amber-50/40 px-4 py-4 text-center">
+  <p className="text-[11px] uppercase tracking-[0.25em] text-amber-700">
+    Bidding
+  </p>
 
-  setUpdatingBid(true);
+  <h3 className="mt-2 text-xl font-bold text-amber-900">
+    Click a Team to Place a Bid
+  </h3>
 
-  try {
-    const nextBid = Number(bidInput || 0) + inc;
-
-    await updateLiveBid(nextBid, teamInput);
-
-    setBidInput(String(nextBid));
-  } catch {
-    // updateLiveBid already shows the correct error toast
-  } finally {
-    setUpdatingBid(false);
-  }
-}}
-      className="rounded-xl glass py-2 text-xs font-semibold"
-    >
-      +{formatINR(inc)}
-    </button>
-  ))}
+  <p className="mt-2 text-sm text-amber-800/80">
+    • First click keeps the bid at the player's base price.
+    <br />
+    • Every new team automatically raises the bid.
+  </p>
 </div>
 
   <div>
@@ -433,7 +416,7 @@ const unsoldPlayers = useMemo(
     Leading Team
   </label>
 
-  <div className="grid grid-cols-4 gap-2">
+  <div className="grid grid-cols-2 gap-3">
 
     {teams.map((team) => (
       <button
@@ -443,9 +426,9 @@ const unsoldPlayers = useMemo(
   setTeamInput(team.id);
 
   try {
-    await changeLeadingTeam(team.id);
+    await placeBid(team.id);
   } catch {
-    toast.error("Failed to change leading team.");
+    toast.error("Failed to place bid.");
   }
 }}
         className={`rounded-xl p-2 transition-all ${
@@ -454,20 +437,11 @@ const unsoldPlayers = useMemo(
             : "border border-border glass"
         }`}
       >
-        <div className="flex flex-col items-center gap-1">
-
-          <TeamCrest
-            short={team.short}
-            color={team.color}
-            color2={team.color2}
-            size={38}
-          />
-
-          <span className="text-[8px] font-medium leading-tight text-center">
-            {team.displayName}
-          </span>
-
-        </div>
+        <div className="text-center">
+  <span className="text-sm font-semibold">
+    {team.displayName}
+  </span>
+</div>
       </button>
     ))}
 
@@ -484,12 +458,11 @@ const unsoldPlayers = useMemo(
   !currentPlayer
 }
   onClick={async () => {
-    const price = Number(bidInput);
+    const price = state.currentBid;
 
-    if (!price) {
-      return toast.error("Invalid bid");
-    }
-
+if (!price) {
+  return toast.error("No current bid");
+}
     if (!teamInput) {
       return toast.error("Select the winning team");
     }
@@ -504,7 +477,7 @@ if (!sold) {
   return;
 }
 
-
+await clearLiveAuction();
 
 toast.success(
   `${currentPlayer.name} sold to ${
@@ -512,15 +485,13 @@ toast.success(
   }`
 );
 
-setBidInput("");
 setTeamInput("");
 setQ("");
   }}
                   className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 text-xs font-semibold text-white transition-all ${
   state.status !== "goingTwice" ||
   !teamInput ||
-  !bidInput ||
-  Number(bidInput) <= 0
+  !state.currentBid
     ? "bg-muted cursor-not-allowed opacity-50"
     : "gradient-royal"
 }`}
@@ -530,13 +501,21 @@ setQ("");
                 <button
   disabled={state.status !== "goingTwice"}
   onClick={async () => {
-    await markUnsold(currentPlayer.id);
+    console.log("Before markUnsold", state);
 
-    toast.success(`${currentPlayer.name} marked unsold`);
+await markUnsold(currentPlayer.id);
 
-    setBidInput("");
-    setTeamInput("");
-    setQ("");
+console.log("After markUnsold");
+
+await clearLiveAuction();
+
+console.log("After clearLiveAuction");
+
+toast.success(`${currentPlayer.name} marked unsold`);
+
+
+setTeamInput("");
+setQ("");
   }}
   className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 text-xs font-semibold ${
     state.status === "goingTwice"
@@ -555,7 +534,6 @@ setQ("");
 
   await clearLiveAuction();
 
-  setBidInput("");
   setTeamInput("");
   setQ("");
 
@@ -748,15 +726,26 @@ toast.success("Auction reset");
     autoFocus
     onClick={async () => {
       try {
-        await pushPlayerLive(
-          pendingPlayer.id,
-          pendingPlayer.basePrice
-        );
+        // Start the broadcast transition
+await startLiveTransition(
+  pendingPlayer.id,
+  pendingPlayer.basePrice
+);
 
-        setBidInput(String(pendingPlayer.basePrice));
-        setTeamInput("");
+// Wait for the broadcast sting
+await new Promise((resolve) =>
+  setTimeout(resolve, 1800)
+);
 
-        toast.success(`${pendingPlayer.name} is now live`);
+// Now actually push the player live
+await pushPlayerLive(
+  pendingPlayer.id,
+  pendingPlayer.basePrice
+);
+
+setTeamInput("");
+
+toast.success(`${pendingPlayer.name} is now live`);
 
         setPendingPlayer(null);
         setShowPushDialog(false);

@@ -60,45 +60,38 @@ const statusDot = {
 </div>
 
     {/* Player */}
-    {/* Player */}
-<div className="relative flex flex-col items-center px-8 pt-10">
-    <div className="absolute top-20 h-72 w-72 rounded-full bg-amber-400/10 blur-3xl" />
+    {/* Player Card */}
 
-  <div className="relative z-10 flex h-48 w-48 lg:h-56 lg:w-56 items-center justify-center overflow-hidden rounded-full border-4 border-amber-400 bg-zinc-800 shadow-[0_0_35px_rgba(251,191,36,0.35)]">
+<div className="flex justify-center px-8 pt-8">
 
-    {currentPlayer?.photo ? (
-      <img
-        src={currentPlayer.photo}
-        alt={currentPlayer.name}
-        className="h-full w-full object-cover"
-      />
-    ) : (
-      <span className="text-5xl font-black text-amber-300">
-        {currentPlayer?.initials ?? "?"}
-      </span>
-    )}
+  {currentPlayer?.playerNumber ? (
 
-  </div>
+    <img
+      src={`/player-cards/${currentPlayer.playerNumber}.png`}
+      alt={currentPlayer.name}
+      className="
+        w-full
+        max-w-[950px]
+        object-contain
+        select-none
+        drop-shadow-[0_20px_35px_rgba(0,0,0,.22)]
+        transition-all
+        duration-700
+      "
+    />
 
-  <p className="mt-6 text-4xl font-black text-amber-300">
-    {currentPlayer?.playerNumber ?? "P--"}
-  </p>
+  ) : (
 
-  <h1 className="mt-3 text-4xl font-extrabold uppercase tracking-wide text-white">
-    {currentPlayer?.name ?? "Next Player Awaiting"}
-  </h1>
+    <div className="py-24 text-center text-zinc-400">
 
-  <p className="mt-2 rounded-full bg-white/5 px-4 py-1 text-sm font-semibold uppercase tracking-widest text-zinc-300">
-    {currentPlayer?.role ?? "Awaiting Player"}
-  </p>
+      Waiting for Player...
 
-<p className="mt-2 text-sm text-zinc-400">
-  Base Price ₹{(currentPlayer?.basePrice ?? 0).toLocaleString("en-IN")}
-</p>
+    </div>
+
+  )}
 
 </div>
 
-    {/* Bid */}
    {/* Bid */}
 <div className="mt-10 border-y border-amber-400/10 py-12 text-center">
 

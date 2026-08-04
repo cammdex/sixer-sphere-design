@@ -63,7 +63,7 @@ const stats = [
 export function TournamentOverview() {
   return (
     <PremiumCard
-  className="space-y-8 p-8"
+  className="space-y-5 p-5"
   decorative
 >
         <SectionHeader
@@ -71,7 +71,7 @@ export function TournamentOverview() {
   title={`${tournament.shortName} ${tournament.season}`}
 /> 
 
-<div className="grid grid-cols-2 gap-5">
+<div className="grid grid-cols-2 gap-3">
   {stats.map((item) => (
     <StatCard
       key={item.title}

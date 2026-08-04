@@ -2,7 +2,6 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import {
   Home,
   Users,
-  Trophy,
   Handshake,
   ShieldCheck,
 } from "lucide-react";
@@ -16,8 +15,7 @@ const tabs: {
 }[] = [
   { to: "/", label: "Home", icon: Home, exact: true },
   { to: "/players", label: "Players", icon: Users },
-  { to: "/tournament", label: "Tournament", icon: Trophy },
-  { to: "/sponsors", label: "Sponsors", icon: Handshake },
+  { to: "/sponsors", label: "Business", icon: Handshake },
 ];
 
 export function MobileBottomNav() {

@@ -1,0 +1,42 @@
+/**
+ * UBL Broadcast Timing Configuration
+ * Final Version
+ */
+
+export const BROADCAST_TIMINGS = {
+  INTRO: 4000,
+
+  TEAM: 6000,
+
+  PLAYER: 3000,
+
+  SPONSOR: 5000,
+
+  AUCTION_SOON: 4000,
+
+  AUCTION_START: 2500,
+
+  FADE_IN: 0.45,
+
+  FADE_OUT: 0.30,
+
+  CONTENT_STAGGER: 0.18,
+
+  LOGO_REVEAL: 0.60,
+
+  CARD_REVEAL: 0.55,
+
+  GOLD_SWEEP: 1.20,
+
+  BREATHING: 4,
+
+  PARTICLES: 12,
+
+  LIGHT_SWEEP: 8,
+
+  WHOOSH_DELAY: 100,
+
+  AUCTION_STING_DELAY: 250,
+
+  SOLD_DELAY: 150,
+} as const;

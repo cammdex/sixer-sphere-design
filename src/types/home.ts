@@ -21,9 +21,12 @@ export interface LeadSponsor {
 
 export interface PoweredBySponsor {
   id: string;
-  role: "Powered By" | "Co-Powered By";
+  role: string;
   name: string;
   logoUrl: string;
+  tagline: string;
+  description: string;
+  websiteUrl: string;
 }
 
 // ---------- Section 4: Meet the Owners ----------

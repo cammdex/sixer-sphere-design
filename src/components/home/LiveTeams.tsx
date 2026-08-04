@@ -6,7 +6,7 @@ import { useLiveTeams } from "@/lib/auction-store";
 
 export function LiveTeams() {
   const { teams } = useLiveTeams();
-  const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
+  const [selectedTeam, setSelectedTeam] = useState<any>(null);
 
   return (
   <>
@@ -28,7 +28,7 @@ export function LiveTeams() {
 
   <div className="mt-3 flex items-center gap-3">
     <div className="h-px flex-1 bg-gradient-to-r from-transparent via-yellow-700/40 to-transparent" />
-    <span className="text-xs text-yellow-700">✦</span>
+    <span className="">✦</span>
     <div className="h-px flex-1 bg-gradient-to-r from-transparent via-yellow-700/40 to-transparent" />
   </div>
 </div>
@@ -41,7 +41,7 @@ export function LiveTeams() {
           return (
             <div
               key={team.id}
-              onClick={() => setSelectedTeamId(team.id)}
+              onClick={() => setSelectedTeam(team)}
               className="auction-card relative cursor-pointer overflow-hidden rounded-[34px] p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
             >
               <div className="flex items-center gap-3">
@@ -139,9 +139,12 @@ export function LiveTeams() {
         </section>
 
     <TeamDetails
-      teamId={selectedTeamId}
-      onClose={() => setSelectedTeamId(null)}
-    />
+  open={!!selectedTeam}
+  team={selectedTeam}
+  players={[]}
+  onClose={() => setSelectedTeam(null)}
+  onPlayerClick={() => {}}
+/>
   </>
 );
 }

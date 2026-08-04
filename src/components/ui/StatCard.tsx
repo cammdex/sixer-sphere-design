@@ -17,21 +17,21 @@ export function StatCard({
 }: StatCardProps) {
   return (
     <div
-      className="rounded-3xl p-6 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-2xl"
+      className="rounded-2xl p-4 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl"
       style={{
         background: "#fffdf8",
         border: "1px solid rgba(190,150,90,.18)",
-        boxShadow: "0 10px 22px rgba(90,60,25,.10)",
+        boxShadow: "0 8px 18px rgba(90,60,25,.08)",
       }}
     >
       <div
-        className="flex h-14 w-14 items-center justify-center rounded-2xl shadow-lg"
+        className="flex h-11 w-11 items-center justify-center rounded-xl"
         style={{
           background,
         }}
       >
         <Icon
-          size={28}
+          size={22}
           style={{
             color,
           }}
@@ -39,7 +39,7 @@ export function StatCard({
       </div>
 
       <div
-        className="mt-6 text-4xl font-black tracking-tight"
+        className="mt-4 text-2xl font-black leading-tight"
         style={{
           color: "#4d3622",
         }}
@@ -48,7 +48,7 @@ export function StatCard({
       </div>
 
       <div
-        className="mt-3 text-sm font-semibold uppercase tracking-[0.18em]"
+        className="mt-1 text-xs font-semibold uppercase tracking-[0.15em]"
         style={{
           color: "#75614b",
         }}

@@ -56,7 +56,7 @@ export function TeamCrest({
   color2: string;
   size?: number;
 }) {
-  const logo = `/logos/teams/${short.toLowerCase()}.png`;
+  const logoPath = `/logos/teams/${short.toLowerCase()}.png`;
   const [imageError, setImageError] = useState(false);
 
   return (
@@ -78,7 +78,7 @@ export function TeamCrest({
       </div>
     ) : (
       <img
-        src={logo}
+        src={logoPath}
         alt={short}
         className="h-full w-full object-contain"
         onError={() => setImageError(true)}

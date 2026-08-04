@@ -6,6 +6,13 @@ import { formatINR } from "@/lib/gpl-data";
 import { useLivePlayers, useLiveTeams, type LivePlayer, type LiveTeam } from "@/lib/auction-store";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import TeamDetails from "@/components/team-details";
+function getPlayerPhoto(playerNumber?: string) {
+  if (!playerNumber) {
+    return undefined;
+  }
+
+  return `/player-photos/${playerNumber}.jpeg`;
+}
 
 export const Route = createFileRoute("/players")({
   head: () => ({ meta: [
@@ -214,22 +221,70 @@ function PlayersCatalog({ players, teams }: { players: LivePlayer[]; teams: Live
   const teamById = (id?: string) => teams.find((t) => t.id === id);
 
   const filtered = useMemo(() => {
-    return players.filter((p) => {
-      if (q && !p.name.toLowerCase().includes(q.toLowerCase())) return false;
+  return [...players]
+    .filter((p) => {
+      if (
+        q &&
+        !(
+          p.name.toLowerCase().includes(q.toLowerCase()) ||
+          p.playerNumber?.toLowerCase().includes(q.toLowerCase())
+        )
+      )
+        return false;
+
       if (role !== "All" && p.role !== role) return false;
       if (teamFilter !== "All" && p.teamId !== teamFilter) return false;
+
       return true;
+    })
+    .sort((a, b) => {
+      const numA = Number(a.playerNumber?.replace("P", "")) || 0;
+      const numB = Number(b.playerNumber?.replace("P", "")) || 0;
+
+      return numA - numB;
     });
-  }, [players, q, role, teamFilter]);
+}, [players, q, role, teamFilter]);
 
   return (
-    <div className="mt-3">
-      <div className="relative">
+  <div className="mt-3">
+
+    <div className="mb-6 text-center">
+
+      <p
+        className="text-[11px] uppercase tracking-[0.45em]"
+        style={{
+          color: "#A07A4B",
+        }}
+      >
+        PLAYER CATALOGUE
+      </p>
+
+      <h2
+        className="mt-2 font-display text-4xl font-black"
+        style={{
+          color: "#4B3120",
+        }}
+      >
+        Registered Players
+      </h2>
+
+      <p
+        className="mt-2 text-sm"
+        style={{
+          color: "#86684B",
+        }}
+      >
+        Browse every registered player available for the auction.
+      </p>
+
+    </div>
+
+    <div className="relative">
         <Search className="absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-[#C79A35] transition-colors duration-300" />
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Search by player name..."
+          placeholder="Search Player Number or Name..."
           className="glass w-full rounded-full border border-white/25 bg-white/35 py-3.5 pl-14 pr-12 text-sm font-medium text-slate-800 shadow-xl backdrop-blur-xl outline-none transition-all duration-300 placeholder:text-slate-400 focus:border-[#D5A44A]/40 focus:bg-white/45 focus:ring-4 focus:ring-[#D5A44A]/15"
         />
         {q && (
@@ -246,7 +301,17 @@ function PlayersCatalog({ players, teams }: { players: LivePlayer[]; teams: Live
             onClick={() => setRole(r)}
             className={`shrink-0 rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 ${role === r ? "gradient-gold text-gold-foreground shadow-glow-gold" : "glass text-muted-foreground"}`}
           >
-            {r}
+            {
+  r === "All"
+    ? "ALL"
+    : r === "Batsman"
+    ? "BAT"
+    : r === "Bowler"
+    ? "BOWL"
+    : r === "All-Rounder"
+    ? "AR"
+    : "WK"
+}
           </button>
         ))}
       </div>
@@ -268,7 +333,7 @@ function PlayersCatalog({ players, teams }: { players: LivePlayer[]; teams: Live
         ))}
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-3">
+      <div className="mt-6 grid grid-cols-2 gap-6">
         {filtered.map((p) => {
           const team = teamById(p.teamId);
           return (
@@ -276,7 +341,7 @@ function PlayersCatalog({ players, teams }: { players: LivePlayer[]; teams: Live
   key={p.id}
   aria-label={`View ${p.name}`}
   onClick={() => setActive(p)}
-  className="group relative overflow-hidden rounded-[32px] p-6 text-left transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl active:scale-[0.98]"
+  className="group relative overflow-hidden rounded-[34px] p-7 text-left transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl active:scale-[0.98]"
   style={{
     background: "linear-gradient(180deg,#fffdf9,#f7efe2)",
     border: "1px solid rgba(190,150,90,.20)",
@@ -291,17 +356,27 @@ function PlayersCatalog({ players, teams }: { players: LivePlayer[]; teams: Live
 />
 
 <div className="relative">
-  <div className="flex items-start justify-between">
-                {p.imageUrl ? (
-                  <img
+  <div className="flex items-start justify-between items-center">
+                <img
   loading="lazy"
-  src={p.imageUrl}
-  alt={`${p.name} profile`}
-                  className="h-[72px] w-[72px] rounded-2xl object-cover shadow-lg transition-transform duration-300 group-hover:scale-105"
-                  />
-                ) : (
-                  <Avatar initials={p.initials} color={team?.color ?? "#3b82f6"} color2={team?.color2 ?? "#1e3a8a"} size={72} />
-                )}
+  src={getPlayerPhoto(p.playerNumber)}
+  alt={p.name}
+  className="h-[104px] w-[104px] rounded-full object-cover border-2 border-white shadow-lg transition-transform duration-300 group-hover:scale-105"
+  onError={(e) => {
+    e.currentTarget.style.display = "none";
+    const next = e.currentTarget.nextElementSibling as HTMLElement | null;
+    if (next) next.style.display = "flex";
+  }}
+/>
+
+<div style={{ display: "none" }}>
+  <Avatar
+    initials={p.initials}
+    color={team?.color ?? "#3b82f6"}
+    color2={team?.color2 ?? "#1e3a8a"}
+    size={104}
+  />
+</div>
                 {p.status === "sold" ? (
   <span className="rounded-full bg-emerald-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-emerald-800">
     SOLD
@@ -316,17 +391,21 @@ function PlayersCatalog({ players, teams }: { players: LivePlayer[]; teams: Live
   </span>
 )}
               </div>
-              <h3 className="mt-4 line-clamp-2 font-display text-xl font-black leading-tight tracking-tight text-slate-900">{p.name}</h3>
-              <div className="mt-2 text-xs font-bold uppercase tracking-[0.28em] text-[#B68B42]">{p.role} · {p.age}yrs</div>
+              <div className="mt-4 h-[78px]">
+  <h3 className="line-clamp-2 text-center font-display text-[2rem] font-black leading-tight tracking-tight text-slate-900">{p.name}</h3>
+</div>
+<div className="mt-1 text-center text-[11px] font-black uppercase tracking-[0.24em] text-[#B68B42]">
+  {p.playerNumber} • {p.role} • {p.age} YEARS
+</div>
               
               
-              <div className="mt-6 grid grid-cols-[1fr_auto] gap-4 border-t border-[#E7D8BE] pt-5">
+              <div className="mt-5 grid grid-cols-[1fr_auto] gap-4 border-t border-[#E7D8BE] pt-5">
 
   <div className="grid grid-cols-2 gap-3">
 
     <div className="rounded-2xl bg-white/60 border border-[#E8D9BF] p-3">
       <div className="text-[9px] font-black uppercase tracking-[0.22em] text-gray-500">
-        Base
+        Base Price
       </div>
 
       <div className="mt-2 font-display text-xl font-black tracking-tight text-[#B68B42]">
@@ -336,7 +415,7 @@ function PlayersCatalog({ players, teams }: { players: LivePlayer[]; teams: Live
 
     <div className="rounded-2xl bg-white/60 border border-[#E8D9BF] p-3">
       <div className="text-[9px] font-black uppercase tracking-[0.22em] text-gray-500">
-        Sold
+        Sold Price
       </div>
 
       <div className="mt-2 font-display text-xl font-black tracking-tight text-[#3F8B57]">
@@ -389,14 +468,26 @@ function PlayerSheet({ player, team, onClose }: { player: LivePlayer | null; tea
               <div className="absolute inset-x-0 top-0 h-64 opacity-55 blur-[120px]"
                 style={{ background: `linear-gradient(180deg, ${team?.color ?? "#3b82f6"}, transparent)` }} />
               <div className="relative flex items-center gap-3">
-                {player.imageUrl ? (
-                  <img
+                <img
   loading="lazy"
-  src={player.imageUrl}
-  alt={`${player.name} profile`} className="h-[92px] w-[92px] rounded-[28px] object-cover shadow-2xl"/>
-                ) : (
-                  <Avatar initials={player.initials} color={team?.color ?? "#3b82f6"} color2={team?.color2 ?? "#1e3a8a"} size={92} />
-                )}
+  src={getPlayerPhoto(player.playerNumber)}
+  alt={player.name}
+  className="h-[92px] w-[92px] rounded-full object-cover border-2 border-white shadow-2xl"
+  onError={(e) => {
+    e.currentTarget.style.display = "none";
+    const next = e.currentTarget.nextElementSibling as HTMLElement | null;
+    if (next) next.style.display = "flex";
+  }}
+/>
+
+<div style={{ display: "none" }}>
+  <Avatar
+    initials={player.initials}
+    color={team?.color ?? "#3b82f6"}
+    color2={team?.color2 ?? "#1e3a8a"}
+    size={92}
+  />
+</div>
                 <div className="min-w-0 flex-1">
                   <h3 className="font-display text-3xl font-black tracking-tight leading-none">{player.name}</h3>
                   <div className="mt-3 inline-flex w-fit rounded-full bg-gold/15 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.22em] text-gold border border-gold/20">{player.role}</div>

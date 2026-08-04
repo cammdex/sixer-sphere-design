@@ -10,6 +10,7 @@ import {
   getDoc,
   query,
   orderBy,
+  Timestamp,
   limit,
 } from "firebase/firestore";
 import { toast } from "sonner";
@@ -64,12 +65,13 @@ currentBid: number | null;
   biddingTeamId: string | null;
 
   status:
-    | "idle"
-    | "live"
-    | "goingOnce"
-    | "goingTwice"
-    | "sold"
-    | "unsold";
+  | "idle"
+  | "transition"
+  | "live"
+  | "goingOnce"
+  | "goingTwice"
+  | "sold"
+  | "unsold";
 
   round: 1 | 2;
 
@@ -143,7 +145,7 @@ export type AuctionEvent = {
   id: string;
   message: string;
   badge?: "LIVE" | "SOLD" | "MATCH" | "RESULT";
-  timestamp?: unknown;
+  timestamp?: Timestamp;
 };
 
 export function useAuctionEvents() {
@@ -200,6 +202,29 @@ async function addEvent(
     message,
     badge: badge ?? null,
     timestamp: serverTimestamp(),
+  });
+}
+
+export async function startLiveTransition(
+  playerId: string,
+  startingBid: number
+) {
+  if (startingBid <= 0) {
+    throw new Error("Starting bid must be greater than zero.");
+  }
+
+  await setDoc(doc(db, AUCTION_DOC), {
+    playerId,
+    previousBid: null,
+    currentBid: startingBid,
+    biddingTeamId: null,
+
+    // NEW STATE
+    status: "transition",
+
+    round: 1,
+    eventMessage: "",
+    updatedAt: serverTimestamp(),
   });
 }
 
@@ -297,6 +322,73 @@ export async function changeLeadingTeam(
     biddingTeamId,
     updatedAt: serverTimestamp(),
   });
+}
+
+function getBidIncrement(currentBid: number) {
+  if (currentBid < 2000000) {
+    return 200000;
+  }
+
+  if (currentBid < 3500000) {
+    return 300000;
+  }
+
+  return 500000;
+}
+
+export async function placeBid(teamId: string) {
+  const auctionRef = doc(db, AUCTION_DOC);
+
+  const auctionSnap = await getDoc(auctionRef);
+
+  if (!auctionSnap.exists()) return;
+
+  const auction = auctionSnap.data() as AuctionState;
+
+  if (!auction.playerId) return;
+
+  const teamSnap = await getDoc(
+    doc(db, TEAMS_COLLECTION, teamId)
+  );
+
+  if (!teamSnap.exists()) return;
+
+  const team = teamSnap.data() as LiveTeam;
+
+  if (teamId === auction.biddingTeamId) {
+    return;
+  }
+
+  let nextBid = auction.currentBid ?? 0;
+
+  const firstBid = auction.biddingTeamId === null;
+
+  if (!firstBid) {
+    nextBid += getBidIncrement(nextBid);
+  }
+
+  if (nextBid > (team.maxBid ?? Infinity)) {
+    toast.error("Bid exceeds team's maximum bid.");
+    return;
+  }
+
+  await updateDoc(auctionRef, {
+    previousBid: auction.currentBid,
+    currentBid: nextBid,
+    biddingTeamId: teamId,
+
+    status:
+      auction.status === "goingOnce" ||
+      auction.status === "goingTwice"
+        ? "live"
+        : auction.status,
+
+    updatedAt: serverTimestamp(),
+  });
+
+  await addEvent(
+    `${team.name} bid ₹${nextBid.toLocaleString("en-IN")}`
+  );
 }
 
 export async function markSold(
@@ -413,22 +505,33 @@ await addEvent(
 }
 
 export async function markUnsold(playerId: string) {
+  console.log("markUnsold start");
+
   await updateDoc(doc(db, PLAYERS_COLLECTION, playerId), {
     status: "unsold",
   });
+
+  console.log("player updated");
+
   await updateDoc(doc(db, AUCTION_DOC), {
     status: "unsold",
     eventMessage: "Player Unsold",
     updatedAt: serverTimestamp(),
-});
+  });
 
-const playerSnap = await getDoc(doc(db, PLAYERS_COLLECTION, playerId));
+  console.log("auction updated");
 
-const player = playerSnap.data();
+  const playerSnap = await getDoc(doc(db, PLAYERS_COLLECTION, playerId));
 
-await addEvent(
-  `${player?.playerNumber ?? ""} ${player?.name ?? "Player"} remained unsold`
-);
+  console.log("player fetched");
+
+  const player = playerSnap.data();
+
+  await addEvent(
+    `${player?.playerNumber ?? ""} ${player?.name ?? "Player"} remained unsold`
+  );
+
+  console.log("event added");
 }
 
 export async function clearLiveAuction() {

@@ -85,7 +85,7 @@ Official Lead Sponsor
             <img
               src={logo}
               alt={name}
-              className="h-20 w-20 shrink-0 rounded-3xl object-cover shadow-xl"
+              className="h-30 w-30 shrink-0 rounded-3xl object-contain bg-white p-2 shadow-xl"
             />
           ) : (
           <div
@@ -103,7 +103,7 @@ Official Lead Sponsor
           )}
           <div className="min-w-0">
             <h3
-  className="font-display text-3xl font-extrabold leading-tight"
+  className="font-display text-3xl md:text-4xl font-black leading-tight"
   style={{
     color: "#4c3624",
     letterSpacing: "-0.02em",
@@ -126,7 +126,7 @@ Official Lead Sponsor
 
         {description && (
     <p
-  className="mt-5 text-[15px] leading-8"
+  className="mt-6 text-[15px] leading-8"
   style={{
     color: "#65523e",
   }}
@@ -138,13 +138,15 @@ Official Lead Sponsor
   href={website}
   target="_blank"
   rel="noopener noreferrer"
-  className="mt-6 inline-flex items-center gap-2 transition-all hover:translate-x-1"
+  className="mt-6 inline-flex items-center gap-2 rounded-2xl px-5 py-3 transition-all duration-300 hover:-translate-y-0.5"
   style={{
-    color: "#a16f34",
-    fontWeight: 700,
-  }}
+  background: "linear-gradient(180deg,#c59a5d,#a97b40)",
+  color: "#fff",
+  boxShadow: "0 8px 20px rgba(120,82,30,.22)",
+  fontWeight: 700,
+}}
 >
-  Visit Sponsor
+  Visit Website
 
   <ExternalLink size={16} />
 </a>

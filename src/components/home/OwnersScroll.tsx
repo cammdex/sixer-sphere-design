@@ -49,6 +49,7 @@ function OwnerCard({ photoUrl, name, companyName, teamName, teamShort, teamLogoU
         {tagline && (
           <p className="mt-2.5 text-[11px] italic leading-snug text-muted-foreground">"{tagline}"</p>
         )}
+        
       </div>
     </article>
   );
