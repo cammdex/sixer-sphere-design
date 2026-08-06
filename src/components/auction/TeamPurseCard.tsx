@@ -19,7 +19,7 @@ export function TeamPurseCard({
 
   return (
     <div
-      className="min-w-[210px] h-[260px] rounded-[20px] overflow-hidden transition-all duration-300"
+      className="min-w-[165px] md:min-w-[210px] h-[220px] md:h-[260px] rounded-[18px] md:rounded-[20px] overflow-hidden transition-all duration-300 snap-start"
       style={{
         background: "#f7efdd",
         border: active
@@ -32,7 +32,7 @@ export function TeamPurseCard({
       }}
     >
       <div
-        className="h-full p-4"
+        className="h-full p-3 md:p-4"
         style={{
           backgroundImage:
             "url('/images/live-player-card/background.jpg')",
@@ -47,7 +47,7 @@ export function TeamPurseCard({
             <img
               src={team.logo}
               alt={team.name}
-              className="h-12 w-12 object-contain"
+              className="h-10 w-10 md:h-12 md:w-12 object-contain"
             />
           ) : (
             <div
@@ -71,16 +71,19 @@ export function TeamPurseCard({
 
         <h2
   className="
-    mt-3
-    h-[56px]
+    mt-2
+    h-[44px]
+    md:h-[56px]
     flex
     items-center
     justify-center
     text-center
-    text-xl
+    text-base
+    md:text-xl
     font-black
     leading-tight
   "
+  
   style={{
     color: "#4b3120",
   }}
@@ -102,7 +105,7 @@ export function TeamPurseCard({
           </p>
 
           <h3
-            className="mt-1 font-display text-[30px] font-black"
+            className="mt-1 font-display text-[22px] md:text-[30px] font-black"
             style={{
               color: "#c38c3c",
             }}
@@ -114,7 +117,7 @@ export function TeamPurseCard({
 
         {/* Squad */}
 
-        <div className="mt-4">
+        <div className="mt-3">
 
           <div className="mb-2 flex justify-between">
 
@@ -160,7 +163,7 @@ export function TeamPurseCard({
 
         {active && (
           <div
-            className="mt-4 flex items-center justify-center gap-2 rounded-full py-2"
+            className="mt-3 flex items-center justify-center gap-2 rounded-full py-1.5"
             style={{
               background:
                 "rgba(220,38,38,.08)",

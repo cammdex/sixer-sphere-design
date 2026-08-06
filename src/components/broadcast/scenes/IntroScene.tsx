@@ -13,7 +13,7 @@ export function IntroScene() {
     >
       {/* Header */}
 
-      <div className="mb-12 flex flex-col items-center">
+      <div className="mb-6 md:mb-12 flex flex-col items-center px-4">
         <div className="mb-2 h-px w-52 bg-gradient-to-r from-transparent via-[#C79A35] to-transparent" />
 
         <p
@@ -50,34 +50,42 @@ export function IntroScene() {
         src="/logos/ubl-logo.png"
         alt="UBL"
         className="
-          h-48
-          w-48
-          object-contain
-          drop-shadow-[0_18px_30px_rgba(0,0,0,.22)]
-        "
+  h-32
+  w-32
+  md:h-48
+  md:w-48
+  object-contain
+  drop-shadow-[0_18px_30px_rgba(0,0,0,.22)]
+"
       />
 
       {/* Title */}
 
       <h1
         className="
-          mt-8
-          text-6xl
-          font-black
-          tracking-[-0.04em]
-          text-[#3B2817]
-        "
+  mt-6
+  text-3xl
+  md:text-6xl
+  font-black
+  tracking-[-0.04em]
+  text-[#3B2817]
+  text-center
+  px-4
+"
       >
         UDAIPUR BOHRA LEAGUE
       </h1>
 
       <p
         className="
-          mt-4
-          text-xl
-          font-medium
-          text-[#7A5532]
-        "
+  mt-3
+  text-base
+  md:text-lg md:text-xl
+  font-medium
+  text-[#7A5532]
+  text-center
+  px-4
+"
       >
         Season 2 • Official Player Auction
       </p>

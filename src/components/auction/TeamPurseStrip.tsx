@@ -6,7 +6,7 @@ export function TeamPurseStrip() {
   const { state } = useAuctionState();
 
   return (
-    <div className="flex gap-4 overflow-x-auto pb-2">
+    <div className="flex gap-3 overflow-x-auto pb-2 px-1 snap-x snap-mandatory no-scrollbar">
       {teams.map((team) => (
         <TeamPurseCard
           key={team.id}

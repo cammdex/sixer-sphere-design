@@ -13,7 +13,7 @@ export function AuctionSoonScene() {
     >
       {/* Header */}
 
-      <div className="mb-12 flex flex-col items-center">
+      <div className="mb-6 md:mb-12 flex flex-col items-center px-4">
         <div className="mb-2 h-px w-52 bg-gradient-to-r from-transparent via-[#C79A35] to-transparent" />
 
         <p
@@ -31,7 +31,7 @@ export function AuctionSoonScene() {
         <h2
           className="
             mt-2
-            text-xl
+            text-lg md:text-xl
             font-bold
             uppercase
             tracking-[0.35em]
@@ -50,8 +50,10 @@ export function AuctionSoonScene() {
         src="/logos/gavel.png"
         alt="Auction Gavel"
         className="
-  h-68
-  w-68
+  h-36
+  w-36
+  md:h-68
+  md:w-68
   object-contain
   drop-shadow-[0_28px_48px_rgba(0,0,0,.28)]
 "
@@ -61,21 +63,25 @@ export function AuctionSoonScene() {
 
       <p
         className="
-          mt-8
-          text-3xl
-          font-bold
-          text-[#3B2817]
-        "
+  mt-6
+  text-xl
+  md:text-3xl
+  font-bold
+  text-[#3B2817]
+  px-4
+"
       >
         Owners are taking their seats
       </p>
 
       <p
-        className="
-          mt-3
-          text-lg
-          text-[#7A5532]
-        "
+       className="
+  mt-3
+  text-sm
+  md:text-lg
+  text-[#7A5532]
+  px-6
+"
       >
         Final preparations are underway before bidding begins.
       </p>

@@ -25,7 +25,7 @@ const handleFabClick = () => {
       {/* Top bar */}
       <MobileHeader title={title} />
 
-      <main className="flex-1 px-4">{children}</main>
+<main className="flex-1 px-3 md:px-4">{children}</main>
 
       {/* FAB */}
       {showFab && (

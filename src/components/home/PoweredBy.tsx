@@ -74,11 +74,11 @@ function PoweredByPrimaryCard({
           </span>
         </div>
 
-        <div className="mt-5 flex items-start gap-5">
+        <div className="mt-5 flex flex-col md:flex-row items-center md:items-start gap-5">
 
           {logoUrl ? (
             <div
-              className="flex h-30 w-30 shrink-0 items-center justify-center rounded-3xl bg-white p-3"
+              className="flex h-24 w-24 md:h-30 md:w-30 shrink-0 items-center justify-center rounded-3xl bg-white p-3"
               style={{
                 boxShadow: "0 10px 22px rgba(70,48,20,.10)",
               }}
@@ -107,10 +107,10 @@ function PoweredByPrimaryCard({
             </div>
           )}
 
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 flex-1 text-center md:text-left">
 
             <h2
-              className="font-display text-3xl font-extrabold leading-tight"
+              className="font-display text-2xl md:text-3xl font-extrabold leading-tight"
               style={{
                 color: "#4c3624",
                 letterSpacing: "-0.02em",
@@ -121,7 +121,7 @@ function PoweredByPrimaryCard({
 
             {tagline && (
               <p
-                className="mt-2 text-sm font-semibold"
+                className="mt-2 text-sm md:text-base font-semibold"
                 style={{
                   color: "#9a6f3c",
                 }}
@@ -132,7 +132,7 @@ function PoweredByPrimaryCard({
 
             {description && (
               <p
-                className="mt-4 text-[15px] leading-8"
+                className="mt-4 text-sm md:text-[15px] leading-7 md:leading-8"
                 style={{
                   color: "#65523e",
                 }}
@@ -146,7 +146,7 @@ function PoweredByPrimaryCard({
                 href={websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center gap-2 transition-all hover:translate-x-1"
+                className="mt-6 inline-flex w-full md:w-auto justify-center items-center gap-2 transition-all hover:translate-x-1"
                 style={{
                   color: "#a16f34",
                   fontWeight: 700,
@@ -283,7 +283,7 @@ export function PoweredBy({
             Co-Powered By
           </div>
 
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 grid-cols-1 md:grid-cols-3">
             {coPoweredBy.map((sponsor) => (
               <CoPoweredByCard
                 key={sponsor.name}

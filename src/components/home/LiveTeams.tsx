@@ -24,7 +24,7 @@ const selectedTeam =
   </div>
 
   <h2
-    className="mt-2 font-display text-4xl md:text-5xl font-black tracking-tight"
+  className="mt-2 font-display text-2xl md:text-5xl font-black tracking-tight"
     style={{ color: "#4c3624" }}
   >
     Live Team Purse
@@ -46,19 +46,19 @@ const selectedTeam =
             <div
               key={team.id}
               onClick={() => setSelectedTeamId(team.id)}
-              className="auction-card relative cursor-pointer overflow-hidden rounded-[34px] p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              className="auction-card relative cursor-pointer overflow-hidden rounded-[28px] md:rounded-[34px] p-5 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-3">
                 <TeamCrest
                   short={team.short}
                   color={team.color}
                   color2={team.color2}
-                  size={56}
+                  size={48}
                 />
 
                 <div className="flex-1">
                   <h3
-  className="font-display text-2xl md:text-3xl font-black tracking-tight"
+  className="font-display text-xl md:text-3xl font-black tracking-tight"
   style={{
     color:"#4c3624"
   }}
@@ -78,7 +78,7 @@ const selectedTeam =
     <div className="h-px flex-1 bg-yellow-700/20" />
   </div>
 
-  <p className="text-4xl font-black tracking-tight">
+  <p className="text-2xl md:text-4xl font-black tracking-tight">
     {formatINR(team.purse ?? 0)}
   </p>
 </div>
@@ -105,7 +105,7 @@ const selectedTeam =
                 />
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-4">
+              <div className="mt-3 grid grid-cols-2 gap-3">
                 <div>
                  <p
   className="text-[10px] uppercase tracking-widest"
@@ -116,7 +116,7 @@ const selectedTeam =
                     Squad
                   </p>
 
-                  <p className="font-display text-2xl font-extrabold">
+                  <p className="font-display text-xl md:text-2xl font-extrabold">
                     {team.playersBought}/{team.squadLimit}
                   </p>
                 </div>
@@ -131,7 +131,7 @@ const selectedTeam =
                     Maximum Available Bid
                   </p>
 
-                  <p className="font-display text-2xl font-extrabold text-gold">
+                  <p className="font-display text-xl md:text-2xl font-extrabold text-gold">
                     {formatINR(Number(team.maxBid ?? 0))}
                   </p>
                 </div>

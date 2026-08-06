@@ -80,12 +80,12 @@ Title Sponsor
 </div>
         
 
-        <div className="mt-4 flex items-start gap-6">
+        <div className="mt-4 flex flex-col md:flex-row items-center md:items-start gap-6">
   {logo ? (
     <img
       src={logo}
       alt={name}
-      className="h-30 w-30 shrink-0 rounded-3xl object-contain bg-white p-2 shadow-xl"
+      className="h-24 w-24 md:h-30 md:w-30 shrink-0 rounded-3xl object-contain bg-white p-2 shadow-xl"
     />
   ) : (
     <div
@@ -102,17 +102,17 @@ Title Sponsor
     </div>
   )}
 
-  <div className="min-w-0 flex-1">
+  <div className="min-w-0 flex-1 text-center md:text-left">
 
     <h3
-      className="font-display text-4xl font-black tracking-tight"
+  className="font-display text-2xl md:text-4xl font-black tracking-tight text-center md:text-left"
       style={{ color: "#4c3624" }}
     >
       {name}
     </h3>
 
     <p
-      className="mt-3 font-display text-4xl md:text-5xl font-black leading-tight tracking-tight"
+  className="mt-3 font-display text-2xl md:text-5xl font-black leading-tight tracking-tight text-center md:text-left"
       style={{
         color: "#b58335",
       }}
@@ -122,7 +122,8 @@ Title Sponsor
 
     {description && (
       <p
-        className="mt-5 text-lg leading-9 font-medium"
+        
+  className="mt-5 text-base md:text-lg leading-7 md:leading-9 font-medium text-center md:text-left"
         style={{
           color: "#65523e",
         }}
@@ -136,7 +137,7 @@ Title Sponsor
         href={website}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-6 inline-flex items-center gap-2 rounded-2xl px-5 py-3 transition-all duration-300 hover:-translate-y-0.5"
+        className="mt-6 inline-flex w-full md:w-auto justify-center items-center gap-2 rounded-2xl px-5 py-3 transition-all duration-300 hover:-translate-y-0.5"
         style={{
           background: "linear-gradient(180deg,#c59a5d,#a97b40)",
           color: "#fff",
