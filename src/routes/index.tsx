@@ -3,7 +3,6 @@ import { MobileLayout } from "@/components/mobile-layout";
 
 import { HeroSection } from "@/components/home/HeroSection";
 import { TournamentOverview } from "@/components/home/TournamentOverview";
-import { SponsorsGrid } from "@/components/home/SponsorsGrid";
 import { LeadSponsor } from "@/components/home/LeadSponsor";
 import { PoweredBy } from "@/components/home/PoweredBy";
 import { APP_PHASE } from "@/lib/app-phase";
@@ -13,7 +12,6 @@ import {
   leadSponsor,
   poweredBySponsors,
 } from "@/lib/home-dummy-data";
-import { EventFeed } from "@/components/home/EventFeed";
 import {LiveTeams} from "@/components/home/LiveTeams";
 import { AuctionProgress } from "@/components/home/AuctionProgress";
 import { useLivePlayers } from "@/lib/auction-store";
@@ -109,21 +107,9 @@ const coPoweredBy = poweredBySponsors.filter(
 />
       </div>
 
-      
-
-      {/* 5. Sponsors grid */}
-      <div className="mt-5">
-        <SponsorsGrid />
-      </div>
-
       {/* 7. Live Teams */}
       <div className="mt-5">
         <LiveTeams />
-      </div>
-
-      {/* 8. Live Event Feed */}
-      <div className="mt-5">
-        <EventFeed />
       </div>
 
       {/* 4. Meet the Owners */}

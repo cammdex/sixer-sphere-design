@@ -2,11 +2,15 @@ import { TeamCrest } from "@/components/mobile-layout";
 import { useState } from "react";
 import  TeamDetails  from "@/components/team-details";
 import { formatINR } from "@/lib/gpl-data";
-import { useLiveTeams } from "@/lib/auction-store";
+import { useLiveTeams, useLivePlayers } from "@/lib/auction-store";
 
 export function LiveTeams() {
   const { teams } = useLiveTeams();
-  const [selectedTeam, setSelectedTeam] = useState<any>(null);
+  const { players } = useLivePlayers();
+const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
+
+const selectedTeam =
+  teams.find((t) => t.id === selectedTeamId) ?? null;
 
   return (
   <>
@@ -41,7 +45,7 @@ export function LiveTeams() {
           return (
             <div
               key={team.id}
-              onClick={() => setSelectedTeam(team)}
+              onClick={() => setSelectedTeamId(team.id)}
               className="auction-card relative cursor-pointer overflow-hidden rounded-[34px] p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
             >
               <div className="flex items-center gap-3">
@@ -141,8 +145,8 @@ export function LiveTeams() {
     <TeamDetails
   open={!!selectedTeam}
   team={selectedTeam}
-  players={[]}
-  onClose={() => setSelectedTeam(null)}
+  players={players}
+ onClose={() => setSelectedTeamId(null)}
   onPlayerClick={() => {}}
 />
   </>

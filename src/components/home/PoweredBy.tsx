@@ -69,7 +69,7 @@ function PoweredByPrimaryCard({
               color: "#9a6f3c",
             }}
           >
-            Official Powered By
+             Powered By
           </span>
         </div>
 

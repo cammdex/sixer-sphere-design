@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { OwnerCard } from "@/components/owners/OwnerCard";
+import { ownerBusinessData } from "@/lib/owner-business-data";
 import { useMemo, useState } from "react";
 import { Search, X, Crown, Phone, ChevronRight } from "lucide-react";
 import { MobileLayout, TeamCrest, Avatar } from "@/components/mobile-layout";
@@ -179,34 +181,35 @@ function TeamsGrid({
 }
 function OwnersList({ teams }: { teams: LiveTeam[] }) {
   const owners = teams.map((t) => ({
-    id: t.id,
-    name: t.owners.join(" & "),
-    team: t.name,
-    initials: t.owners
-  .join(" ")
-  .split(" ")
-  .map((n: string) => n[0])
-  .join(""),
-    color: t.color,
-    color2: t.color2,
-  }));
+  id: t.id,
+
+  owners: t.owners,
+
+  teamName: t.name,
+
+  teamLogo: t.logo ?? "",
+
+  ...(ownerBusinessData[t.id as keyof typeof ownerBusinessData] ?? {
+  businessName: "",
+  businessCategory: "",
+  businessLogo: "",
+  phone: "",
+}),
+}));
 
   return (
     <div className="mt-4 space-y-4">
       {owners.map((o) => (
-        <article key={o.id} className="group flex items-center gap-4 rounded-[30px] glass bohra-border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
-          <div className="transition-transform duration-300 group-hover:scale-105">
-          <Avatar initials={o.initials} color={o.color} color2={o.color2} size={60} />
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-2">
-              <h3 className="truncate font-display text-lg font-black tracking-tight">{o.name}</h3>
-              <span className="rounded-full bg-gold/15 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-gold transition-all duration-300 group-hover:bg-gold/20">Owner</span>
-            </div>
-            <div className="mt-1 truncate text-sm text-muted-foreground">{o.team}</div>
-          </div>
-          <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1" />
-        </article>
+        <OwnerCard
+  key={o.id}
+  owners={o.owners}
+  teamName={o.teamName}
+  teamLogo={o.teamLogo}
+  businessName={o.businessName}
+  businessCategory={o.businessCategory}
+  businessLogo={o.businessLogo}
+  phone={o.phone}
+/>
       ))}
     </div>
   );

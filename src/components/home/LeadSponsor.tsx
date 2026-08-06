@@ -74,7 +74,7 @@ style={{
 color:"#9a6f3c"
 }}
 >
-Official Lead Sponsor
+Title Sponsor
 </span>
 
 </div>

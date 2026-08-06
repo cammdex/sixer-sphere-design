@@ -90,7 +90,7 @@ export default function TeamDetails({
 
             <Stat
               label="PLAYERS"
-             value={`${team.playersBought ?? squad.length}/13`}
+             value={`${team.playersBought ?? squad.length}/${team.squadLimit}`}
             />
 
             <Stat

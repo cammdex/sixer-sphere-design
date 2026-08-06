@@ -58,10 +58,22 @@ export type LivePlayer = Player & {
 
 export type LiveTeam = Team;
 
+export type BidHistoryEntry = {
+  amount: number;
+  teamId: string | null;
+  at: number;
+};
+
 export type AuctionState = {
   playerId: string | null;
+
   previousBid: number | null;
-currentBid: number | null;
+
+  // NEW
+  bidHistory: BidHistoryEntry[];
+
+  currentBid: number | null;
+
   biddingTeamId: string | null;
 
   status:
@@ -175,7 +187,12 @@ export function useAuctionState() {
   const [state, setState] = useState<AuctionState>({
   playerId: null,
   previousBid: null,
+
+  // NEW
+  bidHistory: [],
+
   currentBid: null,
+
   biddingTeamId: null,
   status: "idle",
   round: 1,
@@ -216,7 +233,16 @@ export async function startLiveTransition(
   await setDoc(doc(db, AUCTION_DOC), {
     playerId,
     previousBid: null,
-    currentBid: startingBid,
+
+bidHistory: [
+  {
+    amount: startingBid,
+    teamId: null,
+    at: Date.now(),
+  },
+],
+
+currentBid: startingBid,
     biddingTeamId: null,
 
     // NEW STATE
@@ -239,7 +265,16 @@ export async function pushPlayerLive(
     playerId,
 
     previousBid: null,
-    currentBid: startingBid,
+
+bidHistory: [
+  {
+    amount: startingBid,
+    teamId: null,
+    at: Date.now(),
+  },
+],
+
+currentBid: startingBid,
 
     biddingTeamId: null,
     status: "live",
@@ -288,11 +323,24 @@ export async function updateLiveBid(
     }
 
     await updateDoc(auctionRef, {
-      previousBid: auction.currentBid,
-      currentBid,
-      biddingTeamId,
-      updatedAt: serverTimestamp(),
-    });
+  previousBid: auction.currentBid,
+
+  currentBid,
+
+  // NEW
+  bidHistory: [
+  ...(auction.bidHistory ?? []),
+  {
+    amount: currentBid,
+    teamId: biddingTeamId,
+    at: Date.now(),
+  },
+],
+
+  biddingTeamId,
+
+  updatedAt: serverTimestamp(),
+});
 
     await addEvent(
       `${team.name} bid ₹${currentBid.toLocaleString("en-IN")}`
@@ -304,6 +352,49 @@ export async function updateLiveBid(
     throw err;
   }
 }
+
+export async function rewindBid(): Promise<{
+  currentBid: number;
+  biddingTeamId: string | null;
+} | null> {
+  const auctionRef = doc(db, AUCTION_DOC);
+
+  const snap = await getDoc(auctionRef);
+
+  if (!snap.exists()) return null;
+
+  const auction = snap.data() as AuctionState;
+
+  const history = [...(auction.bidHistory ?? [])];
+
+  if (history.length <= 1) return null;
+
+  history.pop();
+
+  const previous = history[history.length - 1];
+
+  await updateDoc(auctionRef, {
+    previousBid:
+      history.length > 1
+        ? history[history.length - 2].amount
+        : null,
+
+    currentBid: previous.amount,
+
+    biddingTeamId: previous.teamId,
+
+    bidHistory: history,
+
+    status: "live",
+
+    updatedAt: serverTimestamp(),
+  });
+  return {
+  currentBid: previous.amount,
+  biddingTeamId: previous.teamId,
+};
+}
+
 
 export async function changeLeadingTeam(
   biddingTeamId: string
@@ -373,19 +464,30 @@ export async function placeBid(teamId: string) {
   }
 
   await updateDoc(auctionRef, {
-    previousBid: auction.currentBid,
-    currentBid: nextBid,
-    biddingTeamId: teamId,
+  previousBid: auction.currentBid,
 
-    status:
-      auction.status === "goingOnce" ||
-      auction.status === "goingTwice"
-        ? "live"
-        : auction.status,
+  currentBid: nextBid,
 
-    updatedAt: serverTimestamp(),
-  });
+  // NEW
+  bidHistory: [
+  ...(auction.bidHistory ?? []),
+  {
+    amount: nextBid,
+    teamId,
+    at: Date.now(),
+  },
+],
 
+  biddingTeamId: teamId,
+
+  status:
+    auction.status === "goingOnce" ||
+    auction.status === "goingTwice"
+      ? "live"
+      : auction.status,
+
+  updatedAt: serverTimestamp(),
+});
   await addEvent(
     `${team.name} bid ₹${nextBid.toLocaleString("en-IN")}`
   );
@@ -458,7 +560,18 @@ const remainingSlots =
 const maxBid = Math.max(
   purse - Math.max(remainingSlots - 1, 0) * 200000,
   0
+
+
+  
 );
+console.log("Before update", {
+  currentBought,
+  playersBought,
+  remainingSlots,
+  purse,
+  maxBid,
+});
+
 
     await updateDoc(teamRef, {
       purse,
@@ -466,6 +579,8 @@ const maxBid = Math.max(
       remainingSlots,
       maxBid,
     });
+
+console.log("Team updated");
 
     await updateDoc(doc(db, PLAYERS_COLLECTION, playerId), {
     teamId,
@@ -538,6 +653,9 @@ export async function clearLiveAuction() {
   await updateDoc(doc(db, AUCTION_DOC), {
     playerId: null,
     previousBid: null,
+
+bidHistory: [],
+
 currentBid: null,
     biddingTeamId: null,
     status: "idle",
@@ -598,6 +716,13 @@ export async function undoLastSale() {
     playerId: lastSale.playerId,
     biddingTeamId: null,
     previousBid: null,
+    bidHistory: [
+  {
+    amount: lastSale.price,
+    teamId: lastSale.teamId,
+    at: Date.now(),
+  },
+],
 currentBid: lastSale.price,
     status: "live",
     eventMessage: "Sale Undone",

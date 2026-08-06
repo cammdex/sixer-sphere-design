@@ -28,8 +28,8 @@
     "age": 32,
     "role": "All-Rounder",
     "basePrice": 500000,
-    "soldPrice": null,
-    "teamId": null,
+    "soldPrice": 500000,
+    "teamId": "be",
     "batting": "",
     "bowling": "",
     "stats": {
@@ -41,7 +41,7 @@
     },
     "initials": "AS",
     "photo": "/player-photos/P2.jpeg",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": "P3",
@@ -666,8 +666,8 @@
     "age": 53,
     "role": "Batsman",
     "basePrice": 500000,
-    "soldPrice": null,
-    "teamId": null,
+    "soldPrice": 500000,
+    "teamId": "gc",
     "batting": "",
     "bowling": "",
     "stats": {
@@ -679,7 +679,7 @@
     },
     "initials": "AA",
     "photo": "/player-photos/P31.jpeg",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": "P32",
@@ -732,8 +732,8 @@
     "age": 34,
     "role": "All-Rounder",
     "basePrice": 500000,
-    "soldPrice": null,
-    "teamId": null,
+    "soldPrice": 500000,
+    "teamId": "bt",
     "batting": "",
     "bowling": "",
     "stats": {
@@ -745,7 +745,7 @@
     },
     "initials": "AG",
     "photo": "/player-photos/P34.jpeg",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": "P35",
@@ -1414,8 +1414,8 @@
     "age": 33,
     "role": "Batsman",
     "basePrice": 500000,
-    "soldPrice": null,
-    "teamId": null,
+    "soldPrice": 500000,
+    "teamId": "brf",
     "batting": "",
     "bowling": "",
     "stats": {
@@ -1427,7 +1427,7 @@
     },
     "initials": "HG",
     "photo": "/player-photos/P65.jpeg",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": "P66",
@@ -1546,8 +1546,8 @@
     "age": 19,
     "role": "All-Rounder",
     "basePrice": 500000,
-    "soldPrice": null,
-    "teamId": null,
+    "soldPrice": 500000,
+    "teamId": "lt",
     "batting": "",
     "bowling": "",
     "stats": {
@@ -1559,7 +1559,7 @@
     },
     "initials": "HL",
     "photo": "/player-photos/P71.jpeg",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": "P72",
@@ -2558,8 +2558,8 @@
     "age": 18,
     "role": "All-Rounder",
     "basePrice": 500000,
-    "soldPrice": null,
-    "teamId": null,
+    "soldPrice": 500000,
+    "teamId": "rr",
     "batting": "",
     "bowling": "",
     "stats": {
@@ -2571,7 +2571,7 @@
     },
     "initials": "MD",
     "photo": "/player-photos/P117.jpeg",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": "P118",
@@ -3108,8 +3108,8 @@
     "age": 21,
     "role": "All-Rounder",
     "basePrice": 500000,
-    "soldPrice": null,
-    "teamId": null,
+    "soldPrice": 500000,
+    "teamId": "bb",
     "batting": "",
     "bowling": "",
     "stats": {
@@ -3121,7 +3121,7 @@
     },
     "initials": "TP",
     "photo": "/player-photos/P142.jpeg",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": "P143",
@@ -3306,8 +3306,8 @@
     "age": 42,
     "role": "All-Rounder",
     "basePrice": 500000,
-    "soldPrice": null,
-    "teamId": null,
+    "soldPrice": 500000,
+    "teamId": "gm",
     "batting": "",
     "bowling": "",
     "stats": {
@@ -3319,6 +3319,6 @@
     },
     "initials": "SA",
     "photo": "/player-photos/P151.jpeg",
-    "status": "available"
+    "status": "sold"
   }
 ]

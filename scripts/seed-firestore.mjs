@@ -13,11 +13,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+console.log(firebaseConfig);
+console.log(app.options);
 
 const teams = [
   {
     id: "lt",
-    name: "LT Lions",
+    name: "LT Lions Test",
     short: "LTL",
     owners: ["Abdul Hussain Lachhawala", "Abbas Lachhawala"],
     captain: "Mufaddal ZM",
@@ -27,14 +29,15 @@ const teams = [
     color: "#2563eb",
     color2: "#1e3a8a",
     initialPurse: 15000000,
-    purse: 13500000,
-    squadLimit: 10,
-    playersBought: 3,
-    remainingSlots: 10,
-    wins: 0,
-    losses: 0,
-    nrr: 0,
-    points: 0,
+purse: 13500000,
+squadLimit: 13,
+playersBought: 3,
+remainingSlots: 10,
+maxBid: 11700000,
+wins: 0,
+losses: 0,
+nrr: 0,
+points: 0,
   },
 
   {
@@ -49,14 +52,15 @@ const teams = [
     color: "#dc2626",
     color2: "#7f1d1d",
     initialPurse: 15000000,
-    purse: 13500000,
-    squadLimit: 10,
-    playersBought: 3,
-    remainingSlots: 10,
-    wins: 0,
-    losses: 0,
-    nrr: 0,
-    points: 0,
+purse: 13500000,
+squadLimit: 13,
+playersBought: 3,
+remainingSlots: 10,
+maxBid: 11700000,
+wins: 0,
+losses: 0,
+nrr: 0,
+points: 0,
   },
 
   {
@@ -66,19 +70,20 @@ const teams = [
     owners: ["Nuzhat Kagzi"],
     captain: "Qutub Kankroli",
     viceCaptain: "Shabbir Dungri",
-    retainedPlayer: null,
+    retainedPlayer: "Sajid Attari",
     logo: "/logos/teams/gm.png",
     color: "#9333ea",
     color2: "#581c87",
     initialPurse: 15000000,
-    purse: 14000000,
-    squadLimit: 11,
-    playersBought: 2,
-    remainingSlots: 11,
-    wins: 0,
-    losses: 0,
-    nrr: 0,
-    points: 0,
+purse: 13500000,
+squadLimit: 13,
+playersBought: 3,
+remainingSlots: 10,
+maxBid: 11700000,
+wins: 0,
+losses: 0,
+nrr: 0,
+points: 0,
   },
 
   {
@@ -93,14 +98,15 @@ const teams = [
     color: "#16a34a",
     color2: "#14532d",
     initialPurse: 15000000,
-    purse: 13500000,
-    squadLimit: 10,
-    playersBought: 3,
-    remainingSlots: 10,
-    wins: 0,
-    losses: 0,
-    nrr: 0,
-    points: 0,
+purse: 13500000,
+squadLimit: 13,
+playersBought: 3,
+remainingSlots: 10,
+maxBid: 11700000,
+wins: 0,
+losses: 0,
+nrr: 0,
+points: 0,
   },
 
   {
@@ -115,14 +121,15 @@ const teams = [
     color: "#f97316",
     color2: "#9a3412",
     initialPurse: 15000000,
-    purse: 13500000,
-    squadLimit: 10,
-    playersBought: 3,
-    remainingSlots: 10,
-    wins: 0,
-    losses: 0,
-    nrr: 0,
-    points: 0,
+purse: 13500000,
+squadLimit: 13,
+playersBought: 3,
+remainingSlots: 10,
+maxBid: 11700000,
+wins: 0,
+losses: 0,
+nrr: 0,
+points: 0,
   },
 
   {
@@ -136,15 +143,16 @@ const teams = [
     logo: "/logos/teams/gc.png",
     color: "#0891b2",
     color2: "#164e63",
-    initialPurse: 15000000,
-    purse: 13500000,
-    squadLimit: 10,
-    playersBought: 3,
-    remainingSlots: 10,
-    wins: 0,
-    losses: 0,
-    nrr: 0,
-    points: 0,
+   initialPurse: 15000000,
+purse: 13500000,
+squadLimit: 13,
+playersBought: 3,
+remainingSlots: 10,
+maxBid: 11700000,
+wins: 0,
+losses: 0,
+nrr: 0,
+points: 0,
   },
 
   {
@@ -159,14 +167,15 @@ const teams = [
     color: "#ca8a04",
     color2: "#854d0e",
     initialPurse: 15000000,
-    purse: 13500000,
-    squadLimit: 10,
-    playersBought: 3,
-    remainingSlots: 10,
-    wins: 0,
-    losses: 0,
-    nrr: 0,
-    points: 0,
+purse: 13500000,
+squadLimit: 13,
+playersBought: 3,
+remainingSlots: 10,
+maxBid: 11700000,
+wins: 0,
+losses: 0,
+nrr: 0,
+points: 0,
   },
 
   {
@@ -181,32 +190,40 @@ const teams = [
     color: "#475569",
     color2: "#1e293b",
     initialPurse: 15000000,
-    purse: 13500000,
-    squadLimit: 10,
-    playersBought: 3,
-    remainingSlots: 10,
-    wins: 0,
-    losses: 0,
-    nrr: 0,
-    points: 0,
+purse: 13500000,
+squadLimit: 13,
+playersBought: 3,
+remainingSlots: 10,
+maxBid: 11700000,
+wins: 0,
+losses: 0,
+nrr: 0,
+points: 0,
   },
 ];
 
 async function seed() {
   console.log(`Seeding ${teams.length} teams...`);
   for (const t of teams) {
-    await setDoc(doc(db, "teams", t.id), t);
+    await setDoc(doc(db, "teams", t.id), {
+  ...t,
+  TEST_SEED: "HELLO_JAMES",
+});
   }
   console.log(`Seeding ${players.length} players...`);
   for (const p of players) {
     await setDoc(doc(db, "players", p.id), p);
   }
   await setDoc(doc(db, "meta", "auctionState"), {
-    playerId: null,
-    currentBid: null,
-    biddingTeamId: null,
-    status: "idle",
-  });
+  playerId: null,
+  previousBid: null,
+  bidHistory: [],
+  currentBid: null,
+  biddingTeamId: null,
+  status: "idle",
+  round: 1,
+  eventMessage: "",
+});
   console.log("Done!");
 }
 

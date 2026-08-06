@@ -1,145 +1,425 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { Phone, Globe, MapPin, Star, Search } from "lucide-react";
+import { BusinessCard } from "@/components/business/BusinessCard";
+import { useState } from "react";
 import { MobileLayout } from "@/components/mobile-layout";
-import { sponsors, sponsorCategories } from "@/lib/gpl-data";
-import { toast } from "sonner";
+import { LeadSponsor } from "@/components/home/LeadSponsor";
+import { PoweredBy } from "@/components/home/PoweredBy";
+import {
+  leadSponsor,
+  poweredBySponsors,
+} from "@/lib/home-dummy-data";
+
+const sponsorCategories = [
+  "All",
+  "Tournament",
+  "Awards",
+  "Golden Sponsors",
+  "Owner Businesses",
+  "Directory",
+] as const;
+
+const businessCategories = [
+  "Aluminum & Glasswork",
+  "Automobiles & Spare Parts",
+  "Clothing",
+  "Construction",
+  "Electricals",
+  "Electronics",
+  "Events & Planners",
+  "Foods & Beverages",
+  "Hardware",
+  "Home Furnishing",
+  "Household Material",
+  "Interior Designers",
+  "Iron & Steel",
+  "Jewellery",
+  "Marble",
+  "Paints",
+  "Plastic",
+  "Plywood",
+  "Professionals",
+  "Real Estate",
+  "Sanitary",
+  "Textile",
+  "Tours & Travels",
+  "Others",
+] as const;
 
 export const Route = createFileRoute("/sponsors")({
-  head: () => ({ meta: [
-    { title: "Sponsors — Galaxy Premier League" },
-    { name: "description", content: "Local businesses powering the tournament." },
-  ]}),
   component: SponsorsPage,
 });
 
+const tournamentPartners = [
+  {
+    title: "Toss Partner",
+    sponsor: "Wander Hub",
+    logo: "/sponsors/Wander.png",
+    phone: "",
+  },
+  {
+    title: "Beverage Partner",
+    sponsor: "Hola Cafe",
+    logo: "/sponsors/Hola.png",
+    phone: "",
+  },
+];
+
+
+const awardPartners = [
+  {
+    title: "Man of the Match",
+    sponsor: "Universal Trending",
+    logo: "/sponsors/universal.png",
+    phone: "",
+  },
+  {
+    title: "Game Changer Award",
+    sponsor: "AT Plywood & Realtors",
+    logo: "/sponsors/at.png",
+    phone: "",
+  },
+  {
+    title: "Dot Dictator Award",
+    sponsor: "",
+    logo: "/sponsors/dotdictator.png",
+    phone: "",
+  },
+  {
+    title: "Catch of the Match",
+    sponsor: "Bhalamwala Bricks",
+    logo: "/sponsors/bhalamwala.png",
+    phone: "",
+  },
+  {
+    title: "Speed Breaker Award",
+    sponsor: "",
+    logo: "/sponsors/speedbreaker.png",
+    phone: "",
+  },
+  {
+    title: "Maximum Boundaries Award",
+    sponsor: "Taste Buds",
+    logo: "/sponsors/tastebuds.png",
+    phone: "",
+  },
+  {
+    title: "Orange Cap",
+    sponsor: "Sky Homes",
+    logo: "/sponsors/skyhomes.png",
+    phone: "",
+  },
+  {
+    title: "Yellow Cap",
+    sponsor: "Unique Printers",
+    logo: "/sponsors/unique.png",
+    phone: "",
+  },
+  {
+    title: "Emerging Player Award",
+    sponsor: "FYT Fitness Buddy",
+    logo: "/sponsors/fyt.png",
+    phone: "",
+  },
+  {
+    title: "Best Striker Award",
+    sponsor: "",
+    logo: "/sponsors/beststriker.png",
+    phone: "",
+  },
+  {
+    title: "Fighter of the Match",
+    sponsor: "",
+    logo: "/sponsors/fighter.png",
+    phone: "",
+  },
+  {
+    title: "Golden Arm Award",
+    sponsor: "",
+    logo: "/sponsors/goldenarm.png",
+    phone: "",
+  },
+  {
+    title: "Man of the Series",
+    sponsor: "",
+    logo: "/sponsors/mos.png",
+    phone: "",
+  },
+];
+
+const goldenSponsors = [
+  {
+    title: "Golden Sponsor",
+    sponsor: "D+ Mark Product",
+    logo: "/sponsors/dmark.png",
+    phone: "",
+  },
+  {
+    title: "Golden Sponsor",
+    sponsor: "Mariya's Fragrance",
+    logo: "/sponsors/mariya.png",
+    phone: "",
+  },
+  {
+    title: "Golden Sponsor",
+    sponsor: "AT Plywood",
+    logo: "/sponsors/at.png",
+    phone: "",
+  },
+];
+
 function SponsorsPage() {
   const [cat, setCat] = useState<(typeof sponsorCategories)[number]>("All");
-  const [q, setQ] = useState("");
+  const [directoryOpen, setDirectoryOpen] = useState(false);
+  const [businessCategory, setBusinessCategory] = useState<
+  (typeof businessCategories)[number] | null
+>(null);
 
-  const featured = sponsors.find((s) => s.featured);
-
-  const filtered = useMemo(() => {
-    return sponsors.filter((s) => {
-      if (cat !== "All" && s.category !== cat) return false;
-      if (q && !s.name.toLowerCase().includes(q.toLowerCase())) return false;
-      return true;
-    });
-  }, [cat, q]);
+  const poweredBy = poweredBySponsors.find((s) => s.role === "Powered By")!;
+  const coPoweredBy = poweredBySponsors.filter((s) => s.role === "Co-Powered By");
 
   return (
-    <MobileLayout title="Sponsors">
-      {/* Featured */}
-      {featured && (
-        <article className="relative mt-2 overflow-hidden rounded-3xl glass-gold p-5">
-          <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full opacity-50 blur-3xl"
-            style={{ background: `radial-gradient(circle, ${featured.color}, transparent 70%)` }} />
-          <div className="relative">
-            <div className="inline-flex items-center gap-1 rounded-full bg-gold/15 border border-gold/30 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-gold">
-              <Star className="h-3 w-3 fill-current" /> Featured sponsor
-            </div>
-            <div className="mt-3 flex items-center gap-3">
-              <SponsorLogo color={featured.color} color2={featured.color2} initials={featured.initials} size={56} />
-              <div>
-                <h2 className="font-display text-lg font-bold">{featured.name}</h2>
-                <div className="text-[11px] uppercase tracking-widest text-gold">{featured.category}</div>
-              </div>
-            </div>
-            <p className="mt-3 text-sm text-muted-foreground">{featured.tagline}</p>
-            <div className="mt-4 grid grid-cols-3 gap-2">
-              <ActionBtn icon={<Phone className="h-3.5 w-3.5" />} label="Call" onClick={() => toast(featured.phone)} />
-              <ActionBtn icon={<Globe className="h-3.5 w-3.5" />} label="Website" onClick={() => toast(featured.web)} />
-              <ActionBtn icon={<MapPin className="h-3.5 w-3.5" />} label="Map" onClick={() => toast("Opening Google Maps…")} />
-            </div>
-          </div>
-        </article>
-      )}
-      
-
-      {/* Search */}
-      <div className="mt-5 relative">
-        <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-        <input
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          placeholder="Search sponsors"
-          className="w-full rounded-2xl bg-card/60 py-3 pl-10 pr-4 text-sm placeholder:text-muted-foreground border border-border focus:border-primary outline-none transition-colors"
+    <MobileLayout title="Business">
+      <div className="mt-3">
+        <LeadSponsor
+          name={leadSponsor.name}
+          logo={leadSponsor.logoUrl}
+          tagline={leadSponsor.tagline}
+          description={leadSponsor.tagline}
+          website={leadSponsor.websiteUrl}
         />
       </div>
 
-      {/* Categories */}
-      <div className="-mx-4 mt-3 flex gap-2 overflow-x-auto px-4 no-scrollbar">
-        {sponsorCategories.map((c) => (
-          <button
-            key={c}
-            onClick={() => setCat(c)}
-            className={`shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold transition-all ${cat === c ? "gradient-gold text-gold-foreground shadow-glow-gold" : "glass text-muted-foreground"}`}
-          >
-            {c}
-          </button>
-        ))}
+      <div className="mt-5">
+        <PoweredBy
+          poweredBy={{
+            name: poweredBy.name,
+            logoUrl: poweredBy.logoUrl,
+            tagline: poweredBy.tagline,
+            description: poweredBy.description,
+            websiteUrl: poweredBy.websiteUrl,
+          }}
+          coPoweredBy={coPoweredBy.map((s) => ({
+            name: s.name,
+            logoUrl: s.logoUrl,
+            tagline: s.tagline,
+            description: s.description,
+            websiteUrl: s.websiteUrl,
+          }))}
+        />
       </div>
+      <div className="mt-10">
+  <div className="h-px bg-gradient-to-r from-transparent via-yellow-700/40 to-transparent" />
 
-      {/* List */}
-      <div className="mt-4 space-y-3">
-        {filtered.map((s) => (
-          <article key={s.id} className="relative overflow-hidden rounded-2xl glass p-4">
-            <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full opacity-30 blur-2xl"
-              style={{ background: `radial-gradient(circle, ${s.color}, transparent 70%)` }} />
-            <div className="relative flex items-start gap-3">
-              <SponsorLogo color={s.color} color2={s.color2} initials={s.initials} size={48} />
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2">
-                  <h3 className="truncate font-display text-sm font-bold">{s.name}</h3>
-                  <span className="rounded-full bg-primary/15 border border-primary/30 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-primary">{s.category}</span>
-                </div>
-                <p className="mt-0.5 text-[11px] text-muted-foreground line-clamp-2">{s.tagline}</p>
-              </div>
-            </div>
-            <div className="relative mt-3 grid grid-cols-3 gap-2">
-              <ActionBtn small icon={<Phone className="h-3 w-3" />} label="Call" onClick={() => toast(s.phone)} />
-              <ActionBtn small icon={<Globe className="h-3 w-3" />} label="Web" onClick={() => toast(s.web)} />
-              <ActionBtn small icon={<MapPin className="h-3 w-3" />} label="Map" onClick={() => toast("Opening Google Maps…")} />
-            </div>
-          </article>
-        ))}
-        {filtered.length === 0 && (
-          <div className="py-10 text-center text-sm text-muted-foreground">No sponsors in this category.</div>
-        )}
-      </div>
+  <div className="mt-5 text-center">
+    <div className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#9a6f3c]">
+      Partner Directory
+    </div>
 
-      <button
-        onClick={() => toast.success("Sponsor application received", { description: "Our team will be in touch within 48h." })}
-        className="mt-5 w-full rounded-2xl gradient-royal py-3 text-sm font-semibold text-white shadow-glow"
-      >
-        Become a sponsor
+    <h2 className="mt-2 font-display text-3xl font-black text-[#4c3624]">
+      Business Partners
+    </h2>
+  </div>
+</div>
+
+<div className="-mx-4 mt-6 flex gap-2 overflow-x-auto px-4 no-scrollbar">
+  {sponsorCategories.map((c) => (
+    <button
+      key={c}
+      onClick={() => {
+  setCat(c);
+
+  if (c === "Directory") {
+  setDirectoryOpen((prev) => !prev);
+} else {
+  setDirectoryOpen(false);
+  setBusinessCategory(null);
+}
+}}
+      className={`shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold transition-all ${
+        cat === c
+          ? "gradient-gold text-gold-foreground shadow-glow-gold"
+          : "glass text-muted-foreground"
+      }`}
+    >
+      <>
+  {c}
+
+  {c === "Directory" && (
+    <span className="ml-2">
+      {directoryOpen ? "▲" : "▼"}
+    </span>
+  )}
+</>
+    </button>
+  ))}
+</div>
+
+{cat === "Directory" && directoryOpen && (
+  <div
+    className="mt-5 rounded-3xl p-5"
+    style={{
+      background: "#fffdf8",
+      border: "1px solid rgba(188,145,78,.18)",
+      boxShadow: "0 10px 22px rgba(70,48,20,.08)",
+    }}
+  >
+    <div
+      className="mb-4 text-[11px] font-bold uppercase tracking-[0.24em]"
+      style={{ color: "#9a6f3c" }}
+    >
+      Business Category
+    </div>
+
+    <div className="flex flex-wrap gap-2">
+      {businessCategories.map((category) => (
+        <button
+  key={category}
+  onClick={() => setBusinessCategory(category)}
+  className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
+    businessCategory === category
+      ? "gradient-gold text-gold-foreground shadow-glow-gold"
+      : ""
+  }`}
+  style={
+    businessCategory === category
+      ? {}
+      : {
+          border: "1px solid rgba(188,145,78,.25)",
+          background: "linear-gradient(180deg,#fffefb,#fbf4e8)",
+          color: "#4c3624",
+        }
+  }
+>
+  {category}
+</button>
+      ))}
+    </div>
+  </div>
+)}
+
+{cat === "Directory" && businessCategory && (
+  <div
+    className="mt-6 rounded-3xl p-6 text-center"
+    style={{
+      background: "#fffdf8",
+      border: "1px solid rgba(188,145,78,.18)",
+    }}
+  >
+    <div
+      className="text-[11px] font-bold uppercase tracking-[0.24em]"
+      style={{ color: "#9a6f3c" }}
+    >
+      Selected Category
+    </div>
+
+    <h2
+      className="mt-2 font-display text-2xl font-black"
+      style={{ color: "#4c3624" }}
+    >
+      {businessCategory}
+    </h2>
+
+    <p className="mt-3 text-sm text-neutral-600">
+      Businesses in this category will appear here.
+    </p>
+  </div>
+)}
+
+
+     {(cat === "All" || cat === "Tournament") && (
+
+<div className="mt-8">
+  <div
+    className="text-[11px] font-bold uppercase tracking-[0.24em]"
+    style={{ color: "#9a6f3c" }}
+  >
+    Tournament Partners
+  </div>
+
+  <h2
+    className="mt-2 font-display text-2xl font-black"
+    style={{ color: "#4c3624" }}
+  >
+    Official Partners
+  </h2>
+
+  <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+    {tournamentPartners.map((partner) => (
+      <BusinessCard
+        key={partner.title}
+        title={partner.title}
+        sponsor={partner.sponsor}
+        logo={partner.logo}
+        phone={partner.phone}
+      />
+    ))}
+  </div>
+</div>
+
+)}
+
+{(cat === "All" || cat === "Awards") && (
+  <div className="mt-10">
+    <div
+      className="text-[11px] font-bold uppercase tracking-[0.24em]"
+      style={{ color: "#9a6f3c" }}
+    >
+      Award Partners
+    </div>
+
+    <h2
+      className="mt-2 font-display text-2xl font-black"
+      style={{ color: "#4c3624" }}
+    >
+      Official Awards
+    </h2>
+
+    <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+      {awardPartners.map((partner) => (
+        <BusinessCard
+          key={partner.title}
+          title={partner.title}
+          sponsor={partner.sponsor}
+          logo={partner.logo}
+          phone={partner.phone}
+        />
+      ))}
+    </div>
+  </div>
+)}
+
+{(cat === "All" || cat === "Golden Sponsors") && (
+  <div className="mt-10">
+    <div
+      className="text-[11px] font-bold uppercase tracking-[0.24em]"
+      style={{ color: "#9a6f3c" }}
+    >
+      Golden Sponsors
+    </div>
+
+    <h2
+      className="mt-2 font-display text-2xl font-black"
+      style={{ color: "#4c3624" }}
+    >
+      Premium Partners
+    </h2>
+
+    <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+      {goldenSponsors.map((partner) => (
+        <BusinessCard
+          key={partner.sponsor}
+          title={partner.title}
+          sponsor={partner.sponsor}
+          logo={partner.logo}
+          phone={partner.phone}
+        />
+      ))}
+    </div>
+  </div>
+)}
+      <button className="mt-6 w-full rounded-2xl gradient-royal py-3 text-sm font-semibold text-white shadow-glow">
+        Register Your Business
       </button>
     </MobileLayout>
-  );
-}
-
-function SponsorLogo({ color, color2, initials, size }: { color: string; color2: string; initials: string; size: number }) {
-  return (
-    <div
-      className="grid place-items-center rounded-2xl font-display font-extrabold text-white"
-      style={{
-        width: size, height: size, fontSize: size * 0.36,
-        background: `linear-gradient(135deg, ${color}, ${color2})`,
-        boxShadow: `0 8px 22px -6px ${color}80, inset 0 1px 0 rgba(255,255,255,0.18)`,
-      }}
-    >
-      {initials}
-    </div>
-  );
-}
-
-function ActionBtn({ icon, label, onClick, small }: { icon: React.ReactNode; label: string; onClick: () => void; small?: boolean }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`flex items-center justify-center gap-1.5 rounded-xl bg-card/60 border border-border font-semibold text-foreground transition-colors hover:border-gold/40 hover:text-gold ${small ? "py-1.5 text-[10px]" : "py-2 text-xs"}`}
-    >
-      {icon}{label}
-    </button>
   );
 }

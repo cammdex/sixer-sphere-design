@@ -22,6 +22,8 @@ import {
   startLiveTransition,
   pushPlayerLive,
   placeBid,
+  updateLiveBid,
+  rewindBid,
   markSold,
   markUnsold,
   clearLiveAuction,
@@ -200,8 +202,12 @@ toast.success("Tournament reset successfully!");
   const { state } = useAuctionState();
 
   const [q, setQ] = useState("");
-  const [teamInput, setTeamInput] = useState("");
-  const [showUtilities, setShowUtilities] = useState(false);
+const [teamInput, setTeamInput] = useState("");
+
+const [jumpBidInput, setJumpBidInput] = useState("");
+const [updatingJumpBid, setUpdatingJumpBid] = useState(false);
+
+const [showUtilities, setShowUtilities] = useState(false);
   const [pendingPlayer, setPendingPlayer] = useState<any>(null);
 const [showPushDialog, setShowPushDialog] = useState(false);
 
@@ -393,7 +399,89 @@ const unsoldPlayers = useMemo(
       {state.currentBid ? formatINR(state.currentBid) : "—"}
     </div>
   </div>
+  <div className="rounded-xl border border-border bg-card/60 p-4 space-y-3">
+
+  <label className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+    Update Current Bid (Lakhs)
+  </label>
+
+  <div className="flex gap-2">
+
+    <input
+      type="number"
+      placeholder="e.g. 42"
+      value={jumpBidInput}
+      onChange={(e) => setJumpBidInput(e.target.value)}
+      className="flex-1 rounded-xl border border-border bg-background px-3 py-2 outline-none"
+    />
+
+    <button
+      disabled={updatingJumpBid}
+      onClick={async () => {
+        if (!teamInput) {
+          toast.error("Select the current leading team first.");
+          return;
+        }
+
+        const lakhs = parseFloat(jumpBidInput.trim());
+
+        if (!Number.isFinite(lakhs) || lakhs <= 0) {
+          toast.error("Enter a valid amount.");
+          return;
+        }
+
+        const amount = lakhs * 100000;
+
+        if (state.currentBid && amount <= state.currentBid) {
+          toast.error("Amount must be higher than current bid.");
+          return;
+        }
+
+        setUpdatingJumpBid(true);
+
+        try {
+          await updateLiveBid(amount, teamInput);
+          setTeamInput(teamInput);
+
+          setJumpBidInput("");
+
+          toast.success(
+  `Bid updated to ${formatINR(amount)}`
+);
+        } finally {
+          setUpdatingJumpBid(false);
+        }
+      }}
+      className="rounded-xl bg-blue-600 px-4 text-white font-semibold"
+    >
+      Update
+    </button>
+
+  </div>
+
 </div>
+</div>
+<button
+  onClick={async () => {
+    try {
+      const result = await rewindBid();
+
+      if (!result) {
+        toast.error("Already at base price.");
+        return;
+      }
+
+      setTeamInput(result.biddingTeamId ?? "");
+
+      toast.success("Returned to previous bid.");
+    } catch {
+      toast.error("Failed to rewind bid.");
+    }
+  }}
+  className="w-full rounded-xl bg-red-600 py-3 text-sm font-semibold text-white"
+>
+  ← Rewind Last Bid
+</button>
 
 <div className="rounded-2xl border border-amber-300/30 bg-amber-50/40 px-4 py-4 text-center">
   <p className="text-[11px] uppercase tracking-[0.25em] text-amber-700">
