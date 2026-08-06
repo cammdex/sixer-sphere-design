@@ -3,6 +3,7 @@ import { DisplayBroadcast } from "./DisplayBroadcast";
 import { DisplayStatusBar } from "./DisplayStatusBar";
 import { DisplaySoldOverlay } from "./DisplaySoldOverlay";
 import { useEffect, useState } from "react";
+import { DisplayHero } from "./DisplayHero";
 
 import {
   useAuctionState,
@@ -75,6 +76,10 @@ setTeamGlow(false);
   const currentPlayer = players.find(
     (player) => player.id === state.playerId
   );
+  const hasLivePlayer =
+  !!currentPlayer &&
+  state.status !== "idle" &&
+  state.status !== "transition";
 
   const currentTeam = teams.find(
     (team) => team.id === state.biddingTeamId
@@ -94,51 +99,52 @@ setTeamGlow(false);
           season="Season 2 • 2026"
         />
 
-        <div className="flex-1">
-          <DisplayBroadcast
-  leaving={playerLeaving}
-  teamGlow={teamGlow}
-  unsold={unsoldLeaving}
-  playerNumber={currentPlayer?.playerNumber ?? "--"}
-  playerName={currentPlayer?.name ?? "WAITING FOR NEXT PLAYER"}
-  role={currentPlayer?.role ?? ""}
+        <div
+  className={
+    hasLivePlayer
+      ? "flex-1"
+      : "flex flex-1 items-center justify-center"
+  }
+>
+  {hasLivePlayer ? (
+    <DisplayBroadcast
+      leaving={playerLeaving}
+      teamGlow={teamGlow}
+      unsold={unsoldLeaving}
+      playerNumber={currentPlayer!.playerNumber ?? "--"}
+playerName={currentPlayer!.name ?? ""}
+      currentBid={state.currentBid ?? 0}
+      increment={
+        state.previousBid == null
+          ? 0
+          : state.currentBid! - state.previousBid
+      }
+      teamName={currentTeam?.name ?? currentTeam?.displayName ?? ""}
+      teamLogo={currentTeam?.logo}
+    />
+  ) : (
+    <DisplayHero />
+  )}
+</div>
 
-  basePrice={currentPlayer?.basePrice ?? 0}
-  age={currentPlayer?.age}
-  style={
-  currentPlayer?.batting && currentPlayer?.bowling
-    ? `${currentPlayer.batting} • ${currentPlayer.bowling}`
-    : currentPlayer?.batting ||
-      currentPlayer?.bowling ||
-      "--"
-}
-
-  currentBid={state.currentBid ?? 0}
-  increment={
-  state.previousBid == null
-    ? 0
-    : state.currentBid! - state.previousBid
-}
-
-  teamName={currentTeam?.name ?? currentTeam?.displayName ?? ""}
-  playerImage={currentPlayer?.imageUrl}
-  teamLogo={currentTeam?.logo}
-/>
-        </div>
-
-        <DisplayStatusBar status={state.status} />
+        {hasLivePlayer && (
+  <DisplayStatusBar status={state.status} />
+)}
       </div>
 
 
-      <DisplaySoldOverlay
-  status={
-    state.status === "sold"
-      ? "sold"
-      : state.status === "unsold"
-      ? "unsold"
-      : null
-  }
-/>
+      {hasLivePlayer && (
+  <DisplaySoldOverlay
+    status={
+      state.status === "sold"
+        ? "sold"
+        : state.status === "unsold"
+        ? "unsold"
+        : null
+    }
+  />
+)}
+  
     </main>
   );
 }

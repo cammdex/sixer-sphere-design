@@ -13,8 +13,9 @@ export interface LeadSponsor {
   id: string;
   name: string;
   tagline: string;
+  description?: string;
   logoUrl: string;
-  websiteUrl?: string;
+  websiteUrl: string;
 }
 
 // ---------- Section 3: Powered By / Co-Powered By ----------
@@ -23,10 +24,11 @@ export interface PoweredBySponsor {
   id: string;
   role: string;
   name: string;
-  logoUrl: string;
   tagline: string;
   description: string;
+  logoUrl: string;
   websiteUrl: string;
+  phone?: string;
 }
 
 // ---------- Section 4: Meet the Owners ----------

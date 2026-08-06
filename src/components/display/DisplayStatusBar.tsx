@@ -1,5 +1,6 @@
 type AuctionStatus =
   | "idle"
+  | "transition"
   | "live"
   | "goingOnce"
   | "goingTwice"
@@ -22,6 +23,13 @@ const STATUS_CONFIG = {
     icon: "🔴",
     bg: "bg-red-100",
     text: "text-red-700",
+    
+    transition: {
+  label: "PREPARING PLAYER",
+  icon: "⏳",
+  bg: "bg-blue-100",
+  text: "text-blue-700",
+},
   },
   goingOnce: {
     label: "GOING ONCE",
@@ -52,7 +60,11 @@ const STATUS_CONFIG = {
 export function DisplayStatusBar({
   status,
 }: DisplayStatusBarProps) {
-  const config = STATUS_CONFIG[status];
+console.log("Display Status:", status);
+
+  const config =
+  STATUS_CONFIG[status as keyof typeof STATUS_CONFIG] ??
+  STATUS_CONFIG.idle;
 
   return (
     <footer

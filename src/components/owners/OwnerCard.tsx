@@ -1,4 +1,4 @@
-import { Phone } from "lucide-react";
+import { Phone, UserRound } from "lucide-react";
 
 interface OwnerCardProps {
   owners: string[];
@@ -21,106 +21,121 @@ export function OwnerCard({
   businessLogo,
   phone,
 }: OwnerCardProps) {
-  return (
-    <article
-      className="rounded-3xl px-6 py-6"
-      style={{
-        background: "#fffdf8",
-        border: "1px solid rgba(188,145,78,.18)",
-        boxShadow: "0 10px 22px rgba(70,48,20,.08)",
-      }}
-    >
-      <div className="flex flex-col items-center text-center">
+ return (
+  <article
+    className="relative rounded-[32px] px-8 py-8 overflow-hidden"
+    style={{
+  background:
+    "linear-gradient(135deg, #5c4605 0%, #edebe6 0%, #f3f0e7 0%)",
+  border: "1px solid rgba(188,145,78,.22)",
+  boxShadow:
+    "0 12px 28px rgba(70,48,20,.10), inset 0 1px rgba(255,255,255,.85)",
+}}
+  >
+    <div className="flex items-center gap-7">
 
-        {/* Business Logo */}
+      {/* Large Business Logo */}
 
+      <div className="shrink-0">
         <img
           src={businessLogo}
           alt={businessName}
-          className="h-20 w-20 object-contain"
+          className="h-28 w-28 object-contain"
         />
+      </div>
 
-        {/* Owners */}
+<div
+  className="absolute left-0 top-0 h-full w-2 rounded-l-[32px]"
+  style={{
+    background:
+      "linear-gradient(to bottom,#8a5b2c,#d2a45e,#8a5b2c)",
+  }}
+/>
 
-        <div className="mt-5 space-y-1">
-          {owners.map((owner) => (
-            <div
-              key={owner}
-              className="text-lg font-bold"
-              style={{
-                color: "#4c3624",
-              }}
-            >
-              {owner}
-            </div>
-          ))}
-        </div>
+      {/* Content */}
 
-        {/* Divider */}
-
-        <div className="my-5 h-px w-full bg-gradient-to-r from-transparent via-yellow-700/30 to-transparent" />
+      <div className="min-w-0 flex-1">
 
         {/* Business */}
 
         <h3
-          className="text-xl font-black"
-          style={{
-            color: "#4c3624",
-          }}
+          className="font-display text-3xl font-black leading-none"
+          style={{ color: "#4c3624" }}
         >
           {businessName}
         </h3>
 
         <div
-          className="mt-1 text-sm font-semibold"
-          style={{
-            color: "#9a6f3c",
-          }}
+          className="mt-2 text-xs font-bold uppercase tracking-[0.25em]"
+          style={{ color: "#9a6f3c" }}
         >
           {businessCategory}
         </div>
 
-        {/* Divider */}
+        {/* Owners */}
 
-        <div className="my-5 h-px w-full bg-gradient-to-r from-transparent via-yellow-700/30 to-transparent" />
+        <div className="mt-6 space-y-2">
+
+          {owners.map((owner) => (
+            <div
+              key={owner}
+              className="flex items-center gap-2 text-lg font-semibold"
+              style={{ color: "#4c3624" }}
+            >
+              <UserRound
+  size={18}
+  strokeWidth={2}
+  style={{ color: "#9a6f3c" }}
+/>
+              <span>{owner}</span>
+            </div>
+          ))}
+
+        </div>
 
         {/* Team */}
 
-        <div className="flex items-center gap-3">
+        <div className="mt-6 flex items-center gap-3">
 
           <img
             src={teamLogo}
             alt={teamName}
-            className="h-10 w-10 object-contain"
+            className="h-11 w-11 object-contain"
           />
 
-          <div
+          <span
             className="font-bold"
-            style={{
-              color: "#4c3624",
-            }}
+            style={{ color: "#4c3624" }}
           >
             {teamName}
-          </div>
+          </span>
 
         </div>
 
-        {/* Call */}
-
-        <button
-          disabled={!phone}
-          className={`mt-6 flex w-full items-center justify-center gap-2 rounded-full py-2.5 text-sm font-semibold transition ${
-            phone
-              ? "bg-[#c89243] text-white"
-              : "bg-neutral-200 text-neutral-500 cursor-not-allowed"
-          }`}
-        >
-          <Phone size={16} />
-
-          {phone ? "Call Business" : "Coming Soon"}
-        </button>
-
       </div>
-    </article>
-  );
+
+    </div>
+
+    {/* Button */}
+
+    {phone ? (
+  <a
+    href={`tel:${phone.replace(/\s+/g, "")}`}
+    className="mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-[#c89243] py-3 text-sm font-semibold text-white transition hover:bg-[#b88436]"
+  >
+    <Phone size={17} />
+    Call Business
+  </a>
+) : (
+  <button
+    disabled
+    className="mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-neutral-200 py-3 text-sm font-semibold text-neutral-500"
+  >
+    <Phone size={17} />
+    Coming Soon
+  </button>
+)}
+
+  </article>
+);
 }

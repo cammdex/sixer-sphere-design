@@ -21,9 +21,14 @@ import type {
 export const leadSponsor: LeadSponsor = {
   id: "lead-1",
   name: "Sanchi Group",
-  tagline:
+
+  tagline: "Sapno se Samriddhi Tak",
+
+  description:
     "Sanchi Group is a trusted name in Udaipur's real estate sector, delivering quality homes for over 47 years. From affordable apartments to premium villas, we build thoughtfully designed spaces that combine comfort, sustainability, and modern living.",
+
   logoUrl: "/sponsors/lead/sanchi-group.png",
+
   websiteUrl: "https://www.sanchigroup.in/",
 };
 
@@ -72,6 +77,7 @@ export const poweredBySponsors: PoweredBySponsor[] = [
       "Entrepreneur Abbas Ali Motagam is a trusted name in residential and commercial real estate development. Known for his perseverance, integrity, and commitment to quality construction, he has built a strong reputation through successful building projects and customer-focused development.",
     logoUrl: "/sponsors/co-powered-by/motagam.png",
     websiteUrl: "",
+    phone: "+91 9352500904",
   },
 ];
 

@@ -11,10 +11,6 @@ import {
 
 const sponsorCategories = [
   "All",
-  "Tournament",
-  "Awards",
-  "Golden Sponsors",
-  "Owner Businesses",
   "Directory",
 ] as const;
 
@@ -54,13 +50,13 @@ const tournamentPartners = [
     title: "Toss Partner",
     sponsor: "Wander Hub",
     logo: "/sponsors/Wander.png",
-    phone: "",
+    phone: "+91 7073233665",
   },
   {
     title: "Beverage Partner",
-    sponsor: "Hola Cafe",
+    sponsor: "Hola Coffee",
     logo: "/sponsors/Hola.png",
-    phone: "",
+    phone: "+91 8949528176",
   },
 ];
 
@@ -68,80 +64,80 @@ const tournamentPartners = [
 const awardPartners = [
   {
     title: "Man of the Match",
-    sponsor: "Universal Trending",
+    sponsor: "Universal Trading",
     logo: "/sponsors/universal.png",
-    phone: "",
+    phone: "+91 6350014766",
   },
   {
     title: "Game Changer Award",
     sponsor: "AT Plywood & Realtors",
     logo: "/sponsors/at.png",
-    phone: "",
+    phone: "+91 9636815251",
   },
   {
     title: "Dot Dictator Award",
-    sponsor: "",
+    sponsor: "Dr. Yash Jain",
     logo: "/sponsors/dotdictator.png",
-    phone: "",
+    phone: "+91 9828983099",
   },
   {
     title: "Catch of the Match",
     sponsor: "Bhalamwala Bricks",
     logo: "/sponsors/bhalamwala.png",
-    phone: "",
+    phone: "+91 9680406779",
   },
   {
     title: "Speed Breaker Award",
     sponsor: "",
-    logo: "/sponsors/speedbreaker.png",
+    logo: "/sponsors/white.png",
     phone: "",
   },
   {
     title: "Maximum Boundaries Award",
     sponsor: "Taste Buds",
     logo: "/sponsors/tastebuds.png",
-    phone: "",
+    phone: "+91 9549462525",
   },
   {
     title: "Orange Cap",
     sponsor: "Sky Homes",
     logo: "/sponsors/skyhomes.png",
-    phone: "",
+    phone: "+91 7976363842",
   },
   {
     title: "Yellow Cap",
     sponsor: "Unique Printers",
     logo: "/sponsors/unique.png",
-    phone: "",
+    phone: "+91 9649209966",
   },
   {
     title: "Emerging Player Award",
     sponsor: "FYT Fitness Buddy",
     logo: "/sponsors/fyt.png",
-    phone: "",
+    phone: "+91 9829240420",
   },
   {
     title: "Best Striker Award",
     sponsor: "",
-    logo: "/sponsors/beststriker.png",
+    logo: "/sponsors/white.png",
     phone: "",
   },
   {
     title: "Fighter of the Match",
     sponsor: "",
-    logo: "/sponsors/fighter.png",
+    logo: "/sponsors/white.png",
     phone: "",
   },
   {
     title: "Golden Arm Award",
     sponsor: "",
-    logo: "/sponsors/goldenarm.png",
+    logo: "/sponsors/white.png",
     phone: "",
   },
   {
     title: "Man of the Series",
     sponsor: "",
-    logo: "/sponsors/mos.png",
+    logo: "/sponsors/white.png",
     phone: "",
   },
 ];
@@ -151,19 +147,19 @@ const goldenSponsors = [
     title: "Golden Sponsor",
     sponsor: "D+ Mark Product",
     logo: "/sponsors/dmark.png",
-    phone: "",
+    phone: "+91 7597213159",
   },
   {
     title: "Golden Sponsor",
     sponsor: "Mariya's Fragrance",
     logo: "/sponsors/mariya.png",
-    phone: "",
+    phone: "+91 9672022887",
   },
   {
     title: "Golden Sponsor",
     sponsor: "AT Plywood",
     logo: "/sponsors/at.png",
-    phone: "",
+    phone: "+91 9636815251",
   },
 ];
 
@@ -181,12 +177,12 @@ function SponsorsPage() {
     <MobileLayout title="Business">
       <div className="mt-3">
         <LeadSponsor
-          name={leadSponsor.name}
-          logo={leadSponsor.logoUrl}
-          tagline={leadSponsor.tagline}
-          description={leadSponsor.tagline}
-          website={leadSponsor.websiteUrl}
-        />
+  name={leadSponsor.name}
+  logo={leadSponsor.logoUrl}
+  tagline={leadSponsor.tagline}
+  description={leadSponsor.description}
+  website={leadSponsor.websiteUrl}
+/>
       </div>
 
       <div className="mt-5">
@@ -326,7 +322,7 @@ function SponsorsPage() {
 )}
 
 
-     {(cat === "All" || cat === "Tournament") && (
+     {cat === "All" && (
 
 <div className="mt-8">
   <div
@@ -358,7 +354,7 @@ function SponsorsPage() {
 
 )}
 
-{(cat === "All" || cat === "Awards") && (
+{cat === "All"&& (
   <div className="mt-10">
     <div
       className="text-[11px] font-bold uppercase tracking-[0.24em]"
@@ -388,7 +384,7 @@ function SponsorsPage() {
   </div>
 )}
 
-{(cat === "All" || cat === "Golden Sponsors") && (
+{cat === "All"&& (
   <div className="mt-10">
     <div
       className="text-[11px] font-bold uppercase tracking-[0.24em]"

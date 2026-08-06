@@ -82,7 +82,7 @@ const coPoweredBy = poweredBySponsors.filter(
   name={leadSponsor.name}
   logo={leadSponsor.logoUrl}
   tagline={leadSponsor.tagline}
-  description={leadSponsor.tagline}
+  description={leadSponsor.description}
   website={leadSponsor.websiteUrl}
 />
       </div>
@@ -98,12 +98,13 @@ const coPoweredBy = poweredBySponsors.filter(
     websiteUrl: poweredBy.websiteUrl,
   }}
   coPoweredBy={coPoweredBy.map((s) => ({
-    name: s.name,
-    logoUrl: s.logoUrl,
-    tagline: s.tagline,
-    description: s.description,
-    websiteUrl: s.websiteUrl,
-  }))}
+  name: s.name,
+  logoUrl: s.logoUrl,
+  tagline: s.tagline,
+  description: s.description,
+  websiteUrl: s.websiteUrl,
+  phone: s.phone,
+}))}
 />
       </div>
 

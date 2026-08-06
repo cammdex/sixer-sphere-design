@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { MobileBottomNav } from "@/components/mobile-bottom-nav";
 import { MobileHeader } from "@/components/mobile-header";
+import InstallPrompt from "@/components/InstallPrompt";
 
 
 export function MobileLayout({
@@ -38,9 +39,13 @@ onClick={handleFabClick}
         </button>
       )}
 
-      {/* Bottom nav */}
+     {/* Bottom nav */}
 <MobileBottomNav />
-      <Toaster position="top-center" theme="dark" />
+
+{/* Install Prompt */}
+<InstallPrompt />
+
+<Toaster position="top-center" theme="dark" />
     </div>
   );
 }

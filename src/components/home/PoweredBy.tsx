@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Phone } from "lucide-react";
 
 export interface PoweredBySponsorProps {
   name: string;
@@ -6,6 +6,7 @@ export interface PoweredBySponsorProps {
   tagline?: string;
   description?: string;
   websiteUrl?: string;
+  phone?: string;
   accentColor?: string;
 }
 
@@ -169,12 +170,12 @@ function CoPoweredByCard({
   logoUrl,
   tagline,
   websiteUrl,
+  phone,
   accentColor = "#b58335",
 }: PoweredBySponsorProps) {
-
   const initials = initialsOf(name);
 
-  const card = (
+  return (
     <div
       className="flex h-full flex-col rounded-[28px] p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
       style={{
@@ -184,7 +185,6 @@ function CoPoweredByCard({
       }}
     >
       <div className="flex justify-center">
-
         {logoUrl ? (
           <div
             className="flex h-20 w-20 items-center justify-center rounded-3xl bg-white p-3"
@@ -193,10 +193,10 @@ function CoPoweredByCard({
             }}
           >
             <img
-  src={logoUrl}
-  alt={name}
-  className="h-full w-full object-contain"
-/>
+              src={logoUrl}
+              alt={name}
+              className="h-full w-full object-contain"
+            />
           </div>
         ) : (
           <div
@@ -212,13 +212,11 @@ function CoPoweredByCard({
           </div>
         )}
       </div>
-      <div className="mt-5 flex flex-1 flex-col">
 
+      <div className="mt-5 flex flex-1 flex-col">
         <h3
           className="text-center font-display text-lg font-extrabold leading-tight"
-          style={{
-            color: "#4c3624",
-          }}
+          style={{ color: "#4c3624" }}
         >
           {name}
         </h3>
@@ -226,59 +224,43 @@ function CoPoweredByCard({
         {tagline && (
           <p
             className="mt-2 text-center text-xs leading-5"
-            style={{
-              color: "#75614b",
-            }}
+            style={{ color: "#75614b" }}
           >
             {tagline}
           </p>
         )}
 
         <div className="mt-auto pt-5">
-          {websiteUrl ? (
-            <div
-              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-3 transition-all"
-              style={{
-                background: "#f8efdf",
-                border: "1px solid rgba(188,145,78,.25)",
-                color: "#a16f34",
-                fontWeight: 700,
-              }}
-            >
-              Visit Website
-              <ExternalLink size={15} />
-            </div>
-          ) : (
-            <div
-              className="inline-flex w-full items-center justify-center rounded-2xl px-4 py-3"
-              style={{
-                background: "#f8efdf",
-                color: "#8d6b47",
-                fontWeight: 700,
-              }}
-            >
-              Sponsor
-            </div>
-          )}
+          <a
+            href={phone ? `tel:${phone.replace(/\s+/g, "")}` : websiteUrl ?? "#"}
+            target={phone ? undefined : "_blank"}
+            rel={phone ? undefined : "noopener noreferrer"}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-3"
+            style={{
+              background: "#f8efdf",
+              border: "1px solid rgba(188,145,78,.25)",
+              color: "#a16f34",
+              fontWeight: 700,
+            }}
+          >
+            {phone ? (
+              <>
+                <Phone size={15} />
+                Call Sponsor
+              </>
+            ) : (
+              <>
+                Visit Website
+                <ExternalLink size={15} />
+              </>
+            )}
+          </a>
         </div>
-
       </div>
     </div>
   );
-
-  return websiteUrl ? (
-    <a
-      href={websiteUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block h-full"
-    >
-      {card}
-    </a>
-  ) : (
-    card
-  );
 }
+
 
 export function PoweredBy({
   poweredBy,

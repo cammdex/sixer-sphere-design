@@ -3,18 +3,13 @@ import { AnimatedNumber } from "./AnimatedNumber";
 interface DisplayBroadcastProps {
   playerNumber: string;
   playerName: string;
-  role: string;
-
-  basePrice: number;
-  age?: number;
-  style?: string;
+  
 
   currentBid: number;
   increment: number;
 
   teamName: string;
 
-  playerImage?: string;
 teamLogo?: string;
 leaving?: boolean;
 teamGlow?: boolean;
@@ -24,14 +19,9 @@ unsold?: boolean;
 export function DisplayBroadcast({
   playerNumber,
   playerName,
-  role,
-  basePrice,
-  age,
-  style,
   currentBid,
   increment,
   teamName,
- playerImage,
 teamLogo,
 leaving = false,
 teamGlow = false,
@@ -74,74 +64,17 @@ unsold = false,
   `}
 >
 
-        <div className="h-36 w-36 overflow-hidden rounded-full border border-primary/15 bg-muted">
-
-          {playerImage ? (
-            <img
-              src={playerImage}
-              alt={playerName}
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-              PHOTO
-            </div>
-          )}
-
-        </div>
-
-        <div>
-
-          <div className="text-lg font-semibold uppercase tracking-[0.18em] text-foreground/80">
-            PLAYER
-          </div>
-
-          <div className="mt-1 text-5xl font-black text-primary">
-            {playerNumber}
-          </div>
-
-          <div className="mt-1 text-[58px] font-extrabold leading-tight text-foreground">
-            {playerName}
-          </div>
-
-          <div className="mt-2 text-2xl font-medium uppercase tracking-[0.25em] text-muted-foreground">
-            {role}
-          </div>
-
-          {/* Future Details */}
-
-          <div className="mt-5 flex gap-8 text-sm text-muted-foreground">
-
-            <div>
-              <div className="uppercase tracking-widest">
-                Base Price
-              </div>
-              <div className="mt-1 font-semibold text-foreground">
-                ₹{new Intl.NumberFormat("en-IN").format(basePrice)}
-              </div>
-            </div>
-
-            <div>
-              <div className="uppercase tracking-widest">
-                Age
-              </div>
-              <div className="mt-1 font-semibold text-foreground">
-                {age ?? "--"}
-              </div>
-            </div>
-
-            <div>
-              <div className="uppercase tracking-widest">
-                Style
-              </div>
-              <div className="mt-1 font-semibold text-foreground">
-                {style ?? "--"}
-              </div>
-            </div>
-
-          </div>
-
-        </div>
+        <div className="w-[700px] shrink-0">
+  <img
+  src={`/player-cards/${playerNumber}.png`}
+  onError={(e) => {
+    e.currentTarget.src = "/player-cards/placeholder.png";
+  }}
+    alt={playerName}
+    className="w-full h-auto object-contain"
+    draggable={false}
+  />
+</div>
 
       </div>
 

@@ -6,7 +6,7 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 //import { mcpPlugin } from "@lovable.dev/mcp-js/stacks/tanstack/vite";
-
+import { VitePWA } from "vite-plugin-pwa";
 export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
@@ -14,7 +14,48 @@ export default defineConfig({
     server: { entry: "server" },
   },
   vite: {
-    plugins: [],
+    plugins: [
+  VitePWA({
+    registerType: "autoUpdate",
+    injectRegister: "auto",
+
+    includeAssets: [
+  "icons/apple-touch-icon.png",
+],
+
+    manifest: {
+      name: "UBC",
+      short_name: "UBC",
+      description: "Official Udaipur Bohra Club App",
+
+      theme_color: "#4c3624",
+      background_color: "#fffaf2",
+
+      display: "standalone",
+      orientation: "portrait",
+      start_url: "/",
+
+      icons: [
+        {
+          src: "/icons/icon-192.png",
+          sizes: "192x192",
+          type: "image/png",
+        },
+        {
+          src: "/icons/icon-512.png",
+          sizes: "512x512",
+          type: "image/png",
+        },
+        {
+          src: "/icons/icon-512.png",
+          sizes: "512x512",
+          type: "image/png",
+          purpose: "maskable",
+        },
+      ],
+    },
+  }),
+],
   },
 });
 

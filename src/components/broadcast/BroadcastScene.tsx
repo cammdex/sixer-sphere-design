@@ -33,7 +33,7 @@ export function BroadcastScene({
       className="
         relative
         mx-auto
-        h-[620px]
+        h-[820px]
         w-full
         overflow-hidden
         rounded-[34px]
