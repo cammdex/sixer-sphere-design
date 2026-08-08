@@ -1,154 +1,90 @@
-import { TeamCrest } from "@/components/mobile-layout";
 import { useState } from "react";
-import  TeamDetails  from "@/components/team-details";
-import { formatINR } from "@/lib/gpl-data";
+import { TeamCrest } from "@/components/mobile-layout";
+import TeamDetails from "@/components/team-details";
 import { useLiveTeams, useLivePlayers } from "@/lib/auction-store";
 
 export function LiveTeams() {
   const { teams } = useLiveTeams();
   const { players } = useLivePlayers();
-const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
 
-const selectedTeam =
-  teams.find((t) => t.id === selectedTeamId) ?? null;
+  const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
+
+  const selectedTeam =
+    teams.find((team) => team.id === selectedTeamId) ?? null;
 
   return (
-  <>
-    <section className="mt-5">
-      <div className="mb-5">
-  <div
-    className="text-[11px] font-bold uppercase tracking-[0.24em]"
-    style={{ color: "#9a6f3c" }}
-  >
-    Auction Dashboard
-  </div>
-
-  <h2
-  className="mt-2 font-display text-2xl md:text-5xl font-black tracking-tight"
-    style={{ color: "#4c3624" }}
-  >
-    Live Team Purse
-  </h2>
-
-  <div className="mt-3 flex items-center gap-3">
-    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-yellow-700/40 to-transparent" />
-    <span className="">✦</span>
-    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-yellow-700/40 to-transparent" />
-  </div>
-</div>
-
-      <div className="space-y-5">
-        {teams.map((team) => {
-          const pursePercent =
-            ((team.purse ?? 0) / (team.initialPurse ?? 1)) * 100;
-
-          return (
-            <div
+    <>
+      {/* Team tabs */}
+      <div className="relative">
+        <div className="flex gap-2.5 overflow-x-auto pb-2 px-0.5 snap-x snap-mandatory no-scrollbar">
+          {teams.map((team) => (
+            <button
               key={team.id}
+              type="button"
               onClick={() => setSelectedTeamId(team.id)}
-              className="auction-card relative cursor-pointer overflow-hidden rounded-[28px] md:rounded-[34px] p-5 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              className="group relative flex h-[132px] min-w-[168px] snap-start flex-col items-center justify-center overflow-hidden rounded-[18px] text-center transition-all duration-300 active:scale-[0.97]"
+              style={{
+                backgroundColor: "#f7efdd",
+                backgroundImage:
+                  "url('/images/live-player-card/background.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                border: "1px solid rgba(138,97,57,.45)",
+                boxShadow:
+                  "0 7px 16px rgba(80,55,30,.10), inset 0 0 0 1px rgba(255,255,255,.28)",
+              }}
             >
-              <div className="flex items-center gap-2 md:gap-3">
+              {/* Subtle parchment overlay */}
+              <div
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(255,250,235,.18), rgba(215,181,124,.08))",
+                }}
+              />
+
+              {/* Team crest */}
+              <div className="relative z-10 flex h-12 w-12 items-center justify-center">
                 <TeamCrest
                   short={team.short}
                   color={team.color}
                   color2={team.color2}
-                  size={48}
-                />
-
-                <div className="flex-1">
-                  <h3
-  className="font-display text-xl md:text-3xl font-black tracking-tight"
-  style={{
-    color:"#4c3624"
-  }}
->
-                    {team.name}
-                  </h3>
-
-                  <div
-  className="mt-1"
-  style={{
-    color:"#a16f34"
-  }}
->
-  <div className="my-4 flex items-center gap-2">
-    <div className="h-px flex-1 bg-yellow-700/20" />
-    <span className="text-[9px] text-yellow-700">✦</span>
-    <div className="h-px flex-1 bg-yellow-700/20" />
-  </div>
-
-  <p className="text-2xl md:text-4xl font-black tracking-tight">
-    {formatINR(team.purse ?? 0)}
-  </p>
-</div>
-
-                </div>
-              </div>
-
-              {/* Purse Bar */}
-
-              <div className="mt-4 h-4 overflow-hidden rounded-2xl bg-card">
-                <div
-                  className="h-full rounded-2xl bg-gradient-to-r from-green-500 to-emerald-400 transition-all duration-500"
-                  style={{
-  width: `${Math.max(0, Math.min(100, pursePercent))}%`,
-  background:
-    pursePercent > 65
-      ? "linear-gradient(90deg,#8a5b2c,#c79a56,#e5c983,#c79a56,#8a5b2c)"
-      : pursePercent > 35
-      ? "linear-gradient(90deg,#8b5e3c,#c67c39,#d69b58,#c67c39,#8b5e3c)"
-      : "linear-gradient(90deg,#7a3326,#b4513b,#d77d59,#b4513b,#7a3326)",
-  boxShadow:
-    "0 0 10px rgba(180,120,60,.25), inset 0 1px rgba(255,255,255,.3)",
-}}
+                  size={46}
                 />
               </div>
 
-              <div className="mt-3 grid grid-cols-2 gap-3">
-                <div>
-                 <p
-  className="text-[10px] uppercase tracking-widest"
-  style={{
-    color: "#8d6b47",
-  }}
->
-                    Squad
-                  </p>
-
-                  <p className="font-display text-xl md:text-2xl font-extrabold">
-                    {team.playersBought}/{team.squadLimit}
-                  </p>
-                </div>
-
-                <div className="text-right">
-                 <p
-  className="text-[10px] uppercase tracking-widest"
-  style={{
-    color: "#8d6b47",
-  }}
->
-                    Maximum Available Bid
-                  </p>
-
-                  <p className="font-display text-xl md:text-2xl font-extrabold text-gold">
-                    {formatINR(Number(team.maxBid ?? 0))}
-                  </p>
-                </div>
+              {/* Team name */}
+              <div
+                className="relative z-10 mt-2 px-2 font-display text-[14px] font-black leading-tight"
+                style={{
+                  color: "#4b3120",
+                  textShadow: "0 1px rgba(255,255,255,.35)",
+                }}
+              >
+                {team.name}
               </div>
-            </div>
-          );
-        })}
+
+              {/* Small decorative line */}
+              <div
+                className="relative z-10 mt-2 h-px w-12"
+                style={{
+                  background:
+                    "linear-gradient(90deg, transparent, #b8863b, transparent)",
+                }}
+              />
+            </button>
+          ))}
+        </div>
       </div>
-        </section>
 
-    <TeamDetails
-  open={!!selectedTeam}
-  team={selectedTeam}
-  players={players}
- onClose={() => setSelectedTeamId(null)}
-  onPlayerClick={() => {}}
-/>
-  </>
-);
+      {/* Selected team's players/details */}
+      <TeamDetails
+        open={!!selectedTeam}
+        team={selectedTeam}
+        players={players}
+        onClose={() => setSelectedTeamId(null)}
+        onPlayerClick={() => {}}
+      />
+    </>
+  );
 }

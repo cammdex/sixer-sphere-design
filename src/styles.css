@@ -337,7 +337,6 @@ body {
 }
 
 @keyframes playerEnter {
-
   from {
     opacity: 0;
     transform: translateX(40px) scale(.98);
@@ -347,9 +346,70 @@ body {
     opacity: 1;
     transform: translateX(0) scale(1);
   }
-
 }
 
 .animate-player-enter {
-  animation: playerEnter 350ms cubic-bezier(.2,.9,.2,1);
+  animation: playerEnter 350ms cubic-bezier(.2, .9, .2, 1);
+}
+
+
+/* ---------- PLAYER SOLD EXIT ---------- */
+
+@keyframes playerLeaving {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+
+  35% {
+    opacity: 1;
+    transform: translateX(-20px) scale(1.01);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(900px) scale(0.72) rotate(4deg);
+  }
+}
+
+.animate-player-leaving {
+  animation: playerLeaving 1.5s cubic-bezier(.65, 0, .85, .25) forwards;
+}
+
+
+/* ---------- PLAYER UNSOLD EXIT ---------- */
+
+@keyframes playerUnsold {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+
+  20% {
+    opacity: 1;
+    transform: scale(1.05) rotate(-2deg);
+  }
+
+  45% {
+    opacity: 0.9;
+    transform: scale(0.92) rotate(3deg);
+    filter: blur(1px);
+  }
+
+  70% {
+    opacity: 0.45;
+    transform: scale(0.45) rotate(-8deg);
+    filter: blur(4px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(18deg);
+    filter: blur(12px);
+  }
+}
+
+.animate-player-unsold {
+  animation: playerUnsold 1.2s cubic-bezier(.7, 0, .9, .3) forwards;
 }

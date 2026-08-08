@@ -3,12 +3,14 @@ import { BroadcastOverlay } from "./BroadcastOverlay";
 
 export function IdleBroadcast() {
   return (
-    <div className="relative">
+    <section className="w-full overflow-hidden">
       <BroadcastEngine />
 
-      <BroadcastOverlay
-  ticker="WELCOME TO THE OFFICIAL UBL PLAYER AUCTION • FRANCHISE SHOWCASE • PLAYER SHOWCASE • AUCTION BEGINS SOON"
-/>
-    </div>
+      <div className="mt-2 sm:mt-4 lg:mt-5">
+        <BroadcastOverlay
+          ticker="WELCOME TO THE OFFICIAL UBL PLAYER AUCTION • FRANCHISE SHOWCASE • PLAYER SHOWCASE • AUCTION BEGINS SOON"
+        />
+      </div>
+    </section>
   );
 }

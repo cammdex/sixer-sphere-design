@@ -29,9 +29,9 @@ export function LivePlayerCard({
         statusColor={statusColor}
       />
 
-      <div className="px-10 py-8">
+      <div className="px-3 py-3 sm:px-5 sm:py-5 lg:px-10 lg:py-8">
 
-        <div className="grid items-start gap-10 lg:grid-cols-[2.25fr_0.9fr]">
+        <div className="grid items-start gap-3 sm:gap-5 lg:gap-10 lg:grid-cols-[2.25fr_0.9fr]">
 
           <PlayerShowcase
   playerNumber={player.playerNumber}

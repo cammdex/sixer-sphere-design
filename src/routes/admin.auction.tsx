@@ -565,8 +565,6 @@ if (!sold) {
   return;
 }
 
-await clearLiveAuction();
-
 toast.success(
   `${currentPlayer.name} sold to ${
     teams.find((t) => t.id === teamInput)?.short
@@ -591,19 +589,14 @@ setQ("");
   onClick={async () => {
     console.log("Before markUnsold", state);
 
-await markUnsold(currentPlayer.id);
+    await markUnsold(currentPlayer.id);
 
-console.log("After markUnsold");
+    console.log("After markUnsold");
 
-await clearLiveAuction();
+    toast.success(`${currentPlayer.name} marked unsold`);
 
-console.log("After clearLiveAuction");
-
-toast.success(`${currentPlayer.name} marked unsold`);
-
-
-setTeamInput("");
-setQ("");
+    setTeamInput("");
+    setQ("");
   }}
   className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 text-xs font-semibold ${
     state.status === "goingTwice"

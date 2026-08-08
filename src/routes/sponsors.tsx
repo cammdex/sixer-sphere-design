@@ -4,6 +4,7 @@ import { useState } from "react";
 import { MobileLayout } from "@/components/mobile-layout";
 import { LeadSponsor } from "@/components/home/LeadSponsor";
 import { PoweredBy } from "@/components/home/PoweredBy";
+import { LiveSponsorCard } from "@/components/home/LiveSponsorCard";
 import {
   leadSponsor,
   poweredBySponsors,
@@ -313,8 +314,14 @@ const businessDirectory = [
     name: "Mufaddal Sadri",
     category: "IT & Software",
     phone: "+91 8233979772",
-  },
 
+    
+  },
+{
+  name: "Ibrahim Vagpura",
+  category: "IT & Software",
+  phone: "+91 8302267652",
+},
   {
     name: "TOC Mark",
     category: "Digital Marketing",
@@ -389,6 +396,16 @@ function SponsorsPage() {
             websiteUrl: s.websiteUrl,
           }))}
         />
+<div className="mt-5">
+  <LiveSponsorCard
+    name="Personal Slimming Center"
+    logo="/sponsors/live.png"
+    tagline="Science & Serenity converge for Body Renewal!"
+    phone="07300047372"
+    instagram="https://www.instagram.com/personalslimmingcenter"
+  />
+</div>
+
       </div>
       <div className="mt-10">
   <div className="h-px bg-gradient-to-r from-transparent via-yellow-700/40 to-transparent" />

@@ -5,26 +5,6 @@ interface BroadcastSceneProps {
   children: ReactNode;
 }
 
-function Corner({
-  className,
-}: {
-  className: string;
-}) {
-  return (
-    <div
-      className={`absolute h-10 w-10 pointer-events-none z-30 ${className}`}
-    >
-      <div
-        className="absolute inset-0 rounded-sm"
-        style={{
-          borderColor: "#C79A35",
-          borderStyle: "solid",
-        }}
-      />
-    </div>
-  );
-}
-
 export function BroadcastScene({
   children,
 }: BroadcastSceneProps) {
@@ -33,14 +13,23 @@ export function BroadcastScene({
       className="
         relative
         mx-auto
-        h-[820px]
+        h-[390px]
         w-full
         overflow-hidden
-        rounded-[34px]
+        rounded-[18px]
         isolate
-        border-[10px]
+        border-[5px]
         border-[#4A2F1B]
-        shadow-[0_18px_60px_rgba(0,0,0,.35)]
+        shadow-[0_12px_35px_rgba(0,0,0,.28)]
+
+        sm:h-[520px]
+        sm:rounded-[26px]
+        sm:border-[7px]
+
+        lg:h-[820px]
+        lg:rounded-[34px]
+        lg:border-[10px]
+        lg:shadow-[0_18px_60px_rgba(0,0,0,.35)]
       "
       style={{
         backgroundImage:
@@ -50,48 +39,52 @@ export function BroadcastScene({
       }}
     >
       {/* Brass Inner Frame */}
-
       <div
         className="
           absolute
-          inset-[8px]
-          rounded-[24px]
+          inset-[5px]
+          rounded-[14px]
           border
           border-[#C79A35]/70
           pointer-events-none
           z-20
+
+          sm:inset-[7px]
+          sm:rounded-[19px]
+
+          lg:inset-[8px]
+          lg:rounded-[24px]
         "
       />
 
       {/* Corner Plates */}
+      <div className="absolute left-2 top-2 h-5 w-5 border-l-2 border-t-2 border-[#D7B061] z-30 sm:left-3 sm:top-3 sm:h-6 sm:w-6 lg:left-4 lg:top-4 lg:h-8 lg:w-8" />
 
-      <div
-        className="absolute left-4 top-4 h-8 w-8 border-l-2 border-t-2 border-[#D7B061] z-30"
-      />
+      <div className="absolute right-2 top-2 h-5 w-5 border-r-2 border-t-2 border-[#D7B061] z-30 sm:right-3 sm:top-3 sm:h-6 sm:w-6 lg:right-4 lg:top-4 lg:h-8 lg:w-8" />
 
-      <div
-        className="absolute right-4 top-4 h-8 w-8 border-r-2 border-t-2 border-[#D7B061] z-30"
-      />
+      <div className="absolute left-2 bottom-2 h-5 w-5 border-l-2 border-b-2 border-[#D7B061] z-30 sm:left-3 sm:bottom-3 sm:h-6 sm:w-6 lg:left-4 lg:bottom-4 lg:h-8 lg:w-8" />
 
-      <div
-        className="absolute left-4 bottom-4 h-8 w-8 border-l-2 border-b-2 border-[#D7B061] z-30"
-      />
-
-      <div
-        className="absolute right-4 bottom-4 h-8 w-8 border-r-2 border-b-2 border-[#D7B061] z-30"
-      />
+      <div className="absolute right-2 bottom-2 h-5 w-5 border-r-2 border-b-2 border-[#D7B061] z-30 sm:right-3 sm:bottom-3 sm:h-6 sm:w-6 lg:right-4 lg:bottom-4 lg:h-8 lg:w-8" />
 
       {/* Inner Shadow */}
-
       <div
-        className="absolute inset-[10px] rounded-[22px] pointer-events-none z-20"
+        className="
+          absolute
+          inset-[6px]
+          rounded-[14px]
+          pointer-events-none
+          z-20
+          sm:inset-[8px]
+          sm:rounded-[20px]
+          lg:inset-[10px]
+          lg:rounded-[22px]
+        "
         style={{
           boxShadow: "inset 0 0 32px rgba(0,0,0,.10)",
         }}
       />
 
       {/* Light Tint */}
-
       <div
         className="absolute inset-0"
         style={{
@@ -101,35 +94,40 @@ export function BroadcastScene({
       />
 
       {/* Ambient Glow */}
-
       <div
         className="
           absolute
           left-1/2
           top-1/2
-          h-[760px]
-          w-[760px]
+          h-[360px]
+          w-[360px]
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
           bg-[#C79A35]
           opacity-8
-          blur-[170px]
+          blur-[100px]
           animate-pulse
+
+          sm:h-[500px]
+          sm:w-[500px]
+          sm:blur-[130px]
+
+          lg:h-[760px]
+          lg:w-[760px]
+          lg:blur-[170px]
         "
       />
 
       {/* Soft Vignette */}
-
       <div
         className="absolute inset-0"
         style={{
-          boxShadow: "inset 0 0 120px rgba(0,0,0,.12)",
+          boxShadow: "inset 0 0 80px rgba(0,0,0,.12)",
         }}
       />
 
       {/* Gold Sweep */}
-
       <motion.div
         className="
           absolute
@@ -141,7 +139,7 @@ export function BroadcastScene({
         style={{
           background:
             "linear-gradient(90deg, transparent, rgba(255,235,180,.28), transparent)",
-          filter: "blur(28px)",
+          filter: "blur(20px)",
           transform: "skewX(-18deg)",
           mixBlendMode: "screen",
         }}
@@ -160,7 +158,6 @@ export function BroadcastScene({
       />
 
       {/* Content */}
-
       <div
         className="
           relative
@@ -170,7 +167,10 @@ export function BroadcastScene({
           w-full
           items-center
           justify-center
-          px-10
+          px-3
+
+          sm:px-6
+          lg:px-10
         "
       >
         {children}
