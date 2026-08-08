@@ -16,7 +16,8 @@ export default defineConfig({
   vite: {
     plugins: [
       VitePWA({
-        registerType: "autoUpdate",
+  registerType: "autoUpdate",
+  outDir: ".output/public",
 
         injectRegister: "auto",
 
@@ -27,10 +28,11 @@ export default defineConfig({
         ],
 
         workbox: {
-          globPatterns: [
-            "**/*.{js,css,html,png,svg,ico,woff2}",
-          ],
-        },
+  maximumFileSizeToCacheInBytes: 15 * 1024 * 1024,
+  globPatterns: [
+    "**/*.{js,css,html,png,svg,ico,woff2}",
+  ],
+},
 
         manifest: {
           id: "/",

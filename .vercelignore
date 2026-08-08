@@ -1,0 +1,9 @@
+node_modules
+.output
+dist
+.git
+.firebase
+.wrangler
+.lovable
+.vscode
+*.log
