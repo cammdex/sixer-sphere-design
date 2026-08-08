@@ -1,61 +1,82 @@
 // @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
 // or the app will break with duplicate plugins:
-//   - tanstackStart, viteReact, tailwindcss, tsConfigPaths, nitro (build-only using cloudflare as a default target),
-//     componentTagger (dev-only), VITE_* env injection, @ path alias, React/TanStack dedupe,
-//     error logger plugins, and sandbox detection (port/host/strictPort).
-// You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
+//   - tanstackStart, viteReact, tailwindcss, tsConfigPaths, nitro,
+//     componentTagger, VITE_* env injection, @ alias, etc.
+
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
-//import { mcpPlugin } from "@lovable.dev/mcp-js/stacks/tanstack/vite";
 import { VitePWA } from "vite-plugin-pwa";
+
 export default defineConfig({
   tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
+    server: {
+      entry: "server",
+    },
   },
+
   vite: {
     plugins: [
-  VitePWA({
-    registerType: "autoUpdate",
-    injectRegister: "auto",
+      VitePWA({
+        registerType: "autoUpdate",
 
-    includeAssets: [
-  "icons/apple-touch-icon.png",
-],
+        injectRegister: "auto",
 
-    manifest: {
-      name: "UBC",
-      short_name: "UBC",
-      description: "Official Udaipur Bohra Club App",
+        includeAssets: [
+          "icons/apple-touch-icon.png",
+          "icons/icon-192.png",
+          "icons/icon-512.png",
+        ],
 
-      theme_color: "#4c3624",
-      background_color: "#fffaf2",
-
-      display: "standalone",
-      orientation: "portrait",
-      start_url: "/",
-
-      icons: [
-        {
-          src: "/icons/icon-192.png",
-          sizes: "192x192",
-          type: "image/png",
+        workbox: {
+          globPatterns: [
+            "**/*.{js,css,html,png,svg,ico,woff2}",
+          ],
         },
-        {
-          src: "/icons/icon-512.png",
-          sizes: "512x512",
-          type: "image/png",
+
+        manifest: {
+          id: "/",
+          name: "Udaipur Bohra Club",
+          short_name: "UBC",
+          description: "Official Udaipur Bohra Club App",
+
+          theme_color: "#4c3624",
+          background_color: "#fffaf2",
+
+          display: "standalone",
+          orientation: "portrait",
+          start_url: "/",
+
+          icons: [
+            {
+              src: "/icons/icon-192.png",
+              sizes: "192x192",
+              type: "image/png",
+            },
+
+            {
+              src: "/icons/icon-512.png",
+              sizes: "512x512",
+              type: "image/png",
+            },
+
+            {
+              src: "/icons/icon-512.png",
+              sizes: "512x512",
+              type: "image/png",
+              purpose: "maskable",
+            },
+
+            {
+              src: "/icons/apple-touch-icon.png",
+              sizes: "180x180",
+              type: "image/png",
+            },
+          ],
         },
-        {
-          src: "/icons/icon-512.png",
-          sizes: "512x512",
-          type: "image/png",
-          purpose: "maskable",
+
+        devOptions: {
+          enabled: true,
         },
-      ],
-    },
-  }),
-],
+      }),
+    ],
   },
 });
-

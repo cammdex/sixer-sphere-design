@@ -15,29 +15,35 @@ const sponsorCategories = [
 ] as const;
 
 const businessCategories = [
-  "Aluminum & Glasswork",
-  "Automobiles & Spare Parts",
+  "Aluminium & Glasswork",
+  "Automobile",
   "Clothing",
   "Construction",
+  "Cosmetics",
+  "Digital Marketing",
   "Electricals",
   "Electronics",
-  "Events & Planners",
-  "Foods & Beverages",
+  "Event Planners",
+  "Food & Beverages",
+  "Gifting Solutions",
+  "Grocery",
   "Hardware",
   "Home Furnishing",
   "Household Material",
   "Interior Designers",
   "Iron & Steel",
+  "IT & Software",
   "Jewellery",
   "Marble",
   "Paints",
   "Plastic",
   "Plywood",
+  "Printing",
   "Professionals",
   "Real Estate",
   "Sanitary",
   "Textile",
-  "Tours & Travels",
+  "Tours & Travel",
   "Others",
 ] as const;
 
@@ -163,6 +169,187 @@ const goldenSponsors = [
   },
 ];
 
+const categoryIcons: Record<string, string> = {
+  "Aluminium & Glasswork": "/category-icons/Aluminium.png",
+  "Automobile": "/category-icons/Automobile.png",
+  "Clothing": "/category-icons/Clothing.png",
+  "Construction": "/category-icons/Construction.png",
+  "Cosmetics": "/category-icons/Cosmetics.png",
+  "Digital Marketing": "/category-icons/Digmarketing.png",
+  "Electricals": "/category-icons/Electricals.png",
+  "Electronics": "/category-icons/Electronics.png",
+  "Event Planners": "/category-icons/Planner.png",
+  "Food & Beverages": "/category-icons/Foodbev.png",
+  "Gifting Solutions": "/category-icons/Gifting.png",
+  "Grocery": "/category-icons/Grocery.png",
+  "Hardware": "/category-icons/Hardware.png",
+  "Home Furnishing": "/category-icons/Furnishing.png",
+  "Household Material": "/category-icons/Household.png",
+  "Interior Designers": "/category-icons/Designers.png",
+  "Iron & Steel": "/category-icons/Ironsteel.png",
+  "IT & Software": "/category-icons/Software.png",
+  "Jewellery": "/category-icons/Jewellery.png",
+  "Marble": "/category-icons/Marble.png",
+  "Paints": "/category-icons/Paints.png",
+  "Plastic": "/category-icons/Plastic.png",
+  "Plywood": "/category-icons/Plywood.png",
+  "Printing": "/category-icons/Printing.png",
+  "Professionals": "/category-icons/Professionals.png",
+  "Real Estate": "/category-icons/Estate.png",
+  "Sanitary": "/category-icons/Sanitary.png",
+  "Textile": "/category-icons/Textile.png",
+  "Tours & Travel": "/category-icons/Travels.png",
+  "Others": "/category-icons/Others.png",
+};
+
+const businessDirectory = [
+  {
+    name: "TOC Tours",
+    category: "Tours & Travel",
+    phone: "+91 7976675352",
+  },
+  {
+    name: "Foreign Exchange",
+    category: "Tours & Travel",
+    phone: "+91 7014720568",
+  },
+
+  {
+    name: "The Wander Hub",
+    category: "Clothing",
+    phone: "+91 7073222665",
+  },
+  {
+    name: "AV Designs",
+    category: "Clothing",
+    phone: "+91 9057204179",
+  },
+  {
+    name: "Leather & Stitches",
+    category: "Clothing",
+    phone: "+91 7073525253",
+  },
+  {
+    name: "Ruqins Bags",
+    category: "Clothing",
+    phone: "+91 7073025872",
+  },
+
+  {
+    name: "Bhalamwala Bricks",
+    category: "Construction",
+    phone: "+91 9680406779",
+  },
+
+  {
+    name: "Taste Buds Kitchen",
+    category: "Food & Beverages",
+    phone: "+91 9549462525",
+  },
+  {
+    name: "MacMoods Kitchen",
+    category: "Food & Beverages",
+    phone: "+91 8003452351",
+  },
+
+  {
+    name: "A to Z Households",
+    category: "Household Material",
+    phone: "+91 9680983068",
+  },
+
+  {
+    name: "Regen Jewels",
+    category: "Jewellery",
+    phone: "+91 9636507887",
+  },
+
+  {
+    name: "India Traders",
+    category: "Hardware",
+    phone: "+91 9413558403",
+  },
+  {
+    name: "Welder's Choice",
+    category: "Hardware",
+    phone: "+91 8003429901",
+  },
+
+  {
+    name: "Alloy Steel Traders",
+    category: "Iron & Steel",
+    phone: "+91 6350179171",
+  },
+  {
+    name: "S.M.B Steels",
+    category: "Iron & Steel",
+    phone: "+91 8890728785",
+  },
+
+  {
+    name: "Sky Homes",
+    category: "Interior Designers",
+    phone: "+91 8890728785",
+  },
+
+  {
+    name: "Regen Motors",
+    category: "Automobile",
+    phone: "+91 8003863230",
+  },
+
+  {
+    name: "Badri Perfumes",
+    category: "Cosmetics",
+    phone: "+91 8852823497",
+  },
+
+  {
+    name: "Mustafa Sanwari",
+    category: "IT & Software",
+    phone: "+91 9680876750",
+  },
+  {
+    name: "Mufaddal Sadri",
+    category: "IT & Software",
+    phone: "+91 8233979772",
+  },
+
+  {
+    name: "TOC Mark",
+    category: "Digital Marketing",
+    phone: "+91 8949469857",
+  },
+  {
+    name: "Moiz Ora",
+    category: "Digital Marketing",
+    phone: "+91 9057017342",
+  },
+  {
+    name: "Hussain Ajmer",
+    category: "Digital Marketing",
+    phone: "+91 9929455853",
+  },
+
+  {
+    name: "Colorway",
+    category: "Gifting Solutions",
+    phone: "+91 9950645276",
+  },
+
+  {
+    name: "Dr. Yusuf Bhalamwala",
+    category: "Professionals",
+    phone: "+91 9766567352",
+  },
+
+  {
+    name: "Collab Coworking Office",
+    category: "Others",
+    phone: "+91 9079829929",
+  },
+];
+
 function SponsorsPage() {
   const [cat, setCat] = useState<(typeof sponsorCategories)[number]>("All");
   const [directoryOpen, setDirectoryOpen] = useState(false);
@@ -206,14 +393,50 @@ function SponsorsPage() {
       <div className="mt-10">
   <div className="h-px bg-gradient-to-r from-transparent via-yellow-700/40 to-transparent" />
 
-  <div className="mt-5 text-center">
-    <div className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#9a6f3c]">
-      Partner Directory
+  <div className="mt-5 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+
+    <div>
+      <div
+        className="text-[11px] font-bold uppercase tracking-[0.24em]"
+        style={{ color: "#9a6f3c" }}
+      >
+        Partner Directory
+      </div>
+
+      <h2
+        className="mt-2 font-display text-3xl font-black"
+        style={{ color: "#4c3624" }}
+      >
+        Business Partners
+      </h2>
     </div>
 
-    <h2 className="mt-2 font-display text-3xl font-black text-[#4c3624]">
-      Business Partners
-    </h2>
+    <a
+      href="https://forms.gle/61iy6yCq6DcEwdKx6"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="
+        inline-flex
+        items-center
+        justify-center
+        rounded-2xl
+        px-6
+        py-3
+        text-sm
+        font-bold
+        transition-all
+        duration-300
+        hover:-translate-y-1
+      "
+      style={{
+        background: "linear-gradient(180deg,#c79a56,#a97838)",
+        color: "#fff",
+        boxShadow: "0 10px 24px rgba(169,120,56,.28)",
+      }}
+    >
+      Register Your Business
+    </a>
+
   </div>
 </div>
 
@@ -266,12 +489,22 @@ function SponsorsPage() {
       Business Category
     </div>
 
-    <div className="flex flex-wrap gap-2">
+    <div
+  className="
+    flex
+    flex-col
+    gap-2
+    max-h-56
+    overflow-y-auto
+    pr-2
+    custom-scrollbar
+  "
+>
       {businessCategories.map((category) => (
         <button
   key={category}
   onClick={() => setBusinessCategory(category)}
-  className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
+  className={`w-full rounded-full px-4 py-3 text-sm font-semibold text-left transition-all ${
     businessCategory === category
       ? "gradient-gold text-gold-foreground shadow-glow-gold"
       : ""
@@ -294,30 +527,22 @@ function SponsorsPage() {
 )}
 
 {cat === "Directory" && businessCategory && (
-  <div
-    className="mt-6 rounded-3xl p-6 text-center"
-    style={{
-      background: "#fffdf8",
-      border: "1px solid rgba(188,145,78,.18)",
-    }}
-  >
-    <div
-      className="text-[11px] font-bold uppercase tracking-[0.24em]"
-      style={{ color: "#9a6f3c" }}
-    >
-      Selected Category
-    </div>
+  <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
 
-    <h2
-      className="mt-2 font-display text-2xl font-black"
-      style={{ color: "#4c3624" }}
-    >
-      {businessCategory}
-    </h2>
+    {businessDirectory
+      .filter(
+        (business) => business.category === businessCategory
+      )
+      .map((business) => (
+        <BusinessCard
+          key={business.name}
+          title={business.category}
+          sponsor={business.name}
+          logo="/sponsors/white.png"
+          phone={business.phone}
+        />
+      ))}
 
-    <p className="mt-3 text-sm text-neutral-600">
-      Businesses in this category will appear here.
-    </p>
   </div>
 )}
 
@@ -390,14 +615,14 @@ function SponsorsPage() {
       className="text-[11px] font-bold uppercase tracking-[0.24em]"
       style={{ color: "#9a6f3c" }}
     >
-      Golden Sponsors
+      Premium Partners
     </div>
 
     <h2
       className="mt-2 font-display text-2xl font-black"
       style={{ color: "#4c3624" }}
     >
-      Premium Partners
+      Golden Sponsor
     </h2>
 
     <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -413,9 +638,41 @@ function SponsorsPage() {
     </div>
   </div>
 )}
-      <button className="mt-6 w-full rounded-2xl gradient-royal py-3 text-sm font-semibold text-white shadow-glow">
-        Register Your Business
-      </button>
+
+{cat === "All" && (
+  <div className="mt-10">
+
+    <div
+      className="text-[11px] font-bold uppercase tracking-[0.24em]"
+      style={{ color: "#9a6f3c" }}
+    >
+      Business Directory
+    </div>
+
+    <h2
+      className="mt-2 font-display text-2xl font-black"
+      style={{ color: "#4c3624" }}
+    >
+      Registered Businesses
+    </h2>
+
+    <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+
+      {businessDirectory.map((business) => (
+        <BusinessCard
+          key={business.name}
+          title={business.category}
+          sponsor={business.name}
+          logo={categoryIcons[business.category]}
+          phone={business.phone}
+        />
+      ))}
+
+    </div>
+
+  </div>
+)}
+
     </MobileLayout>
   );
 }

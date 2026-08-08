@@ -9,19 +9,45 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
+import { Route as SupportRouteImport } from './routes/support'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
+import { Route as ReportIssueRouteImport } from './routes/report-issue'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PlayersRouteImport } from './routes/players'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as HelpRouteImport } from './routes/help'
 import { Route as DisplayRouteImport } from './routes/display'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminAuctionRouteImport } from './routes/admin.auction'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 
+const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
+  id: '/terms-and-conditions',
+  path: '/terms-and-conditions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SponsorsRoute = SponsorsRouteImport.update({
   id: '/sponsors',
   path: '/sponsors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportIssueRoute = ReportIssueRouteImport.update({
+  id: '/report-issue',
+  path: '/report-issue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlayersRoute = PlayersRouteImport.update({
@@ -34,9 +60,19 @@ const McpRoute = McpRouteImport.update({
   path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DisplayRoute = DisplayRouteImport.update({
   id: '/display',
   path: '/display',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -70,10 +106,16 @@ const Char91DotmcpChar93InvokeToolToolRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/display': typeof DisplayRoute
+  '/help': typeof HelpRoute
   '/mcp': typeof McpRoute
   '/players': typeof PlayersRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/report-issue': typeof ReportIssueRoute
   '/sponsors': typeof SponsorsRoute
+  '/support': typeof SupportRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/auction': typeof AdminAuctionRoute
@@ -81,10 +123,16 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/display': typeof DisplayRoute
+  '/help': typeof HelpRoute
   '/mcp': typeof McpRoute
   '/players': typeof PlayersRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/report-issue': typeof ReportIssueRoute
   '/sponsors': typeof SponsorsRoute
+  '/support': typeof SupportRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/auction': typeof AdminAuctionRoute
@@ -93,10 +141,16 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/display': typeof DisplayRoute
+  '/help': typeof HelpRoute
   '/mcp': typeof McpRoute
   '/players': typeof PlayersRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/report-issue': typeof ReportIssueRoute
   '/sponsors': typeof SponsorsRoute
+  '/support': typeof SupportRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/auction': typeof AdminAuctionRoute
@@ -106,10 +160,16 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/display'
+    | '/help'
     | '/mcp'
     | '/players'
+    | '/privacy-policy'
+    | '/report-issue'
     | '/sponsors'
+    | '/support'
+    | '/terms-and-conditions'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/auction'
@@ -117,10 +177,16 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/display'
+    | '/help'
     | '/mcp'
     | '/players'
+    | '/privacy-policy'
+    | '/report-issue'
     | '/sponsors'
+    | '/support'
+    | '/terms-and-conditions'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/auction'
@@ -128,10 +194,16 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/display'
+    | '/help'
     | '/mcp'
     | '/players'
+    | '/privacy-policy'
+    | '/report-issue'
     | '/sponsors'
+    | '/support'
+    | '/terms-and-conditions'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/auction'
@@ -140,10 +212,16 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   DisplayRoute: typeof DisplayRoute
+  HelpRoute: typeof HelpRoute
   McpRoute: typeof McpRoute
   PlayersRoute: typeof PlayersRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  ReportIssueRoute: typeof ReportIssueRoute
   SponsorsRoute: typeof SponsorsRoute
+  SupportRoute: typeof SupportRoute
+  TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminAuctionRoute: typeof AdminAuctionRoute
@@ -152,11 +230,39 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms-and-conditions': {
+      id: '/terms-and-conditions'
+      path: '/terms-and-conditions'
+      fullPath: '/terms-and-conditions'
+      preLoaderRoute: typeof TermsAndConditionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sponsors': {
       id: '/sponsors'
       path: '/sponsors'
       fullPath: '/sponsors'
       preLoaderRoute: typeof SponsorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report-issue': {
+      id: '/report-issue'
+      path: '/report-issue'
+      fullPath: '/report-issue'
+      preLoaderRoute: typeof ReportIssueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/players': {
@@ -173,11 +279,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/display': {
       id: '/display'
       path: '/display'
       fullPath: '/display'
       preLoaderRoute: typeof DisplayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -220,10 +340,16 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   DisplayRoute: DisplayRoute,
+  HelpRoute: HelpRoute,
   McpRoute: McpRoute,
   PlayersRoute: PlayersRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
+  ReportIssueRoute: ReportIssueRoute,
   SponsorsRoute: SponsorsRoute,
+  SupportRoute: SupportRoute,
+  TermsAndConditionsRoute: TermsAndConditionsRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
