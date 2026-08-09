@@ -1,48 +1,25 @@
-import { BroadcastStage } from "./BroadcastStage";
-import { BroadcastOverlay } from "./BroadcastOverlay";
-
-import { LivePlayerCard } from "@/components/live-player-card/LivePlayerCard";
-
-import {
-  useAuctionState,
-  useLivePlayers,
-  useLiveTeams,
-} from "@/lib/auction-store";
+import { useAuctionState, useLivePlayers } from "@/lib/auction-store";
 
 export function LiveBroadcast() {
   const { state: auction } = useAuctionState();
-
   const { players } = useLivePlayers();
-  const { teams } = useLiveTeams();
 
   const player = players.find(
     (p) => p.id === auction.playerId
   );
 
-  const team = teams.find(
-    (t) => t.id === auction.biddingTeamId
-  );
-
   if (!player) return null;
 
   return (
-    <BroadcastStage>
-      <BroadcastOverlay
-  ticker="UDAIPUR BOHRA LEAGUE • OFFICIAL PLAYER AUCTION • LIVE BROADCAST"
-/>
-
-      <LivePlayerCard
-        player={player}
-        currentBid={auction.currentBid ?? undefined}
-        status={auction.status as
-  | "live"
-  | "goingOnce"
-  | "goingTwice"
-  | "sold"
-  | "unsold"}
-        teamName={team?.displayName}
-        teamLogo={team?.logo}
-      />
-    </BroadcastStage>
+    <div className="mt-2 flex w-full justify-center sm:mt-4 lg:mt-5">
+      <div className="w-full max-w-[600px] overflow-hidden rounded-[16px]">
+        <img
+          src={`/player-cards/${player.playerNumber}.png`}
+          alt=""
+          className="block h-auto w-full object-contain"
+          draggable={false}
+        />
+      </div>
+    </div>
   );
 }

@@ -301,7 +301,7 @@ export type Player = {
 
   photo?: string;
 
-  status?: "available" | "live" | "sold" | "unsold";
+  status?: "available" | "live" | "sold" | "unsold" | "extras";
 };
 
 export { players } from "./data/players";

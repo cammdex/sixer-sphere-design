@@ -53,7 +53,7 @@ export function useRecentSales() {
 
 export type LivePlayer = Player & {
   imageUrl?: string;
-  status: "available" | "unsold" | "sold" | "pending";
+  status: "available" | "unsold" | "extras" | "sold" | "pending";
 };
 
 export type LiveTeam = Team;
@@ -85,7 +85,7 @@ export type AuctionState = {
   | "sold"
   | "unsold";
 
-  round: 1 | 2;
+  round: 1 | 2 | 3;
 
   eventMessage?: string;
 
@@ -137,6 +137,8 @@ export function useLivePlayers() {
 
   return { players, loading };
 }
+
+
 
 export function useLiveTeams() {
   const [teams, setTeams] = useState<LiveTeam[]>([]);
@@ -224,7 +226,8 @@ async function addEvent(
 
 export async function startLiveTransition(
   playerId: string,
-  startingBid: number
+  startingBid: number,
+  round: number = 1
 ) {
   if (startingBid <= 0) {
     throw new Error("Starting bid must be greater than zero.");
@@ -248,7 +251,7 @@ currentBid: startingBid,
     // NEW STATE
     status: "transition",
 
-    round: 1,
+    round,
     eventMessage: "",
     updatedAt: serverTimestamp(),
   });
@@ -256,7 +259,8 @@ currentBid: startingBid,
 
 export async function pushPlayerLive(
   playerId: string,
-  startingBid: number
+  startingBid: number,
+  round: number = 1
 ) {
   if (startingBid <= 0) {
   throw new Error("Starting bid must be greater than zero.");
@@ -278,7 +282,7 @@ currentBid: startingBid,
 
     biddingTeamId: null,
     status: "live",
-    round: 1,
+    round,
     eventMessage: "",
     updatedAt: serverTimestamp(),
   });
@@ -622,8 +626,19 @@ await addEvent(
 export async function markUnsold(playerId: string) {
   console.log("markUnsold start");
 
+  const auctionSnap = await getDoc(doc(db, AUCTION_DOC));
+
+  if (!auctionSnap.exists()) {
+    throw new Error("Auction state not found.");
+  }
+
+  const auction = auctionSnap.data() as AuctionState;
+
+  const playerStatus =
+    auction.round === 1 ? "unsold" : "extras";
+
   await updateDoc(doc(db, PLAYERS_COLLECTION, playerId), {
-    status: "unsold",
+    status: playerStatus,
   });
 
   console.log("player updated");
@@ -636,14 +651,18 @@ export async function markUnsold(playerId: string) {
 
   console.log("auction updated");
 
-  const playerSnap = await getDoc(doc(db, PLAYERS_COLLECTION, playerId));
+  const playerSnap = await getDoc(
+    doc(db, PLAYERS_COLLECTION, playerId)
+  );
 
   console.log("player fetched");
 
   const player = playerSnap.data();
 
   await addEvent(
-    `${player?.playerNumber ?? ""} ${player?.name ?? "Player"} remained unsold`
+    `${player?.playerNumber ?? ""} ${
+      player?.name ?? "Player"
+    } remained unsold`
   );
 
   console.log("event added");

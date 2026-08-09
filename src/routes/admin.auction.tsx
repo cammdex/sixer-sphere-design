@@ -210,6 +210,7 @@ const [updatingJumpBid, setUpdatingJumpBid] = useState(false);
 const [showUtilities, setShowUtilities] = useState(false);
   const [pendingPlayer, setPendingPlayer] = useState<any>(null);
 const [showPushDialog, setShowPushDialog] = useState(false);
+const [auctionRound, setAuctionRound] = useState<1 | 2 | 3>(1);
 
   const availablePlayers = useMemo(
   () =>
@@ -236,8 +237,30 @@ const unsoldPlayers = useMemo(
         const numA = Number((a.playerNumber ?? "").replace("P", ""));
         const numB = Number((b.playerNumber ?? "").replace("P", ""));
         return numA - numB;
-      }),
-  [players]
+      })
+      .filter(
+        (p) =>
+          p.playerNumber?.toLowerCase().includes(q.toLowerCase()) ||
+          p.name.toLowerCase().includes(q.toLowerCase())
+      ),
+  [players, q]
+);
+
+const extrasPlayers = useMemo(
+  () =>
+    [...players]
+      .filter((p) => p.status === "extras")
+      .sort((a, b) => {
+        const numA = Number((a.playerNumber ?? "").replace("P", ""));
+        const numB = Number((b.playerNumber ?? "").replace("P", ""));
+        return numA - numB;
+      })
+      .filter(
+        (p) =>
+          p.playerNumber?.toLowerCase().includes(q.toLowerCase()) ||
+          p.name.toLowerCase().includes(q.toLowerCase())
+      ),
+  [players, q]
 );
 
   const currentPlayer = players.find((p) => p.id === state.playerId);
@@ -703,13 +726,59 @@ toast.success("Auction reset");
   </button>
         {!currentPlayer && (
         <section>
+
+          <div className="mb-3 flex gap-2">
+  <button
+    type="button"
+    onClick={() => setAuctionRound(1)}
+    className={`flex-1 rounded-xl py-3 text-xs font-semibold ${
+      auctionRound === 1
+        ? "gradient-royal text-white"
+        : "glass text-muted-foreground"
+    }`}
+  >
+    Round 1
+  </button>
+
+  <button
+    type="button"
+    onClick={() => setAuctionRound(2)}
+    className={`flex-1 rounded-xl py-3 text-xs font-semibold ${
+      auctionRound === 2
+        ? "gradient-royal text-white"
+        : "glass text-muted-foreground"
+    }`}
+  >
+    Round 2 — Unsold
+  </button>
+
+<button
+  type="button"
+  onClick={() => setAuctionRound(3)}
+  className={`flex-1 rounded-xl py-3 text-xs font-semibold ${
+    auctionRound === 3
+      ? "gradient-royal text-white"
+      : "glass text-muted-foreground"
+  }`}
+>
+  Round 3 — Extras
+</button>
+
+</div>
+
           <div className="relative">
             <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
             disabled={showPushDialog}
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Search Player Number (P1, P2...)"
+              placeholder={
+  auctionRound === 2
+    ? "Search Unsold Player (P1, P2...)"
+    : auctionRound === 3
+      ? "Search Extra Player (P1, P2...)"
+      : "Search Player Number (P1, P2...)"
+}
               className="w-full rounded-2xl bg-card/60 py-4 pl-10 pr-4 text-base border border-border outline-none"
             />
           </div>
@@ -718,7 +787,13 @@ toast.success("Auction reset");
     showPushDialog ? "pointer-events-none opacity-40" : ""
   }`}
 >
-            {availablePlayers.map((p) => (
+            {(
+  auctionRound === 1
+    ? availablePlayers
+    : auctionRound === 2
+      ? unsoldPlayers
+      : extrasPlayers
+).map((p) => (
               <button
                 key={p.id}
 
@@ -743,39 +818,7 @@ toast.success("Auction reset");
               </button>
             ))}
           </div>
-          {unsoldPlayers.length > 0 && (
-  <>
-    <h3 className="mt-6 mb-2 text-sm font-bold text-red-400">
-      Unsold Players ({unsoldPlayers.length})
-    </h3>
-
-    <div className="space-y-2 max-h-[30vh] overflow-y-auto">
-      {unsoldPlayers.map((p) => (
-        <div
-          key={p.id}
-          className="flex items-center gap-3 rounded-xl border border-red-500/30 bg-red-500/5 p-4"
-        >
-          <Avatar
-            initials={p.initials}
-            color="#ef4444"
-            color2="#991b1b"
-            size={46}
-          />
-
-          <div className="min-w-0 flex-1">
-            <div className="truncate text-base font-semibold">
-              {p.playerNumber} • {p.name}
-            </div>
-
-            <div className="text-[10px] text-muted-foreground">
-              {p.role} • Base {formatINR(p.basePrice)}
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </>
-)}
+          
         </section>
         )}
       </div>
@@ -784,8 +827,12 @@ toast.success("Auction reset");
     <div className="w-full max-w-sm rounded-2xl bg-card p-6">
 
       <h2 className="text-lg font-bold">
-        Push Player Live?
-      </h2>
+  {
+  auctionRound === 1
+    ? "Push Player Live?"
+    : `Push Player Live — Round ${auctionRound}?`
+}
+</h2>
 
       <p className="mt-2 text-sm text-muted-foreground">
         {pendingPlayer.playerNumber} • {pendingPlayer.name}
@@ -810,7 +857,8 @@ toast.success("Auction reset");
         // Start the broadcast transition
 await startLiveTransition(
   pendingPlayer.id,
-  pendingPlayer.basePrice
+  pendingPlayer.basePrice,
+  auctionRound
 );
 
 // Wait for the broadcast sting
@@ -821,12 +869,15 @@ await new Promise((resolve) =>
 // Now actually push the player live
 await pushPlayerLive(
   pendingPlayer.id,
-  pendingPlayer.basePrice
+  pendingPlayer.basePrice,
+  auctionRound
 );
 
 setTeamInput("");
 
-toast.success(`${pendingPlayer.name} is now live`);
+toast.success(
+  `${pendingPlayer.name} is now live for Round ${auctionRound}`
+);
 
         setPendingPlayer(null);
         setShowPushDialog(false);
