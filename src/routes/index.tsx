@@ -59,7 +59,7 @@ function HomePage() {
 
       <div className="mt-4">
   <a
-    href="https://youtube.com/live/hI3bTEL49uI"
+    href="https://youtube.com/@ubl-udaipurbohraleague?si=_vv8JTK8pKSaoK_7"
     target="_blank"
     rel="noopener noreferrer"
     className="flex w-full items-center justify-center gap-3 rounded-2xl px-5 py-4 font-display text-sm font-black uppercase tracking-[0.18em] transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
