@@ -4,6 +4,7 @@ import { Search, Radio, CheckCircle2, XCircle, RotateCcw, ChevronDown, ChevronRi
 import { MobileLayout, TeamCrest, Avatar } from "@/components/mobile-layout";
 
 import { formatINR, teams as defaultTeams } from "@/lib/gpl-data";
+import { players as defaultPlayers } from "@/lib/data/players";
 
 import { db } from "@/lib/firebase";
 import {
@@ -110,22 +111,18 @@ function AuctionControls() {
 
 async function importPlayers() {
   try {
-    const response = await fetch("/data/players.auction.ready.json");
-
-    const players = await response.json();
-
-    for (const player of players) {
+    for (const player of defaultPlayers) {
       await setDoc(
-        doc(db, "players", player.playerNumber),
+        doc(db, "players", player.playerNumber ?? player.id),
         player,
         { merge: true }
       );
     }
-  
-    toast.success("Players imported successfully");
+
+    toast.success("Final auction player data synced successfully");
   } catch (error) {
     console.error(error);
-    toast.error("Failed to import players");
+    toast.error("Failed to sync final player data");
   }
 }
   async function clearPlayers() {
