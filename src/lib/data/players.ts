@@ -2807,9 +2807,7 @@ export const players: Player[] = [
       sr: 0,
     },
     initials: "TB",
-    soldPrice: 3500000,
-    teamId: "gm",
-    status: "sold",
+    status: "unsold",
   },
   {
     id: "p139",
@@ -2828,7 +2826,9 @@ export const players: Player[] = [
       sr: 0,
     },
     initials: "TF",
-    status: "unsold",
+    soldPrice: 3500000,
+    teamId: "gm",
+    status: "sold",
   },
   {
     id: "p140",
