@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/players")({
   head: () => ({ meta: [
-    { title: "Players — Galaxy Premier League" },
+    { title: "Players — Sanchi UBL 2026" },
     { name: "description", content: "Teams, owners and the full player catalog with stats." },
   ]}),
   component: PlayersPage,
@@ -22,13 +22,13 @@ function PlayersPage() {
     <MobileLayout title="Squads & Players">
       {/* Segmented control */}
       <div className="sticky top-[68px] z-20 -mx-4 px-4 pt-2 pb-3 backdrop-blur-xl"
-        style={{ background: "linear-gradient(180deg, oklch(0.16 0.03 260 / 0.85), oklch(0.16 0.03 260 / 0))" }}>
+        style={{ background: "linear-gradient(180deg, var(--background), transparent)" }}>
         <div className="glass rounded-2xl p-1 grid grid-cols-3 gap-1">
           {sectionTabs.map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`relative rounded-xl py-2 text-xs font-semibold transition-all ${tab === t ? "gradient-royal text-white shadow-glow" : "text-muted-foreground"}`}
+              className={`relative rounded-xl py-2 text-xs font-semibold transition-all ${tab === t ? "gradient-royal text-primary-foreground shadow-glow" : "text-muted-foreground"}`}
             >
               {t}
             </button>
@@ -79,7 +79,7 @@ function TeamsGrid() {
                   <span className="uppercase tracking-widest text-muted-foreground">Purse used</span>
                   <span className="font-display font-bold text-gold tabular-nums">{pct}%</span>
                 </div>
-                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white/10">
+                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-secondary">
                   <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${t.color}, ${t.color2})` }} />
                 </div>
               </div>
@@ -161,13 +161,13 @@ function PlayersCatalog() {
       <div className="-mx-4 mt-2 flex gap-2 overflow-x-auto px-4 no-scrollbar">
         <button
           onClick={() => setTeamFilter("All")}
-          className={`shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold transition-all ${teamFilter === "All" ? "gradient-royal text-white" : "glass text-muted-foreground"}`}
+          className={`shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold transition-all ${teamFilter === "All" ? "gradient-royal text-primary-foreground" : "glass text-muted-foreground"}`}
         >All teams</button>
         {teams.map((t) => (
           <button
             key={t.id}
             onClick={() => setTeamFilter(t.id)}
-            className={`shrink-0 flex items-center gap-1.5 rounded-full pl-1 pr-3 py-1 text-[11px] font-semibold transition-all ${teamFilter === t.id ? "gradient-royal text-white" : "glass text-muted-foreground"}`}
+            className={`shrink-0 flex items-center gap-1.5 rounded-full pl-1 pr-3 py-1 text-[11px] font-semibold transition-all ${teamFilter === t.id ? "gradient-royal text-primary-foreground" : "glass text-muted-foreground"}`}
           >
             <TeamCrest short={t.short} color={t.color} color2={t.color2} size={20} />
             {t.short}
@@ -185,7 +185,7 @@ function PlayersCatalog() {
               className="group relative overflow-hidden rounded-2xl glass p-3 text-left transition-transform active:scale-[0.98]"
             >
               <div className="flex items-start justify-between">
-                <Avatar initials={p.initials} color={team?.color ?? "#3b82f6"} color2={team?.color2 ?? "#1e3a8a"} size={44} />
+                <Avatar initials={p.initials} color={team?.color ?? "#79513a"} color2={team?.color2 ?? "#493023"} size={44} />
                 {team ? (
                   <TeamCrest short={team.short} color={team.color} color2={team.color2} size={22} />
                 ) : (
@@ -228,9 +228,9 @@ function PlayerSheet({ player, onClose }: { player: Player | null; onClose: () =
           {player && (
             <>
               <div className="absolute inset-x-0 top-0 h-40 opacity-30 blur-3xl"
-                style={{ background: `linear-gradient(180deg, ${team?.color ?? "#3b82f6"}, transparent)` }} />
+                style={{ background: `linear-gradient(180deg, ${team?.color ?? "#79513a"}, transparent)` }} />
               <div className="relative flex items-center gap-3">
-                <Avatar initials={player.initials} color={team?.color ?? "#3b82f6"} color2={team?.color2 ?? "#1e3a8a"} size={64} />
+                <Avatar initials={player.initials} color={team?.color ?? "#79513a"} color2={team?.color2 ?? "#493023"} size={64} />
                 <div className="min-w-0 flex-1">
                   <h3 className="font-display text-lg font-bold">{player.name}</h3>
                   <div className="text-[11px] uppercase tracking-widest text-gold">{player.role}</div>

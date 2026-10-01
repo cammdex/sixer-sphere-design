@@ -98,12 +98,12 @@ function TeamDetailPage() {
             <h1 className="font-display text-xl font-extrabold leading-tight">{team.name}</h1>
             <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-muted-foreground">
               <span className="text-gold">C</span> {team.captain}
-              <span className="text-white/20">•</span>
+              <span className="text-muted-foreground/40">•</span>
               <Crown className="h-3 w-3 text-gold" /> {team.owner}
             </div>
             <div className="mt-2 inline-flex items-center gap-3 text-[10px] uppercase tracking-widest text-muted-foreground">
-              <span><b className="text-white">{team.wins}</b>W</span>
-              <span><b className="text-white">{team.losses}</b>L</span>
+              <span><b className="text-primary-foreground">{team.wins}</b>W</span>
+              <span><b className="text-primary-foreground">{team.losses}</b>L</span>
               <span className="text-gold"><b>{team.points}</b> Pts</span>
             </div>
           </div>
@@ -115,7 +115,7 @@ function TeamDetailPage() {
         {/* Total purse */}
         <article className="relative overflow-hidden rounded-2xl glass-gold p-4">
           <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-50 blur-3xl"
-            style={{ background: "radial-gradient(circle, oklch(0.82 0.14 85 / 0.7), transparent 70%)" }} />
+            style={{ background: "radial-gradient(circle, oklch(0.46 0.09 68 / 0.14), transparent 70%)" }} />
           <div className="relative flex items-center justify-between">
             <div>
               <div className="inline-flex items-center gap-1 rounded-full bg-gold/15 border border-gold/30 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-widest text-gold">
@@ -152,7 +152,7 @@ function TeamDetailPage() {
             <div className="flex flex-col gap-1.5">
               <button
                 onClick={placeBid}
-                className="flex items-center gap-1 rounded-xl gradient-royal px-3 py-2 text-[11px] font-semibold text-white shadow-glow active:scale-95"
+                className="flex items-center gap-1 rounded-xl gradient-royal px-3 py-2 text-[11px] font-semibold text-primary-foreground shadow-glow active:scale-95"
               >
                 <Plus className="h-3 w-3" /> +₹1L
               </button>
@@ -172,7 +172,7 @@ function TeamDetailPage() {
             <div className="text-[10px] font-bold uppercase tracking-widest text-gold">Purse Usage</div>
             <div className="font-display text-sm font-bold tabular-nums">{pct}<span className="text-muted-foreground">%</span></div>
           </div>
-          <div className="mt-2 h-3 overflow-hidden rounded-full bg-white/8 border border-border">
+          <div className="mt-2 h-3 overflow-hidden rounded-full bg-secondary border border-border">
             <div
               className="relative h-full rounded-full transition-all duration-700 ease-out"
               style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${team.color}, ${team.color2})` }}

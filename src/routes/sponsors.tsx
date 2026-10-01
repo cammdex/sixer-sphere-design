@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/sponsors")({
   head: () => ({ meta: [
-    { title: "Sponsors — Galaxy Premier League" },
+    { title: "Sponsors — Sanchi UBL 2026" },
     { name: "description", content: "Local businesses powering the tournament." },
   ]}),
   component: SponsorsPage,
@@ -107,7 +107,7 @@ function SponsorsPage() {
 
       <button
         onClick={() => toast.success("Sponsor application received", { description: "Our team will be in touch within 48h." })}
-        className="mt-5 w-full rounded-2xl gradient-royal py-3 text-sm font-semibold text-white shadow-glow"
+        className="mt-5 w-full rounded-2xl gradient-royal py-3 text-sm font-semibold text-primary-foreground shadow-glow"
       >
         Become a sponsor
       </button>
@@ -118,7 +118,7 @@ function SponsorsPage() {
 function SponsorLogo({ color, color2, initials, size }: { color: string; color2: string; initials: string; size: number }) {
   return (
     <div
-      className="grid place-items-center rounded-2xl font-display font-extrabold text-white"
+      className="grid place-items-center rounded-2xl font-display font-extrabold text-primary-foreground"
       style={{
         width: size, height: size, fontSize: size * 0.36,
         background: `linear-gradient(135deg, ${color}, ${color2})`,
