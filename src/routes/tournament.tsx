@@ -7,7 +7,11 @@ import { teams, fixtures, results, topScorers, topWicketTakers, venues, umpires,
 export const Route = createFileRoute("/tournament")({
   head: () => ({ meta: [
     { title: "Tournament — Sanchi UBL 2026" },
-    { name: "description", content: "Fixtures, points table, leaderboards, venues and gallery." },
+    { name: "description", content: "Explore Sanchi UBL 2026 fixtures, points table, leaders and venues." },
+    { property: "og:title", content: "Tournament — Sanchi UBL 2026" },
+    { property: "og:description", content: "Explore Sanchi UBL 2026 fixtures, points table, leaders and venues." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
   ]}),
   component: TournamentPage,
 });

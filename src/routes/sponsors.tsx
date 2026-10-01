@@ -8,7 +8,11 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/sponsors")({
   head: () => ({ meta: [
     { title: "Sponsors — Sanchi UBL 2026" },
-    { name: "description", content: "Local businesses powering the tournament." },
+    { name: "description", content: "Meet the local businesses supporting Sanchi UBL 2026." },
+    { property: "og:title", content: "Sponsors — Sanchi UBL 2026" },
+    { property: "og:description", content: "Meet the local businesses supporting Sanchi UBL 2026." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
   ]}),
   component: SponsorsPage,
 });

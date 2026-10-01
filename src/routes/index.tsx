@@ -15,6 +15,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Sanchi United Bat League 2026 — sponsors, teams, promotions and live auction feed." },
       { property: "og:title", content: "Sanchi UBL 2026" },
       { property: "og:description", content: "The premium local cricket tournament — Season 4, 2026." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: HomePage,

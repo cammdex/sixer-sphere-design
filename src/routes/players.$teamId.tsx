@@ -10,7 +10,11 @@ export const Route = createFileRoute("/players/$teamId")({
   head: ({ params }) => ({
     meta: [
       { title: `${teamById(params.teamId)?.name ?? "Team"} — Sanchi UBL 2026` },
-      { name: "description", content: "Team roster, live auction purse, next highest bid and player list." },
+      { name: "description", content: "Explore the team squad, auction purse and bids in Sanchi UBL 2026." },
+      { property: "og:title", content: `${teamById(params.teamId)?.name ?? "Team"} — Sanchi UBL 2026` },
+      { property: "og:description", content: "Explore the team squad, auction purse and bids in Sanchi UBL 2026." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: TeamDetailPage,

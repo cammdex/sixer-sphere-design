@@ -8,7 +8,11 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 export const Route = createFileRoute("/players")({
   head: () => ({ meta: [
     { title: "Players — Sanchi UBL 2026" },
-    { name: "description", content: "Teams, owners and the full player catalog with stats." },
+    { name: "description", content: "Explore Sanchi UBL 2026 teams, owners, players and cricket statistics." },
+    { property: "og:title", content: "Players — Sanchi UBL 2026" },
+    { property: "og:description", content: "Explore Sanchi UBL 2026 teams, owners, players and cricket statistics." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
   ]}),
   component: PlayersPage,
 });
