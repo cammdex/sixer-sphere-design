@@ -6,8 +6,12 @@ import { teams, fixtures, results, topScorers, topWicketTakers, venues, umpires,
 
 export const Route = createFileRoute("/tournament")({
   head: () => ({ meta: [
-    { title: "Tournament — Galaxy Premier League" },
-    { name: "description", content: "Fixtures, points table, leaderboards, venues and gallery." },
+    { title: "Tournament — Sanchi UBL 2026" },
+    { name: "description", content: "Explore Sanchi UBL 2026 fixtures, points table, leaders and venues." },
+    { property: "og:title", content: "Tournament — Sanchi UBL 2026" },
+    { property: "og:description", content: "Explore Sanchi UBL 2026 fixtures, points table, leaders and venues." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
   ]}),
   component: TournamentPage,
 });
@@ -19,12 +23,12 @@ function TournamentPage() {
   return (
     <MobileLayout title="Tournament">
       <div className="-mx-4 mt-1 flex gap-2 overflow-x-auto px-4 pb-3 no-scrollbar sticky top-[68px] z-20 backdrop-blur-xl"
-        style={{ background: "linear-gradient(180deg, oklch(0.16 0.03 260 / 0.85), oklch(0.16 0.03 260 / 0))" }}>
+        style={{ background: "linear-gradient(180deg, var(--background), transparent)" }}>
         {tabs.map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
-            className={`shrink-0 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${tab === t ? "gradient-royal text-white shadow-glow" : "glass text-muted-foreground"}`}
+            className={`shrink-0 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${tab === t ? "gradient-royal text-primary-foreground shadow-glow" : "glass text-muted-foreground"}`}
           >
             {t}
           </button>
@@ -183,7 +187,7 @@ function PointsTable() {
             </div>
             <span className="tabular-nums text-xs">{t.wins}</span>
             <span className="tabular-nums text-xs">{t.losses}</span>
-            <span className={`tabular-nums text-xs ${t.nrr >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{t.nrr > 0 ? "+" : ""}{t.nrr.toFixed(2)}</span>
+            <span className={`tabular-nums text-xs ${t.nrr >= 0 ? "text-gold" : "text-destructive"}`}>{t.nrr > 0 ? "+" : ""}{t.nrr.toFixed(2)}</span>
             <span className="font-display text-sm font-bold text-gold tabular-nums">{t.points}</span>
           </div>
         ))}
@@ -255,7 +259,7 @@ function CapBadge({ tone }: { tone: "orange" | "purple" }) {
   const colors = tone === "orange" ? ["#f59e0b", "#b45309"] : ["#a855f7", "#6b21a8"];
   return (
     <div className="grid h-7 w-7 place-items-center rounded-full" style={{ background: `linear-gradient(135deg, ${colors[0]}, ${colors[1]})`, boxShadow: `0 4px 14px -4px ${colors[0]}80` }}>
-      <Trophy className="h-3.5 w-3.5 text-white" />
+      <Trophy className="h-3.5 w-3.5 text-primary-foreground" />
     </div>
   );
 }
@@ -268,7 +272,7 @@ function More() {
         <div className="mt-3 grid grid-cols-2 gap-3">
           {venues.map((v) => (
             <article key={v.name} className="rounded-2xl glass p-3.5">
-              <div className="grid h-10 w-10 place-items-center rounded-xl gradient-royal mb-2"><MapPin className="h-4 w-4 text-white" /></div>
+              <div className="grid h-10 w-10 place-items-center rounded-xl gradient-royal mb-2"><MapPin className="h-4 w-4 text-primary-foreground" /></div>
               <div className="font-display text-sm font-bold">{v.name}</div>
               <div className="text-[11px] text-muted-foreground">{v.city}</div>
               <div className="mt-2 text-[10px] uppercase tracking-widest text-gold">Cap. {v.capacity}</div>
@@ -301,7 +305,7 @@ function More() {
               const has = [4, 5, 7, 11, 12, 14, 18, 21, 25].includes(day);
               const playoff = [25].includes(day);
               return (
-                <div key={i} className={`aspect-square grid place-items-center rounded-md text-[10px] ${day < 1 || day > 31 ? "text-transparent" : "text-foreground"} ${has ? (playoff ? "gradient-gold text-gold-foreground font-bold" : "gradient-royal text-white") : "bg-card/40"}`}>
+                <div key={i} className={`aspect-square grid place-items-center rounded-md text-[10px] ${day < 1 || day > 31 ? "text-transparent" : "text-foreground"} ${has ? (playoff ? "gradient-gold text-gold-foreground font-bold" : "gradient-royal text-primary-foreground") : "bg-card/40"}`}>
                   {day > 0 && day <= 31 ? day : ""}
                 </div>
               );
@@ -323,7 +327,7 @@ function More() {
                 background: `linear-gradient(135deg, hsl(${(i * 47) % 360} 70% 25%), hsl(${(i * 47 + 60) % 360} 60% 12%))`,
               }} />
               <div className="absolute inset-0 shimmer opacity-30" />
-              <div className="absolute inset-x-1.5 bottom-1.5 text-[9px] font-semibold leading-tight text-white/90">{g}</div>
+              <div className="absolute inset-x-1.5 bottom-1.5 text-[9px] font-semibold leading-tight text-primary-foreground/90">{g}</div>
             </div>
           ))}
         </div>

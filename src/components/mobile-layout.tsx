@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, Users, Trophy, Handshake, Megaphone, Bell } from "lucide-react";
+import { Home, Users, Trophy, Handshake, Megaphone, Bell, ShoppingBag } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
@@ -8,6 +8,7 @@ const tabs: { to: string; label: string; icon: typeof Home; exact?: boolean }[] 
   { to: "/", label: "Home", icon: Home, exact: true },
   { to: "/players", label: "Players", icon: Users },
   { to: "/tournament", label: "Tournament", icon: Trophy },
+  { to: "/store", label: "Store", icon: ShoppingBag },
   { to: "/sponsors", label: "Sponsors", icon: Handshake },
 ];
 
@@ -26,12 +27,11 @@ export function MobileLayout({
   return (
     <div className="relative mx-auto flex min-h-screen max-w-md flex-col pb-28">
       {/* Top bar */}
-      <header className="sticky top-0 z-30 px-4 pt-4 pb-3 backdrop-blur-xl"
-        style={{ background: "linear-gradient(180deg, oklch(0.16 0.03 260 / 0.85), oklch(0.16 0.03 260 / 0.4))" }}>
+      <header className="sticky top-0 z-30 bg-background/90 px-4 pt-4 pb-3 backdrop-blur-xl">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5">
             <div className="relative grid h-10 w-10 place-items-center rounded-xl gradient-royal shadow-glow">
-              <span className="font-display text-base font-extrabold tracking-tight text-white">S</span>
+              <span className="font-display text-base font-extrabold tracking-tight text-primary-foreground">S</span>
               <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-gold ring-2 ring-background" />
             </div>
             <div className="leading-tight">
@@ -66,26 +66,26 @@ export function MobileLayout({
 
       {/* Bottom nav */}
       <nav className="fixed inset-x-0 bottom-0 z-30 mx-auto max-w-md px-4 pb-4 pt-2">
-        <div className="glass flex items-center justify-around rounded-2xl px-2 py-2">
+        <div className="glass flex items-center justify-around rounded-2xl px-1 py-2">
           {tabs.map(({ to, label, icon: Icon, exact }) => {
             const active = exact ? pathname === to : pathname.startsWith(to);
             return (
               <Link
                 key={to}
                 to={to}
-                className="group relative flex flex-1 flex-col items-center gap-1 rounded-xl px-2 py-1.5 transition-colors"
+                className="group relative flex min-w-0 flex-1 flex-col items-center gap-1 rounded-xl px-0.5 py-1.5 transition-colors"
               >
                 <div className={`grid h-9 w-9 place-items-center rounded-xl transition-all duration-300 ${active ? "gradient-royal shadow-glow" : "bg-transparent"}`}>
-                  <Icon className={`h-[18px] w-[18px] transition-colors ${active ? "text-white" : "text-muted-foreground group-hover:text-foreground"}`} strokeWidth={active ? 2.4 : 2} />
+                  <Icon className={`h-[18px] w-[18px] transition-colors ${active ? "text-primary-foreground" : "text-muted-foreground group-hover:text-foreground"}`} strokeWidth={active ? 2.4 : 2} />
                 </div>
-                <span className={`text-[10px] font-medium tracking-wide transition-colors ${active ? "text-gold" : "text-muted-foreground"}`}>{label}</span>
+                <span className={`text-[9px] font-medium transition-colors ${active ? "text-gold" : "text-muted-foreground"}`}>{label}</span>
               </Link>
             );
           })}
         </div>
       </nav>
 
-      <Toaster position="top-center" theme="dark" />
+      <Toaster position="top-center" theme="light" />
     </div>
   );
 }

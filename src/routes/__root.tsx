@@ -47,7 +47,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { name: "theme-color", content: "#0b1020" },
+      { name: "theme-color", content: "#f3eadc" },
       { title: "Sanchi UBL 2026 — United Bat League" },
       { name: "description", content: "Sanchi United Bat League 2026 — live auction, teams, sponsors and event feed." },
       { property: "og:title", content: "Sanchi UBL 2026" },

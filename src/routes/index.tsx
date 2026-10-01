@@ -15,6 +15,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Sanchi United Bat League 2026 — sponsors, teams, promotions and live auction feed." },
       { property: "og:title", content: "Sanchi UBL 2026" },
       { property: "og:description", content: "The premium local cricket tournament — Season 4, 2026." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: HomePage,
@@ -44,12 +46,9 @@ function HomePage() {
     <MobileLayout>
       {/* Hero + Countdown */}
       <section className="relative mt-2 overflow-hidden rounded-3xl p-5 glass-gold">
-        <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-40 blur-3xl" style={{ background: "radial-gradient(circle, oklch(0.82 0.14 85 / 0.7), transparent 70%)" }} />
-        <div className="absolute -bottom-12 -left-6 h-40 w-40 rounded-full opacity-40 blur-3xl" style={{ background: "radial-gradient(circle, oklch(0.55 0.22 260 / 0.7), transparent 70%)" }} />
         <div className="relative">
           <div className="inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold">
-            <span className="h-1.5 w-1.5 rounded-full bg-gold pulse-ring" />
-            Auction goes live in
+            Auction countdown
           </div>
           <h1 className="mt-3 font-display text-2xl font-extrabold leading-tight">
             <span className="text-gold">Sanchi</span> UBL <span className="text-primary">2026</span>
@@ -66,8 +65,8 @@ function HomePage() {
           </div>
 
           <button
-            onClick={() => toast.success("Going live soon", { description: "Stream opens 15 min before the auction." })}
-            className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl gradient-royal px-4 py-3 text-sm font-semibold text-white shadow-glow transition-transform active:scale-[0.98]"
+            onClick={() => toast.info("Stream unavailable", { description: "A live stream link has not been provided yet." })}
+            className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl gradient-royal px-4 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform active:scale-[0.98]"
           >
             <Radio className="h-4 w-4" />
             Watch Auction Live
@@ -170,7 +169,7 @@ function HomePage() {
             {eventFeed.map((e) => (
               <li key={e.id} className="relative flex items-start gap-3">
                 <div className={`relative z-10 grid h-8 w-8 shrink-0 place-items-center rounded-full ${e.tone === "gold" ? "gradient-gold" : "gradient-royal"} shadow-glow`}>
-                  <TrendingUp className={`h-3.5 w-3.5 ${e.tone === "gold" ? "text-gold-foreground" : "text-white"}`} strokeWidth={2.6} />
+                  <TrendingUp className={`h-3.5 w-3.5 ${e.tone === "gold" ? "text-gold-foreground" : "text-primary-foreground"}`} strokeWidth={2.6} />
                 </div>
                 <div className="min-w-0 flex-1 rounded-2xl glass p-3">
                   <div className="flex items-center justify-between gap-2">
@@ -191,7 +190,7 @@ function HomePage() {
 function BrandTile({ brand, tone, icon }: { brand: BrandCard; tone: "lead" | "royal" | "crimson"; icon: React.ReactNode }) {
   const toneClass =
     tone === "lead" ? "glass-gold" : "glass";
-  const ringColor = tone === "lead" ? brand.color : tone === "royal" ? "#3b82f6" : "#ef4444";
+  const ringColor = tone === "lead" ? brand.color : tone === "royal" ? "#79513a" : "#a27048";
   return (
     <section className="mt-4">
       <div className={`relative overflow-hidden rounded-3xl ${toneClass} p-4`}>
@@ -232,7 +231,7 @@ function BrandTile({ brand, tone, icon }: { brand: BrandCard; tone: "lead" | "ro
 function BrandBadge({ color, color2, initials, size }: { color: string; color2: string; initials: string; size: number }) {
   return (
     <div
-      className="grid shrink-0 place-items-center rounded-2xl font-display font-extrabold text-white"
+      className="grid shrink-0 place-items-center rounded-2xl font-display font-extrabold text-primary-foreground"
       style={{
         width: size, height: size, fontSize: size * 0.36,
         background: `linear-gradient(135deg, ${color}, ${color2})`,

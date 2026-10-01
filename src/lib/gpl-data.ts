@@ -221,3 +221,9 @@ export function teamSpent(teamId: string) {
     .filter((p) => p.teamId === teamId && p.soldPrice)
     .reduce((sum, p) => sum + (p.soldPrice ?? 0), 0);
 }
+
+export const merchandise = [
+  { id: "tee", name: "The Club Tee", category: "T-shirts", price: 799, description: "Everyday cotton, match-day spirit.", sizes: ["S", "M", "L", "XL"] },
+  { id: "cap", name: "Boundary Cap", category: "Caps", price: 499, description: "Six-panel cotton with an embroidered cricket mark.", sizes: ["One size"] },
+  { id: "tote", name: "Match Day Tote", category: "Tote bags", price: 399, description: "Canvas carryall for everything the day brings.", sizes: ["One size"] },
+] as const;
