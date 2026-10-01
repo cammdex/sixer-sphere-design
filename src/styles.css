@@ -71,7 +71,6 @@
   body { min-height: 100vh; }
   h1,h2,h3,h4 { font-family: var(--font-display); letter-spacing: 0; }
 }
-}
 
 @utility glass {
   background: var(--card);
