@@ -89,10 +89,7 @@
   background: linear-gradient(135deg, oklch(0.51 0.09 70), oklch(0.40 0.08 55));
 }
 @utility text-gold {
-  background: linear-gradient(135deg, oklch(0.48 0.09 73), oklch(0.34 0.06 54));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--gold);
 }
 @utility shadow-glow {
   box-shadow: 0 8px 22px -12px oklch(0.32 0.055 52 / 0.45);

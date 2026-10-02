@@ -108,7 +108,7 @@ function StorePage() {
       </article>)}
     </div>
     <Dialog open={cartOpen} onOpenChange={setCartOpen}>
-      <DialogContent className="max-h-[85dvh] w-[calc(100%-2rem)] max-w-md overflow-y-auto rounded-lg bg-card p-5 [&>button]:hidden">
+      <DialogContent className="max-h-[85dvh] w-[calc(100%-2rem)] max-w-md overflow-y-auto rounded-lg bg-card p-5 shadow-xl [&>button]:hidden">
         <DialogHeader className="flex-row items-center justify-between space-y-0">
           <DialogTitle className="font-display text-xl">Your bag <span className="text-sm font-normal text-muted-foreground">({count})</span></DialogTitle>
           <Button variant="ghost" size="icon" aria-label="Close bag" onClick={() => setCartOpen(false)}><X /></Button>

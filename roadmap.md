@@ -1,3 +1,3 @@
 - [x] Add Store tab and interactive merchandise bag.
 - [x] Recolor the app beige and walnut brown.
-- [ ] Verify store interactions and presentation.
+- [x] Verify store interactions and presentation.
